@@ -94,7 +94,7 @@ hr{ border-top-color:#dadada;}
 
 @media screen and (min-width: 667px){
 	#header h1 {
-		background: url("/images/backend_images/admin-logo-strip.png") no-repeat scroll 0 0 transparent;
+		background: url("/images/frontend_images/logo1.webp") no-repeat scroll 0 0 transparent;
 		height: 100px;
 		left: 50px;
 		line-height: 600px;

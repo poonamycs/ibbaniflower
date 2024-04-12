@@ -27,7 +27,7 @@
 <div class="carousel-inner">
 
 <div class="item active slide-1">
-	<img src="{{ asset('front/img/crousel_banner1.png') }}" alt="img-holiwood">
+	<img src="{{ asset('/images/frontend_images/crousel_banner1.png') }}" alt="img-holiwood">
 	<div class="carousel-caption">
       <h3>EXPLORE THE</h3>
       <h1>New Arrivals</h1>
@@ -39,7 +39,7 @@
 </div>
 
 <div class="item slide-2">
-	<img src="{{ asset('front/img/crousel_banner1.png') }}" alt="img-holiwood">
+	<img src="{{ asset('/images/frontend_images/crousel_banner1.png') }}" alt="img-holiwood">
 	<div class="carousel-caption">
       <h3>A Ferfect</h3>
       <h1>Bouquet</h1>
@@ -51,7 +51,7 @@
 </div>
 
 <div class="item slide-1">
-	<img src="{{ asset('front/img/crousel_banner1.png') }}" alt="img-holiwood">
+	<img src="{{ asset('/images/frontend_images/crousel_banner1.png') }}" alt="img-holiwood">
 	<div class="carousel-caption">
       <h3>EXPLORE THE</h3>
       <h1>New Arrivals</h1>
@@ -63,7 +63,7 @@
 </div>
 
 <div class="item slide-2">
-	<img src="{{ asset('front/img/crousel_banner1.png') }}" alt="img-holiwood">
+	<img src="{{ asset('/images/frontend_images/crousel_banner1.png') }}" alt="img-holiwood">
 	<div class="carousel-caption">
       <h3>A Ferfect</h3>
       <h1>Bouquet</h1>
@@ -80,7 +80,7 @@
 <div class="who" id="showcase">
 <div class="gallery clearfix">
 	<figure>
-<img src="{{ asset('front/img/second_banner.png') }}" alt="img-holiwood">
+<img src="{{ asset('/images/frontend_images/second_banner.png') }}" alt="img-holiwood">
 <h1>who we are ?</h1>
 <h1 class="h2">who we are ?</h1>
 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has<br class="hidden-md hidden-sm hidden-xs">
@@ -103,7 +103,7 @@ software like Aldus PageMaker including versions of Lorem Ipsum
 <div class="row">
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 banner-collec">
 
-		<img src="{{ asset('front/img/third_banner.png') }}" class="img-responsive" alt="img-holiwood">
+		<img src="{{ asset('/images/frontend_images/third_banner.png') }}" class="img-responsive" alt="img-holiwood">
 		<h3>HELLO SUMMER</h3>
 		<h1>Sale 10%</h1>
 		<a href="#">Shop now</a>
@@ -111,7 +111,7 @@ software like Aldus PageMaker including versions of Lorem Ipsum
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 product-collection">
 			<div class="product-image-collec">
-				<figure class="hot"><a href="#"><img src="{{ asset('front/img/product4.webp') }}" class="img-responsive" alt="img-holiwood"></a></figure>
+				<figure class="hot"><a href="#"><img src="{{ asset('/images/frontend_images/product4.webp') }}" class="img-responsive" alt="img-holiwood"></a></figure>
 				<div class="product-icon-collec">
 					<a href="#" data-toggle="modal" data-target="#myModal"><i class="far fa-eye"></i></a>
 					<a href="#"><i class="fas fa-shopping-basket"></i></a>
@@ -127,7 +127,7 @@ software like Aldus PageMaker including versions of Lorem Ipsum
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 product-collection">
 			<div class="product-image-collec">
-				<a href="#"><img src="{{ asset('front/img/product2.webp') }}" class="img-responsive" alt="img-holiwood"></a>
+				<a href="#"><img src="{{ asset('/images/frontend_images/product2.webp') }}" class="img-responsive" alt="img-holiwood"></a>
 				<div class="product-icon-collec">
 					<a href="#" data-toggle="modal" data-target="#myModal"><i class="far fa-eye"></i></a>
 					<a href="#"><i class="fas fa-shopping-basket"></i></a>
@@ -142,7 +142,7 @@ software like Aldus PageMaker including versions of Lorem Ipsum
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 product-collection">
 			<div class="product-image-collec">
-				<a href="#"><img src="{{ asset('front/img/product3.webp') }}" class="img-responsive" alt="img-holiwood"></a>
+				<a href="#"><img src="{{ asset('/images/frontend_images/product3.webp') }}" class="img-responsive" alt="img-holiwood"></a>
 				<div class="product-icon-collec">
 					<a href="#" data-toggle="modal" data-target="#myModal"><i class="far fa-eye"></i></a>
 					<a href="#"><i class="fas fa-shopping-basket"></i></a>
@@ -157,7 +157,7 @@ software like Aldus PageMaker including versions of Lorem Ipsum
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 product-collection">
 			<div class="product-image-collec">
-				<figure class="sale"><a href="#"><img src="{{ asset('front/img/product4.webp') }}" class="img-responsive" alt="img-holiwood"></a></figure>
+				<figure class="sale"><a href="#"><img src="{{ asset('/images/frontend_images/product4.webp') }}" class="img-responsive" alt="img-holiwood"></a></figure>
 				<div class="product-icon-collec">
 					<a href="#" data-toggle="modal" data-target="#myModal"><i class="far fa-eye"></i></a>
 					<a href="#"><i class="fas fa-shopping-basket"></i></a>
@@ -183,12 +183,12 @@ software like Aldus PageMaker including versions of Lorem Ipsum
 <h2>- Lorem Ipsum is<span class="hidden-xs"> simply dummy</span> text of the printing -</h2>
 <div class="gallery clearfix">
 <figure>
-	<div class="img-wedding"><img src="{{ asset('front/img/fourth_banner.png') }}" alt="img-holiwood"></div>
+	<div class="img-wedding"><img src="{{ asset('/images/frontend_images/fourth_banner.png') }}" alt="img-holiwood"></div>
 	<div class="container wedding-content">
 		<div class="row">
 	<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 product-wedding">
 		<div class="product-image-wedding">
-			<figure class="sale"><a href="#"><img src="{{ asset('front/img/product1.webp') }}" class="img-responsive" alt="img-holiwood"></a></figure>
+			<figure class="sale"><a href="#"><img src="{{ asset('/images/frontend_images/product1.webp') }}" class="img-responsive" alt="img-holiwood"></a></figure>
 				<div class="product-icon-wedding">
 					<a href="#"><i class="far fa-eye"></i></a>
 					<a href="#"><i class="fas fa-shopping-basket"></i></a>
@@ -203,7 +203,7 @@ software like Aldus PageMaker including versions of Lorem Ipsum
 	</div>
 	<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 product-wedding">
 		<div class="product-image-wedding">
-				<a href="#"><img src="{{ asset('front/img/product6.webp') }}" class="img-responsive" alt="img-holiwood"></a>
+				<a href="#"><img src="{{ asset('/images/frontend_images/product6.webp') }}" class="img-responsive" alt="img-holiwood"></a>
 				<div class="product-icon-wedding">
 					<a href="#"><i class="far fa-eye"></i></a>
 					<a href="#"><i class="fas fa-shopping-basket"></i></a>
@@ -218,7 +218,7 @@ software like Aldus PageMaker including versions of Lorem Ipsum
 	</div>
 	<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 product-wedding">
 		<div class="product-image-wedding">
-			<figure class="hot"><a href="#"><img src="{{ asset('front/img/product1.webp') }}" class="img-responsive" alt="img-holiwood"></a></figure>
+			<figure class="hot"><a href="#"><img src="{{ asset('/images/frontend_images/product1.webp') }}" class="img-responsive" alt="img-holiwood"></a></figure>
 				<div class="product-icon-wedding">
 					<a href="#"><i class="far fa-eye"></i></a>
 					<a href="#"><i class="fas fa-shopping-basket"></i></a>
@@ -233,7 +233,7 @@ software like Aldus PageMaker including versions of Lorem Ipsum
 	</div>
 	<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 product-wedding">
 		<div class="product-image-wedding">
-				<a href="#"><img src="{{ asset('front/img/product6.webp') }}" class="img-responsive" alt="img-holiwood"></a>
+				<a href="#"><img src="{{ asset('/images/frontend_images/product6.webp') }}" class="img-responsive" alt="img-holiwood"></a>
 				<div class="product-icon-wedding">
 					<a href="#"><i class="far fa-eye"></i></a>
 					<a href="#"><i class="fas fa-shopping-basket"></i></a>
@@ -265,7 +265,7 @@ software like Aldus PageMaker including versions of Lorem Ipsum
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 product-holiday">
 			<div class="product-image-holiday">
-				<figure class="hot"><a href="#"><img src="{{ asset('front/img/flower1.png') }}" class="img-responsive" alt="img-holiwood"></a></figure>
+				<figure class="hot"><a href="#"><img src="{{ asset('/images/frontend_images/flower1.png') }}" class="img-responsive" alt="img-holiwood"></a></figure>
 				<div class="product-icon-holiday">
 					<a href="#"><i class="far fa-eye"></i></a>
 					<a href="#"><i class="fas fa-shopping-basket"></i></a>
@@ -280,7 +280,7 @@ software like Aldus PageMaker including versions of Lorem Ipsum
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 product-holiday">
 			<div class="product-image-holiday">
-				<a href="#"><img src="{{ asset('front/img/flower2.png') }}" class="img-responsive" alt="img-holiwood"></a>
+				<a href="#"><img src="{{ asset('/images/frontend_images/flower2.png') }}" class="img-responsive" alt="img-holiwood"></a>
 				<div class="product-icon-holiday">
 					<a href="#"><i class="far fa-eye"></i></a>
 					<a href="#"><i class="fas fa-shopping-basket"></i></a>
@@ -295,7 +295,7 @@ software like Aldus PageMaker including versions of Lorem Ipsum
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 product-holiday">
 			<div class="product-image-holiday">
-				<a href="#"><img src="{{ asset('front/img/flower1.png') }}" class="img-responsive" alt="img-holiwood"></a>
+				<a href="#"><img src="{{ asset('/images/frontend_images/flower1.png') }}" class="img-responsive" alt="img-holiwood"></a>
 				<div class="product-icon-holiday">
 					<a href="#"><i class="far fa-eye"></i></a>
 					<a href="#"><i class="fas fa-shopping-basket"></i></a>
@@ -310,7 +310,7 @@ software like Aldus PageMaker including versions of Lorem Ipsum
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 product-holiday">
 			<div class="product-image-holiday">
-				<figure class="sale"><a href="#"><img src="{{ asset('front/img/flower2.png') }}" class="img-responsive" alt="img-holiwood"></a></figure>
+				<figure class="sale"><a href="#"><img src="{{ asset('/images/frontend_images/flower2.png') }}" class="img-responsive" alt="img-holiwood"></a></figure>
 				<div class="product-icon-holiday">
 					<a href="#"><i class="far fa-eye"></i></a>
 					<a href="#"><i class="fas fa-shopping-basket"></i></a>
@@ -327,7 +327,7 @@ software like Aldus PageMaker including versions of Lorem Ipsum
 	
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 banner-holiday">
 		<div class="img-banner-holiday">
-			<img src="{{ asset('/front/img/holiday.png') }}" class="img-responsive" alt="img-holiwood">
+			<img src="{{ asset('/images/frontend_images/holiday.png') }}" class="img-responsive" alt="img-holiwood">
 		</div>
 		<div class="title-holiday">
 			<h1>HAPPY MOTHER'S DAY</h1>
@@ -344,7 +344,7 @@ software like Aldus PageMaker including versions of Lorem Ipsum
 </div>
 <div class="count">
 <div class="img-count">
-	<img src="{{ asset('/front/img/counter.png') }}" alt="img-holiwood">
+	<img src="{{ asset('/images/frontend_images/counter.png') }}" alt="img-holiwood">
 </div>
 <div class="title-count">
 	<h1>Sale up to 40%</h1>
@@ -379,7 +379,7 @@ software like Aldus PageMaker including versions of Lorem Ipsum
 <p>- Lorem Ipsum is<span class="hidden-xs"> simply dummy</span> text of the printing -</p>
 <div class="row">
 	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 product-blog">
-		<a href="#"><img src="{{ asset('/front/img/blog-1.jpg') }}" class="img-responsive" title="img-blog" alt="img-holiwood"></a>
+		<a href="#"><img src="{{ asset('/images/frontend_images/blog-1.jpg') }}" class="img-responsive" title="img-blog" alt="img-holiwood"></a>
 		<div class="time-blog">
 			<span class="time"><i class="far fa-calendar-alt"></i><span>May, 12 2018</span></span>
 			<span class="time"><i class="far fa-edit"></i><span>Pixel-Creative</span></span>
@@ -388,7 +388,7 @@ software like Aldus PageMaker including versions of Lorem Ipsum
 		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
 	</div>
 	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 product-blog">
-		<a href="#"><img src="{{ asset('/front/img/blog-2.jpg') }}" class="img-responsive" title="img-blog" alt="img-holiwood"></a>
+		<a href="#"><img src="{{ asset('/images/frontend_images/blog-2.jpg') }}" class="img-responsive" title="img-blog" alt="img-holiwood"></a>
 		<div class="time-blog">
 			<span class="time"><i class="far fa-calendar-alt"></i><span>May, 12 2018</span></span>
 			<span class="time"><i class="far fa-edit"></i><span>Pixel-Creative</span></span>
@@ -398,7 +398,7 @@ software like Aldus PageMaker including versions of Lorem Ipsum
 
 	</div>
 	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 product-blog">
-		<a href="#"><img src="{{ asset('/front/img/blog-3.jpg') }}" class="img-responsive" title="img-blog" alt="img-holiwood"></a>
+		<a href="#"><img src="{{ asset('/images/frontend_images/blog-3.jpg') }}" class="img-responsive" title="img-blog" alt="img-holiwood"></a>
 		<div class="time-blog">
 			<span class="time"><i class="far fa-calendar-alt"></i><span>May, 12 2018</span></span>
 			<span class="time"><i class="far fa-edit"></i><span>Pixel-Creative</span></span>

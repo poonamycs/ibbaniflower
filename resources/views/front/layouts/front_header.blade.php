@@ -6,11 +6,11 @@
 <!-- bootstrap vs fontawesome-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<link rel="icon" href="{{ asset('front/img/favicon.png') }}" type="image/x-icon"/>
-<link rel="stylesheet" type="text/css" href="{{ asset('front/css/style-homev1.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('front/css/style-res-v1.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('front/css/style-fix-nav.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('front/css/style-form-search-mobile.css') }}">
+<link rel="icon" href="{{ asset('images/frontend_images/favicon.png') }}" type="image/x-icon"/>
+<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-homev1.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-res-v1.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-fix-nav.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-form-search-mobile.css') }}">
 <!-- scroll -->
 
 
@@ -56,7 +56,7 @@
 		<div class="collapse navbar-collapse col-lg-6 col-md-6 col-sm-12 col-xs-12" id="myNavbar">
 			<form class="hidden-lg hidden-md form-group form-search-mobile">
 				<input type="text" name="search" placeholder="Search here..." class="form-control">
-				<button type="submit"><img src="{{ asset('front/img/Search.png') }}" alt="search" class="img-responsive"></button>
+				<button type="submit"><img src="{{ asset('/images/frontend_images/Search.png') }}" alt="search" class="img-responsive"></button>
 			</form>
 			<ul class="nav navbar-nav menu-main">
 				<li><figure id="btn-close-menu" class="hidden-lg hidden-md"><i class="far fa-times-circle"></i></figure></li>
@@ -107,7 +107,7 @@
 					</ul>
 				</li>
 				<li class="col-lg-4 col-md-4 hidden-sm hidden-xs li-banner">
-					<a href="#"><img src="{{ asset('front/img/flower1.png') }}" alt="img-holiwood"></a>
+					<a href="#"><img src="{{ asset('/images/frontend_images/flower1.png') }}" alt="img-holiwood"></a>
 				</li>
 				
 					</ul>
@@ -170,11 +170,11 @@
 			</ul>
 		</div>
 	<ul class="logo col-lg-2 col-md-2 col-sm-7 col-xs-7">
-		<li><a href="#"><img src="{{ asset('front/img/logo.png') }}" class="img-responsive" alt="img-holiwood" style="height:100px;width:100px"></a></li>
+		<li><a href="#"><img src="{{ asset('images/frontend_images/logo.png') }}" class="img-responsive" alt="img-holiwood" style="height:100px;width:100px"></a></li>
 	</ul>
 	<ul class="nav navbar-nav navbar-right col-lg-4 col-md-4 col-sm-5 col-xs-5" style="padding-top:50px">
 	@if(empty(Auth::check()))
-		<li class="icon-user hidden-sm hidden-xs"><a href="{{ url('user-login') }}"><img src="{{ asset('front/img/user.png') }}" alt="img-holiwood" style="width: 25px;"></a></li>
+		<li class="icon-user hidden-sm hidden-xs"><a href="{{ url('user-login') }}"><img src="{{ asset('images/frontend_images/user.png') }}" alt="img-holiwood" style="width: 25px;"></a></li>
 	@else
 	<li class="icon-user hidden-sm hidden-xs">
 		<a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -193,10 +193,10 @@
 	</li>
 	@endif
 		<li class="dropdown cart-menu">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{{ asset('front/img/cart.png') }}" alt="img-holiwood"></a>
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{{ asset('/images/frontend_images/cart.png') }}" alt="img-holiwood"></a>
 			<div class="dropdown-menu">
 				<div class="cart-1">
-					<div class="img-cart"><img src="{{ asset('front/img/340x420.png') }}" class="img-responsive" alt="img-holiwood"></div>
+					<div class="img-cart"><img src="{{ asset('/images/frontend_images/340x420.png') }}" class="img-responsive" alt="img-holiwood"></div>
 					<div class="info-cart">
 						<h1>Pink roses</h1>
 						<span class="number">x1</span>
@@ -215,9 +215,9 @@
 			</div>
 		</li>
 		<!-- <li class="icon-user hidden-sm hidden-xs"><a href="#"><i class="fa fa-shopping-cart"></i></a></li> -->
-		<li class="icon-user hidden-sm hidden-xs"><a href="#"><img src="{{ asset('front/img/wishlist.png') }}" alt="img-holiwood" style="width: 25px;"></a></li>
+		<li class="icon-user hidden-sm hidden-xs"><a href="#"><img src="{{ asset('/images/frontend_images/wishlist.png') }}" alt="img-holiwood" style="width: 25px;"></a></li>
 		<li id="input-search" class="hidden-sm hidden-xs">
-			<a href="#"><img src="{{ asset('front/img/Search.png') }}" alt="img-holiwood"></a>
+			<a href="#"><img src="{{ asset('/images/frontend_images/Search.png') }}" alt="img-holiwood"></a>
 		</li>
 	</ul>
 </div>

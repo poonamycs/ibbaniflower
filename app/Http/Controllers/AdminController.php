@@ -133,7 +133,7 @@ class AdminController extends Controller
                 $email = $data['email'];
                 $messageData = ['email'=>$data['email'],'vname'=>$data['vname'],'code'=>base64_encode($data['email'])];
                 Mail::send('emails.confirm_vendor_email',$messageData,function($message) use($email){
-                    $message->to($email)->subject('Verify Email - Veggi Mart');
+                    $message->to($email)->subject('Verify Email - Ibbani Flower');
                 });
 
                 return redirect()->back()->with('flash_message_success','Vendor registration form submitted successfully.');
@@ -160,7 +160,7 @@ class AdminController extends Controller
                 // Send Welcome Email
                 $messageData = ['email'=>$email,'vname'=>$vendorDetails->vname];
                 Mail::send('emails.vendor_welcome',$messageData,function($message) use($email){
-                    $message->to($email)->subject('Welcome to Veggi Mart');
+                    $message->to($email)->subject('Welcome to Ibbani Flower');
                 });
 
                 return redirect('vendor-register')->with('flash_message_success','Your Email account is confirmed. You can login after admin approves your request.');
@@ -218,7 +218,7 @@ class AdminController extends Controller
                 'password'=>$random_password
             ];
             Mail::send('emails.adminforgotpassword',$messageData,function($message) use($email){
-                $message->to($email)->subject('New Password - Veggi Mart');
+                $message->to($email)->subject('New Password - Ibbani Flower');
             });
             return redirect()->back()->with('flash_message_success','Password sent on your email, kindly check your Email.');
         }

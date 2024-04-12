@@ -1,274 +1,225 @@
-<?php
-    $url = url()->current(); 
+<!DOCTYPE html>
+<html>
+<head>
+<title>Home</title>
+<meta charset="utf-8">
+<!-- bootstrap vs fontawesome-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="icon" href="{{ asset('images/frontend_images/favicon.png') }}" type="image/x-icon"/>
+<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-homev1.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-res-v1.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-fix-nav.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-form-search-mobile.css') }}">
+<!-- scroll -->
 
-    use App\Http\Controllers\Controller;
-    use App\Models\Product;
-    use App\Models\Category;
-    $cartCount = Product::cartCount();    
-    $wishlistCount = Product::wishlistCount();
-    $mainCategories = Controller::mainCategories();
-    $categories = Category::with('categories')->where(['parent_id'=>0])->get();
-?>
 
-<div class="modal fade login-modal-main" id="bd-example-modal">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="login-modal">
-                    <div class="row d-flex justify-content-center">
-                        {{-- <div class="col-lg-6 pad-right-0">
-                            <div class="login-modal-left"></div>
-                        </div> --}}
-                        <div class="col-lg-11 col-lg-11 col-sm-12 pad-left-0">
-                            <button type="button" class="close close-top-right" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true"><i class="mdi mdi-close"></i></span>
-                                <span class="sr-only">Close</span>
-                            </button>
-                            
-                            <div class="login-modal-right">
-                                <!-- Tab panes -->
-                                <div class="tab-content">
-                                    <div class="tab-pane active" id="login" role="tabpanel">
-                                        <form action="{{ url('user-login/') }}" method="post"  id="loginForm" name="loginForm">
-                                            {{ csrf_field() }}
-                                            <h5 class="heading-design-h5">Login to your account </h5>
-                                            <fieldset class="form-group">
-                                                <label>Enter Email</label>
-                                                <input type="text" class="form-control" name="email" placeholder="johhdoe@gmail.com">
-                                            </fieldset>
-                                            <fieldset class="form-group">
-                                                <label>Enter Password</label>
-                                                <input type="password" class="form-control" name="password" placeholder="********">
-                                            </fieldset>
-                                            <span class="pb-1"><a href="{{ url('forgot-password/') }}"><u><strong>Forgot Password?</strong></u></a></span>
-                                            <fieldset class="form-group">
-                                                <button type="submit" class="btn btn-lg btn-secondary btn-block"><b>Login <i class="fa fa-sign-in"></i></b></button>
-                                            </fieldset>
-                                            {{-- <div class="login-with-sites text-center">
-                                                <p>or Login with your google account</p>
-                                                <button class="btn-facebook login-icons btn-lg"><i class="mdi mdi-facebook"></i> Facebook</button>
-                                                <a href="{{ url('/redirect') }}"><button type="button" class="btn-google login-icons btn-lg btn-block"><i class="mdi mdi-google"></i> Google</button></a>
-                                                <button class="btn-twitter login-icons btn-lg"><i class="mdi mdi-twitter"></i> Twitter</button>
-                                            </div> --}}
-                                            {{-- <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                                <label class="custom-control-label" for="customCheck1">Remember me</label>
-                                            </div> --}}
-                                        </form>
-                                    </div>
-                                    <div class="tab-pane" id="register" role="tabpanel">
-                                        <form id="registerForm" name="registerForm" action="{{ url('/user-register') }}" method="post">
-                                            {{ csrf_field() }}
-                                            <h5 class="heading-design-h5">Register Now!</h5>
-                                            <div class="row">
-                                                <div class="control-group col-md-6">
-                                                    <fieldset class="form-group">
-                                                        <label>Name</label>
-                                                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter full name" autofocus="true" required>
-                                                    </fieldset>
-                                                </div>
-                                                <div class="control-group col-md-6">
-                                                    <fieldset class="form-group">
-                                                        <label>Email</label>
-                                                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email address" required>
-                                                    </fieldset>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="control-group col-md-6">
-                                                    <fieldset class="form-group">
-                                                        <label>Mobile</label>
-                                                        <input type="number" class="form-control" id="mobile" name="mobile" placeholder="Enter mobile number" required>
-                                                    </fieldset>
-                                                </div>
-                                                <div class="control-group col-md-6">
-                                                    <fieldset class="form-group">
-                                                        <label>Pincode/Postal Code</label>
-                                                        <input type="number" class="form-control" id="pincode" name="pincode" placeholder="Enter pincode" required>
-                                                    </fieldset>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="control-group col-md-6">
-                                                    <fieldset class="form-group">
-                                                        <label>Password</label>
-                                                        <input type="password" class="form-control" name="password" id="myPassword" placeholder="Enter password" required>
-                                                    </fieldset>
-                                                </div>
-                                                <div class="control-group col-md-6">
-                                                    <fieldset class="form-group">
-                                                        <label>Confirm Password</label>
-                                                        <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Enter confirm password" required>
-                                                    </fieldset>
-                                                </div>
-                                            </div>
-                                            <fieldset class="form-group">
-                                                <button type="submit" class="btn btn-lg btn-secondary btn-block"><b>Register <i class="fa fa-pencil"></i></b></button>
-                                            </fieldset>
-                                            <!-- <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                                <label class="custom-control-label" for="customCheck2">I Agree with <a href="#">Term and Conditions</a>
-                                                </label>
-                                            </div> -->
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="text-center login-footer-tab">
-                                    <ul class="nav nav-tabs" role="tablist">
-                                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#login" role="tab"><i class="mdi mdi-lock"></i> LOGIN</a>
-                                        </li>
-                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#register" role="tab"><i class="mdi mdi-pencil"></i> REGISTER</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="navbar-top bg-success pt-2">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12 text-center"> 
-                <div class="float-left float-sm-none">
-                    <a href="mailto:info@veggimart.in?subject=Enquiry/Suggetion&body=Enter%20your%20message%20here." class="mb-0 text-white"> 
-                        <span class="fa fa-envelope"> <b><span class="text-light" style="font-family: 'Maven Pro', sans-serif;"> info@veggimart.in | </span></b></span> 
-                    </a>
-                    <a href="tel:7273837273" class="mb-0 text-white">
-                        <span class="mdi mdi-phone"> Mob: <strong><span class="text-light">(+91) 72738 37273 </span></strong></span>   
-                    </a>
-                </div>
-                <div class="float-right d-sm-none">
-                    <div class="footer-social ml-3"> 
-                        <a class="btn-facebook" href="#"><i class="mdi mdi-facebook text-info"></i></a>
-                        <a class="btn-instagram" href="#"><i class="mdi mdi-instagram text-danger"></i></a>
-                        <a class="btn-whatsapp" href="https://api.whatsapp.com/send?phone=+91%209503835353" target="_blank"><i class="mdi mdi-whatsapp text-success"></i></a>
-                    </div>
-                </div>
-                <div class="float-right border-right border-left">
-                    <a class="location-top mr-3 ml-2" href="#"><i class="mdi mdi-map-marker-circle" aria-hidden="true"></i> Pune</a>
-                </div>
-
-                <div class="float-right d-flex d-sm-none">
-                    <input type="number" name="pincode" id="checkPincode" class="form-control-sm mb-1 h-pincode" name="product" placeholder="Enter your pincode to check items availability" title="Enter your pincode to check items availability" required="true" style="font-size: 12px">
-                    <button type="button" onclick="return checkPincodeHeader();" class="pl-2 pr-2 btn btn-secondary btn-lg mr-2" style="padding: 0px; height: calc(1.27em + .6rem + 2px);"><i class="fa fa-search"></i>
-                    </button>
-                    <span id="pincodeResponseHeader" style="color: #fff"></span>
-                </div>
-                {{-- @if(empty(Auth::check()))
-                <a href="{{ url('login-register/') }}" class="mb-0 mt-2 text-white desktop-hidden">
-                    <button class="btn btn-primary">Login / Sign Up</button>
-                </a>
-                @endif --}}
-            </div>
-        </div>
-    </div>
-</div>
-
-<nav class="navbar navbar-light navbar-expand-lg bg-dark bg-faded osahan-menu">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="{{ url('/') }}">
-            <img class="logo" src="{{ asset('images/frontend_images/veggimart.png') }}" title="Veggimart">
-        </a> 
-
-        <button class="navbar-toggler navbar-toggler-white" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="navbar-collapse" id="navbarNavDropdown">
-            <div class="navbar-nav mr-auto mt-2 mt-lg-0 margin-auto top-categories-search-main">
-                <div class="top-categories-search">
-                    <form action="{{ url('/search-products') }}" name="searchbar" method="post">{{ csrf_field() }}
-                        <div class="input-group mt-md-3"> 
-                            <span class="input-group-btn categories-dropdown">
-                                <select class="form-control-select" onchange="location = this.value;">
-                                    <option selected="selected">Categories</option>
-                                    @foreach($categories as $cat)
-                                    <option value="{{ asset('products/'.$cat->url) }}">{{ $cat->name }}</option>
-                                    @endforeach
-                                </select>
-                            </span>
-                            <input class="form-control" placeholder="Search products in store" aria-label="Search products in store" type="text" name="product" id="productSearch"> 
-                            <span class="input-group-btn"><button class="btn btn-secondary" type="submit"><i class="fa fa-search"></i> Search</button></span>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="my-2 my-lg-0">
-                <ul class="list-inline main-nav-right">
-                    @if(empty(Auth::check()))
-                    <li class="list-inline-item"> 
-                        <a href="{{ url('login-register/') }}" data-target="#bd-example-modal" data-toggle="modal" class="btn btn-link"><i class="fa fa-user-circle"></i> Login/Sign Up</a>
-                    </li>
-                    @else
-                    <li class="list-inline-item dropdown osahan-top-dropdown">
-                        <a class="btn btn-theme-round dropdown-toggle dropdown-toggle-top-user" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img alt="logo" src="{{ asset('images/frontend_images/user/1.jpg')}}"><strong>Hi </strong> <span class="case">
-                            <?php $auth = Auth::User()->name;
-                            $first = explode(" ", $auth);
-                            echo $first[0]; ?></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-list-design">
-                           <a href="{{ url('orders/') }}" class="dropdown-item"><i aria-hidden="true" class="mdi mdi-format-list-bulleted"></i>  My Orders</a>
-                           <a href="{{ url('my-wishlist') }}" class="dropdown-item"><i aria-hidden="true" class="mdi mdi-heart"></i> My Wishlist </a>
-                           <a href="{{ url('account/') }}" class="dropdown-item desktop-hidden"><i aria-hidden="true" class="mdi mdi-account"></i>  Hi <?php echo $first[0]; ?></a>
-                           <a href="{{ url('account/') }}" class="dropdown-item"><i aria-hidden="true" class="mdi mdi-account"></i>  My Account</a>
-                           <a href="{{ url('password-setting/') }}" class="dropdown-item"><i aria-hidden="true" class="mdi mdi-key"></i> Change Password </a>
-                           <div class="dropdown-divider"></div>
-                           <a class="dropdown-item" href="{{ url('user-logout/') }}"><i class="fa fa-power-off"></i> Logout</a>    
-                        </div>
-                     </li>
-                     @endif
-                    <li class="list-inline-item cart-btn">
-                        <a href="javascript:" data-toggle="offcanvas" class="btn btn-link border-none" title="Cart"><i class="mdi mdi-cart"></i> Cart <small class="cart-value">{{ $cartCount }}</small></a>
-                        <a href="{{ url('my-wishlist/') }}" class="btn btn-link border-none" title="Wishlist"><i class="mdi mdi-heart"></i> <small class="cart-value wishlistcounter">{{ $wishlistCount }}</small></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+<!-- GG FONT -->
+<link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+<style>
+	@media (min-width: 1200px)
+	{
+		.col-lg-4:nth-child(3n+1){
+			clear:none;
+		}
+	}
+</style>
+</head>
+<body>
+<header class="navbar-fixed-top pos-header" id="header-v1">
+<nav class="hidden-xs">
+	<div class="container">
+		<ul class="nav navbar-nav nav-help">
+			<li>800 123 654 78</li>
+			<li>ibbaniflowers@gmail.com</li>
+		</ul>
+		<ul class="nav navbar-nav navbar-right language">
+			<li class="dropdown eng-language"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Eng</a><figure id="language-figure"></figure>
+					<ul class="dropdown-menu">
+						<li><a href="#">Eng</a></li>
+						<li><a href="#">France</a></li>
+					</ul>
+			</li>
+		</ul>
+	</div>
 </nav>
 
-<nav class="navbar navbar-expand-lg navbar-light osahan-menu-2 pad-none-mobile">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0 margin-auto">
-                <li class="nav-item"> <a class="nav-link shop" href="{{ url('/') }}"><span class="gradient"><span class="mdi mdi-store"></span>Welcome to Veggi Mart</span></a></li>
-                <!-- <li class="nav-item"> <a class="nav-link <?php if(preg_match("/products/i", $url)){ ?> active <?php } ?>" href="{{ url('products/') }}">All Products</a></li> -->
+	<div class="container">
+		<div class="row">
+			<div class="navbar-header mobile-menu">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<i class="fas fa-bars"></i>                 
+				</button>
+			</div>
+		<div class="collapse navbar-collapse col-lg-6 col-md-6 col-sm-12 col-xs-12" id="myNavbar">
+			<form class="hidden-lg hidden-md form-group form-search-mobile">
+				<input type="text" name="search" placeholder="Search here..." class="form-control">
+				<button type="submit"><img src="{{ asset('/images/frontend_images/Search.png') }}" alt="search" class="img-responsive"></button>
+			</form>
+			<ul class="nav navbar-nav menu-main">
+				<li><figure id="btn-close-menu" class="hidden-lg hidden-md"><i class="far fa-times-circle"></i></figure></li>
+				<li class="dropdown menu-home">
+					<a href="{{ url('/') }}" id="home-menu" class="dropdown-toggle" data-toggle="dropdown">Home</a>
+					
+				</li>
+				<li class="shop-menu dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Flowers</a><figure id="shop-1" class="hidden-sm hidden-xs"></figure>
+					<div class="dropdown-menu">
+				<div class="container container-menu">
+					<ul class="row">
+				<li class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+					<ul>
+						<li class="col-lg-4 col-md-4 col-sm-12 col-xs-12 menu-home-lv2">
+							<ul>
+									<li><a href="#">By Occaions </a> </li>
+									<li class="li-home li-one"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="shop-right-sidebar.html">Birthday</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="shop-left-sidebar.html">Anniversary</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="shop-full-screen.html">Wedding</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="shop-full-width.html">Love n ROmance</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="singel-detail.html">Congratulations</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="singel-detail.html">Sympathy n Funeral</a></li>
+								
+							</ul>
+						</li>
+						<li class="col-lg-4 col-md-4 col-sm-12 col-xs-12 menu-home-lv2">
+							<ul>
+								<li><a href="#">By type </a></li> 
+									<li class="li-home li-one"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="shopping-cart.html">Roses</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="checkout.html">Carnations</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="order.html">Orchids</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="order.html">Gerberas</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="order.html">Lilies</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="order.html">Mixed Flowers</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="order.html">Exotic Flowers</a></li>
+							</ul>
+						</li>
+						<li class="col-lg-4 col-md-4 col-sm-12 col-xs-12 menu-home-lv2">
+							<ul>
+									<li><a href="#">By collection </a></li>
+									<li class="li-home li-one"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="FAQ.html">Flower Subscription</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="login_register.html">Flower Boquets</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="page404.html">Flower Arrangments</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="tracking.html">Flagship Collection</a></li>
+							</ul>
+						</li>
+						
+					</ul>
+				</li>
+				<li class="col-lg-4 col-md-4 hidden-sm hidden-xs li-banner">
+					<a href="#"><img src="{{ asset('/images/frontend_images/flower1.png') }}" alt="img-holiwood"></a>
+				</li>
+				
+					</ul>
+				</div>
+			</div>
+				</li>
+			
+			<li class="wedding-menu"><a href="{{ url('/about') }}">About us</a><figure id="wedding-1" class="hidden-sm hidden-xs"></figure></li>
+			<!-- <li class="wedding-menu"><a href="about.html">Corporate</a><figure id="wedding-1" class="hidden-sm hidden-xs"></figure></li> -->
+			<li class="shop-menu dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Corporate</a><figure id="shop-1" class=" hidden-sm hidden-md hidden-xs"></figure>
+					<div class="dropdown-menu">
+				<div class="container1 container-menu1">
+					<ul class="row">
+				<li class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<ul>
+						<li class="col-lg-12 col-md-12 col-sm-12 col-xs-12 menu-home-lv2">
+							<ul>
+								<li><a href="#">SHOP PAGE</a> </li>
+								<li class="li-home li-one"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="shop-right-sidebar.html">Occaions Details</a></li>
+								<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="shop-left-sidebar.html">Decoration</a></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				</ul></div></div>
+			</li>
+			<!-- <li class="wedding-menu"><a href="about.html">Media</a><figure id="wedding-1" class="hidden-sm hidden-xs"></figure></li> -->
+			<li class="shop-menu dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Media</a><figure id="shop-1" class=" hidden-sm hidden-md hidden-xs"></figure>
+					<div class="dropdown-menu">
+				<div class="container1 container-menu1">
+					<ul class="row">
+				<li class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<ul>
+						<li class="col-lg-12 col-md-12 col-sm-12 col-xs-12 menu-home-lv2">
+							<ul>
+								<li><a href="#">SHOP PAGE</a> </li>
+								<li class="li-home li-one"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="shop-right-sidebar.html">Gallery</a></li>
+								<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/blog') }}">Blog</a></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				</ul></div></div>
+			</li>
+			<!-- <li class="blog-menu dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog</a><figure id="blog-1" class=" hidden-sm hidden-md hidden-xs"></figure>
+							<ul class="menu-home-lv2 dropdown-menu">
+								<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="blog.html">Blog right sidebar</a></li>
+								<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="blog-left-sidebar.html">Blog Left sidebar</a></li>
+								<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="blog-no-sidebar.html">Blog no sidebar</a></li>
+								<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="singel-post-left-sidebar.html">Singel post left sidebar</a></li>
+								<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="singel-post-right-sidebar.html">Singel post right sidebar</a></li>
+								<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="singel-post-no-sidebar.html">Singel post no sidebar</a></li>
+							</ul>
+						</li> -->
+			<li class="contact-menu"><a href="{{ url('/contact') }}">Contact</a><figure id="contact-1" class="hidden-sm hidden-xs"></figure></li>
+			<li class="hidden-lg hidden-md"><a href="#"><i class="far fa-user"></i> My Account</a></li>
+			<li class="hidden-lg hidden-md hidden-sm phone-mobile">800 123 654 78</li>
+			<li class="hidden-lg hidden-md hidden-sm phone-mobile">ibbaniflowers@gmail.com</li>
+			</ul>
+		</div>
+	<ul class="logo col-lg-2 col-md-2 col-sm-7 col-xs-7">
+		<li><a href="#"><img src="{{ asset('images/frontend_images/logo.png') }}" class="img-responsive" alt="img-holiwood" style="height:100px;width:100px"></a></li>
+	</ul>
+	<ul class="nav navbar-nav navbar-right col-lg-4 col-md-4 col-sm-5 col-xs-5" style="padding-top:50px">
+	@if(empty(Auth::check()))
+		<li class="icon-user hidden-sm hidden-xs"><a href="{{ url('user-login') }}"><img src="{{ asset('images/frontend_images/user.png') }}" alt="img-holiwood" style="width: 25px;"></a></li>
+	@else
+	<li class="icon-user hidden-sm hidden-xs">
+		<a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<i class="far fa-user"></i>
+		<!-- <img alt="logo" src="{{ asset('images/frontend_images/user/1.jpg')}}"> <span class="case"> -->
+			
+		</a>
+		<ul class="menu-home-lv2 dropdown-menu">
+			<li class="li-home"><a href="{{ url('orders/') }}">My Orders</a></li>
+			<li class="li-home"><a href="{{ url('my-wishlist') }}">My Wishlist</a></li>
+			<li class="li-home"><a href="{{ url('account/') }}">My Account</a></li>
+			<li class="li-home"><a href="{{ url('password-setting/') }}">Change Password</a></li>
+			<li class="li-home"><a href="{{ url('user-logout/') }}">Logout</a></li>
+		</ul>
 
-                <!-- <li class="nav-item dropdown has-megamenu">
-                    <a class="nav-link dropdown-toggle  <?php if(preg_match("/products/i", $url)){ ?> active <?php } ?>" href="#" data-toggle="dropdown"> All Products </a>
-                    <div class="dropdown-menu megamenu mega-bg" role="menu">
-                        <div class="row d-flex justify-content-center">
-                            @foreach($categories as $cat)
-                            <div class="col-md-2 col-sm-6 text-left mb-3">
-                                <div class="col-megamenu">
-                                    <h6 class="title text-capitalize" style="color: #000">{{ $cat->name }}</h6>
-                                    <ul class="list-unstyled">
-                                        @foreach($cat->categories as $subcat)
-                                            @if($subcat->status==1)
-                                                <li class="text-capitalize"><a href="{{ asset('products/'.$subcat->url) }}">{{ $subcat->name }}</a></li>
-                                            @endif
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </li> -->
-
-                <li class="nav-item"> <a class="nav-link <?php if(preg_match("/products/i", $url)){ ?> active <?php } ?>" href="{{ url('/products/') }}">All Products </a></li>
-                <li class="nav-item"> <a class="nav-link <?php if(preg_match("/fruits/i", $url)){ ?> active <?php } ?>" href="{{ url('/products/fruits/') }}">Fruits </a></li>
-                <li class="nav-item"> <a class="nav-link <?php if(preg_match("/vegetables/i", $url)){ ?> active <?php } ?>" href="{{ url('/products/vegetables/') }}">Vegetables</a></li>
-                <li class="nav-item"> <a class="nav-link <?php if(preg_match("/about/i", $url)){ ?> active <?php } ?>" href="{{ url('/about/') }}">About Us</a></li>
-                <!-- <li class="nav-item"> <a class="nav-link <?php if(preg_match("/faq/i", $url)){ ?> active <?php } ?>" href="{{ url('/faq/') }}">FAQs</a></li> -->
-                <li class="nav-item"> <a class="nav-link <?php if(preg_match("/contact/i", $url)){ ?> active <?php } ?>" href="{{ url('/contact/') }}">Contact Us</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+	</li>
+	@endif
+		<li class="dropdown cart-menu">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{{ asset('/images/frontend_images/cart.png') }}" alt="img-holiwood"></a>
+			<div class="dropdown-menu">
+				<div class="cart-1">
+					<div class="img-cart"><img src="{{ asset('/images/frontend_images/340x420.png') }}" class="img-responsive" alt="img-holiwood"></div>
+					<div class="info-cart">
+						<h1>Pink roses</h1>
+						<span class="number">x1</span>
+						<span class="prince-cart">$207.2</span>
+					</div>
+				</div>
+				
+				<div class="total">
+					<span>Total:</span>
+					<span>$621.6</span>
+				</div>
+				<div id="div-cart-menu">
+					<a href="#">ADD TO CART</a>
+					<a href="#" class="check">CHECK VIEW</a>
+				</div>
+			</div>
+		</li>
+		<!-- <li class="icon-user hidden-sm hidden-xs"><a href="#"><i class="fa fa-shopping-cart"></i></a></li> -->
+		<li class="icon-user hidden-sm hidden-xs"><a href="#"><img src="{{ asset('/images/frontend_images/wishlist.png') }}" alt="img-holiwood" style="width: 25px;"></a></li>
+		<li id="input-search" class="hidden-sm hidden-xs">
+			<a href="#"><img src="{{ asset('/images/frontend_images/Search.png') }}" alt="img-holiwood"></a>
+		</li>
+	</ul>
+</div>
+</div>
+</header>

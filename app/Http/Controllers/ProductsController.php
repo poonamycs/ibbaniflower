@@ -538,9 +538,9 @@ class ProductsController extends Controller
         $productAltImages = ProductsImage::where('product_id',$id)->get();
         $total_stock = ProductsAttribute::where('product_id',$id)->sum('stock');
 
-        $meta_title = $productDetails->product_name.' | Veggi Mart';
-        $meta_description = $productDetails->product_name.' | Veggi Mart';
-        $meta_keywords = $productDetails->product_name.' | Veggi Mart';
+        $meta_title = $productDetails->product_name.' | Ibbani Flower';
+        $meta_description = $productDetails->product_name.' | Ibbani Flower';
+        $meta_keywords = $productDetails->product_name.' | Ibbani Flower';
         return view('products.detail')->with(compact('productDetails','categories','productAltImages','total_stock','relatedProducts','meta_title','meta_description','meta_keywords','breadcrumb'));
     }
 
@@ -655,7 +655,7 @@ class ProductsController extends Controller
             $userCart[$key]->image = $productDetails->image;
         }
         // echo "<pre>"; print_r($userCart);
-        $meta_title = "Shopping Cart | Veggi Mart";
+        $meta_title = "Shopping Cart | Ibbani Flower";
         return view('products.cart')->with(compact('userCart','meta_title'));
     }
 
@@ -672,7 +672,7 @@ class ProductsController extends Controller
         }else{
             $userWishList = array();
         }
-        $meta_title = "My Wishlist | Veggi Mart";
+        $meta_title = "My Wishlist | Ibbani Flower";
         return view('products.wishlist')->with(compact('userWishList','categories','meta_title'));
     }
 
@@ -774,7 +774,7 @@ class ProductsController extends Controller
         // fetch shipping charges
         $shippingCharges = Product::getShippingCharges($shippingDetails->pincode);
 
-        $meta_title = "Order Overview | Veggi Mart";
+        $meta_title = "Order Overview | Ibbani Flower";
         $categories = Category::with('categories')->where(['parent_id'=>0])->get();
 
         return view('products.order_review')->with(compact('userDetails','shippingDetails','userCart','codpincodeCount','prepaidpincodeCount','categories','meta_title','shippingCharges'));
@@ -888,7 +888,7 @@ class ProductsController extends Controller
             'userDetails' => $userDetails
         ];
         Mail::send('emails.order',$messageData,function($message) use($email){
-            $message->to($email)->subject('Order Placed - Veggi Mart');    
+            $message->to($email)->subject('Order Placed - Ibbani Flower');    
         });
 
         //admin - order confirmation mail
@@ -901,7 +901,7 @@ class ProductsController extends Controller
             'userDetails' => $userDetails
         ];
         Mail::send('emails.admin_order',$messageData,function($message) use($email){
-            $message->to($email)->subject('New Order Received - Veggi Mart');    
+            $message->to($email)->subject('New Order Received - Ibbani Flower');    
         });
 
         DB::table('cart')->where('user_email',$user_email)->delete();
@@ -912,7 +912,7 @@ class ProductsController extends Controller
     public function razorpay(Request $request){
         $user_email = Auth::user()->email;
         // DB::table('cart')->where('user_email',$user_email)->delete();
-        $meta_title = 'Make Payment | Veggi Mart';
+        $meta_title = 'Make Payment | Ibbani Flower';
         // return view('orders.payment_details')->with(compact('meta_title'));
         return view('orders.razorpay')->with(compact('meta_title'));
     }
@@ -1015,7 +1015,7 @@ class ProductsController extends Controller
                 'userDetails' => $userDetails
             ];
             Mail::send('emails.order',$messageData,function($message) use($email){
-                $message->to($email)->subject('Order Placed - Veggi Mart');    
+                $message->to($email)->subject('Order Placed - Ibbani Flower');    
             });
 
             //admin - order confirmation mail
@@ -1028,7 +1028,7 @@ class ProductsController extends Controller
                 'userDetails' => $userDetails
             ];
             Mail::send('emails.admin_order',$messageData,function($message) use($email){
-                $message->to($email)->subject('New Order Received - Veggi Mart');    
+                $message->to($email)->subject('New Order Received - Ibbani Flower');    
             });
 
             DB::table('cart')->where('user_email',$user_email)->delete();   
@@ -1322,7 +1322,7 @@ class ProductsController extends Controller
                 </div>
                 <div class="col-md-6" style="float: right;">
                     <div id="logo">
-                        <h1> Veggi Mart</h1>
+                        <h1> Ibbani Flower</h1>
                         <p>Sector No 7, Plot No 97, Near Vishweshwar Chowk, Bhosari MIDC Pune, 411026</p>
                         <p>(+91) 7273 83 7273</p>
                         <p>info@veggimart.in</p>
@@ -1421,7 +1421,7 @@ class ProductsController extends Controller
             $order_status = $data['order_status'];
             $messageData = ['email'=>$email,'order_id'=>$order_id,'name'=>$name,'order_status'=>$order_status];
             Mail::send('emails.order_status',$messageData,function($message) use($email){
-                $message->to($email)->subject('Order Status - Veggi Mart');    
+                $message->to($email)->subject('Order Status - Ibbani Flower');    
             });            
 
             return redirect()->back()->with('flash_message_success','Order Status has been Updated.');

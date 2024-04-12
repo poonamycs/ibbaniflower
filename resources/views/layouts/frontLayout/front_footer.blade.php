@@ -1,190 +1,322 @@
-<?php 
-    use App\Http\Controllers\Controller; 
-    use App\Models\Product; 
-    use App\Models\ContactDetail; 
-    $cartCount=Product::cartCount();
-    $contactDetails = ContactDetail::first();
-    $mainCategories=Controller::mainCategories();
-
-    if(Auth::check()){
-        $user_email = Auth::User()->email;
-        $userCart = DB::table('cart')->where(['user_email' => $user_email])->get();     
-    }else{
-        $session_id = Session::get('session_id');
-        $userCart = DB::table('cart')->where(['session_id' => $session_id])->get();    
-    }
-
-    foreach($userCart as $key => $product){
-        $productDetails = Product::where('id',$product->product_id)->first();
-        $userCart[$key]->image = $productDetails->image;
-    }
-?>
-<!-- Footer -->
-<section class="section-padding footer bg-white border-top footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-6 width-50">
-                {{-- <h4 class="mb-5 mt-0"><a class="logo" href="{{ url('/') }}l"><img src="{{ asset('images/frontend_images/logo.png') }}" alt=""></a></h4> --}}
-                <h6 class="mb-4">Contact Info </h6>
-                <span class="mb-0"><a class="text-dark"><i class="fa fa-map-marker"></i> {{ $contactDetails->address }}</span></p>
-                <p class="mb-0"><a class="text-dark" href="tel:{{ $contactDetails->phone }}"><i class="fa fa-phone"></i> {{ $contactDetails->phone }}</a></p>
-                <p class="mb-0"><a class="text-dark" href="mailto:{{ $contactDetails->email }}"><i class="fa fa-envelope"></i> {{ $contactDetails->email }}</a></p>
-            </div>
-            <div class="col-lg-2 col-md-2 col-sm-6 width-50">
-                <h6 class="mb-4">Quick Links </h6>
-                <ul>
-                    <li><a href="{{ url('about/') }}">About Us</a></li>
-                    <li><a href="{{ url('contact/') }}">Contact Us</a></li>
-                    {{-- <li><a href="{{ url('faq/') }}">FAQ's</a></li> --}}
-                <ul>
-            </div>
-            <div class="col-lg-2 col-md-2 col-sm-6 width-50">
-                <h6 class="mb-4">Categories</h6>
-                <ul>
-                    <li><a href="{{ url('products/vegetables/') }}">Vegetables</a></li>
-                    <li><a href="{{ url('products/fruits/') }}">Fruits</a></li>
-                <ul>
-            </div>
-            <div class="col-lg-2 col-md-2 col-sm-6 width-50">
-                <h6 class="mb-4">About Us</h6>
-                <ul>
-                    <li><a href="{{ url('page/privacy-policy') }}">Privacy Policy</a></li>
-                    <li><a href="{{ url('page/refund-policy') }}">Refund Policy</a></li>
-                    <li><a href="{{ url('page/terms-conditions') }}">Terms & Conditions</a></li>
-                <ul>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 width-50">
-                <div class="app">
-                    <ul>
-                        <li><a href="{{ url('admin/') }}"><b>Vendor login</b></a></li>
-                    </ul>
-                </div>
-                <h6 class="mb-3 mt-4">GET IN TOUCH</h6>
-                <div class="footer-social"> <a class="btn-facebook" href="#"><i class="mdi mdi-facebook text-primary"></i></a>
-                    <a class="btn-instagram" href="#"><i class="mdi mdi-instagram text-danger"></i></a>
-                    <a class="btn-whatsapp" href="#"><i class="mdi mdi-whatsapp text-success"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End Footer -->
-
-<!-- Copyright -->
-<section class="pt-2 pb-2 footer-bottom">
-    <div class="container">
-        <div class="row no-gutters">
-            <div class="col-lg-7 col-sm-12 width-50 m-auto">
-                <p class="mt-1 mb-0">&copy; <?php echo date('Y') ?> All Rights Reserved | Designed & Developed By <strong class="text-dark"><a href="https://www.ycstech.in" target="_blank">YCS TechSoft Pvt. Ltd.</a></strong>
-                    <!--<br> <small class="mt-0 mb-0">Made with <i class="mdi mdi-heart text-danger"></i> by <a href="#" target="_blank" class="text-primary"></a>-->
-              </small>
-                </p>
-            </div>
-            <div class="col-lg-5 col-sm-12 width-50 text-right">
-                <img src="{{ asset('images/frontend_images/payment_methods.png') }}">
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End Copyright -->
-
-<div class="footer-fix-nav shadow">
-    <div class="row mx-0">
-        <div class="col">
-            <a href="{{ url('/') }}"><i class="mdi mdi-home"></i></a>
-        </div>
-        <div class="col active">
-            <a class="toggle" href="#"><i class="mdi mdi-menu"></i></a>
-        </div>
-        @if(empty(Auth::check()))
-        <div class="col">
-            <a href="{{ url('account/') }}"><i class="mdi mdi-lock"></i></a>
-        </div>
-        @else
-        <div class="col">
-            <a href="{{ url('login-register/') }}"><i class="mdi mdi-account-circle"></i></a>
-        </div>
-        @endif
-    </div>
+<footer>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 info-footer">
+			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+				<h3>About</h3>
+				<ul>
+					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">News & Stories</a></li>
+					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">History</a> </li>
+					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">Our Studio</a></li>
+					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">Shop</a></li>
+					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">Stockists</a></li>
+				</ul>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+				<h3>Customer sevices</h3>
+				<ul>
+					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">Contact Us</a></li>
+					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">Trade Services</a></li>
+					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">Login/Register</a></li>
+					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">Delivery & Returns</a></li>
+					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">FAQs</a></li>
+				</ul>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+				<h3>Store</h3>
+				<ul>
+					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">Shop</a></li>
+					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">Wedding</a></li>
+					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">Holiday</a></li>
+					
+				</ul>
+			</div>
+			<div class="social-text"><span id="text-connect">CONNECT WITH US:</span>
+				<span class="social"><a href="#" id="instar"></a><a href="#" id="fb"></a><a href="#" id="tw"></a><a href="#" id="sky"></a></span>
+			</div>
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 new-letter">
+			<div class="form-new">
+				<h1>Newsletter</h1>
+			<p>Sign up for our mailing list to get lastest updates and offers</p>
+			<form class="form-group">
+				<input type="text" name="input-mail" placeholder="Your mail here" class="form-control input-lg">
+				<button type="submit">Subscribe</button>
+			</form>
+			</div>
+			
+		</div>
+	</div>
 </div>
-
-<nav id="main-nav">
-    <ul class="first-nav">
-        <li class="search" data-nav-custom-content>
-            <div class="form-container">
-                <form class="search-form" action="{{ url('/search-products') }}" method="post">@csrf
-                    <input type="text" name="product" placeholder="Search products in store" autocomplete="on" id="productSearch">
-                </form>
-            </div>
-        </li>
-        <li> <a href="{{ url('products/fruits/') }}"> Fruits <i class="fa fa-angle-right float-right"></i></a></li>
-        <li> <a href="{{ url('products/vegetables/') }}"> Vegetables <i class="fa fa-angle-right float-right"></i></a></li>
-    </ul>
-    <ul class="bottom-nav">
-        <li class="github">
-            <a href="mailto:info@veggimart.in?subject=Enquiry/Suggetion&amp;body=Enter%20your%20message%20here." target="_blank">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-                    <path d="M0 0h24v24H0z" fill="none" />
-                </svg>
-            </a>
-        </li>
-        <li class="email">
-            <a href="#" target="_blank">
-                <i class="fa fa-facebook"></i>
-            </a>
-        </li>
-        <li class="ko-fi">
-            <a href="https://api.whatsapp.com/send?phone=+91%209503835353" target="_blank">
-                <i class="fa fa-whatsapp font-weight-bold"></i>
-            </a>
-        </li>
-    </ul>
-</nav>
-
-
-<!-- cart drawer -->
-<div class="cart-sidebar">
-     <div class="cart-sidebar-header">
-        <h5>
-           My Cart <span class="text-success">({{ $cartCount }} item/s)</span> <a data-toggle="offcanvas" class="float-right" href="#"><i class="mdi mdi-close"></i>
-           </a>
-        </h5>
-     </div>
-
-     <div class="cart-sidebar-body">
-        <?php $total_amount=0; ?>
-        @if(count($userCart)>0)
-        @foreach($userCart as $cart)
-        <div class="cart-list-product">
-           <a class="float-right remove-cart" href="{{ url('/cart/delete-product/'.$cart->id) }}"><i class="mdi mdi-close"></i></a>
-           <img class="img-fluid" src="{{ asset('images/backend_images/products/small/'.$cart->image) }}" alt="">
-           {{-- <span class="badge badge-success">50% OFF</span> --}}
-           <h5><a href="#">{{ $cart->product_name }}</a></h5>
-           <h6><strong><span class="badge badge-success border">x {{ $cart->quantity }}</span></strong> - {{ $cart->size }}</h6>
-           <p class="offer-price mb-0">₹ {{ $cart->price }} <i class="mdi mdi-tag-outline"></i></p>
-        </div>
-        <?php $total_amount = $total_amount + ($cart->price*$cart->quantity); ?>
-        @endforeach
-        @else
-        <div class="container mt-3">
-            <div class="alert alert-warning" role="alert">
-              <a href="{{ url('products/') }}" class="alert-link">You cart is empty! Keep shopping</a>
-            </div>
-        </div>
-        @endif
-     </div>
-     <div class="cart-sidebar-footer">
-        <div class="cart-store-details">
-           <!-- <p>Delivery Charges <strong class="float-right text-danger">+ $29.69</strong></p> -->
-        </div>
-        <a href="{{ url('cart/') }}"><button class="btn btn-outline-secondary border btn-lg btn-block text-left" type="button"><span class="float-left"><i class="mdi mdi-cart-outline"></i> <b>View Shopping Cart</b> </span> <span class="mdi mdi-chevron-right"></span></span></button></a>
-        
-        @if(count($userCart)>0)
-        <a href="{{ url('checkout/') }}"><button class="btn btn-secondary btn-lg btn-block text-left mt-1"><span class="float-left"><i class="mdi mdi-cart-outline"></i> <b>Proceed to Checkout</b> </span><span class="float-right"><strong>₹ <?php echo $total_amount ?></strong> <span class="mdi mdi-chevron-right"></span></span></button></a>
-        @else
-        <button class="btn btn-secondary btn-lg btn-block text-left mt-1" disabled="true"><span class="float-left"><i class="mdi mdi-cart-outline"></i> <b>Proceed to Checkout</b> </span><span class="float-right"><strong>₹ <?php echo $total_amount ?></strong> <span class="mdi mdi-chevron-right"></span></span></button></a>
-        @endif
-     </div>
+<div class="footer-logo">
+	<div class="row footer-row">
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+			<a href="#"><img src="{{ asset('/images/frontend_images/logo.png') }}" style="height:100px;width:100px;padding-top:10px"/></a>
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 cop">
+			<span>Copyright</span><i class="far fa-copyright"></i><span>2018 by EngoTheme</span>
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+			<span id="gmail-footer"><a href="#">ibbaniflowers@gmail.com</a></span>
+		</div>
+	</div>
 </div>
+<div class="hidden-lg hidden-md back-to-top fade"><i class="fas fa-caret-up"></i></div>
+<div class="BG-menu"></div>
+<!-- Modal quick view -->
+								<div id="myModal" class="modal fade" role="dialog">
+								  <div class="modal-dialog">
+								
+								    <!-- Modal content-->
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <button type="button" class="close" data-dismiss="modal">&times;</button>
+								        
+								      </div>
+								      <div class="modal-body">
+								       <div class="tab-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div id="img-pill-1" class="tab-pane fade in active">
+  						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 title-quick">
+							<figure class="fi-quick"><h1>QUICK VIEW</h1></figure>
+						</div>
+						<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+							<img src="img/340x420.png" class="img-responsive" alt="holiwood">
+						</div>
+					</div>
+  						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 detail">
+  							<h1>Queen Rose - Pink</h1>
+							<p class="p1">It is a long established fact that a reader will be distracted  by the readable content of a page when looking at its layout.</p>
+							<div class="star">
+								<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+								<span>10 Rating(s) | Add Your Rating</span>
+							</div>
+							<div class="prince"><span>$250.9</span><s class="strike">$300.02</s></div>
+							<figure class="fi-option"><p class="option">Option</p></figure>
+							<div class="size">
+								<span class="lb-size">Size <span class="sta-red">*</span></span><span class="lb-color">Color <span class="sta-red">*</span></span>
+							</div>
+							<div class="select-custom">
+								<select>
+									<option>S</option>
+									<option>M</option>
+									<option>L</option>
+									<option>XL</option>
+								</select>
+								<a href="#"><span class="color-1"></span></a> <a href="#"><span class="color-2"></span></a> <a href="#"><span class="color-3"></span></a> <a href="#"><span class="color-4"></span></a> 
+								<p class="require">Required Fields <span>*</span></p>
+								<div class="Quality">
+									
+									<div class="input-group input-number-group">
+										<span class="text-qua">Quanty:</span>
+										  <div class="input-group-button">
+										    <span class="input-number-decrement">-</span>
+										  </div>
+										  <input class="input-number" type="number" min="0" max="1000" value="01" >
+										  <div class="input-group-button">
+										    <span class="input-number-increment">+</span>
+										  </div>
+										  <span class="dola">$ </span><span class="total">250.9</span>
+									</div>
+									
+								</div>
+								<div class="add-cart">
+									<a href="#" class="btn-add-cart">Add to cart</a>
+									<a href="#" class="list-icon icon-1"><i class="far fa-eye"></i></a>
+									<a href="#" class="list-icon icon-2"><i class="far fa-heart"></i></a>
+								</div>
+							</div>
+  						</div>
+				</div>
+				<div id="img-pill-2" class="tab-pane fade">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 title-quick">
+							<figure class="fi-quick"><h1>QUICK VIEW</h1></figure>
+						</div>
+						<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+							<img src="{{ asset('/images/frontend_images/340x420.png') }}" class="img-responsive" alt="holiwood">
+						</div>
+					</div>
+  					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 detail">
+  							<h1>Queen Rose</h1>
+							<p class="p1">It is a long established fact that a reader will be distracted  by the readable content of a page when looking at its layout.</p>
+							<div class="star">
+								<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+								<span>10 Rating(s) | Add Your Rating</span>
+							</div>
+							<div class="prince"><span>$300.02</span><s class="strike">$250.9</s></div>
+							<figure class="fi-option"><p class="option">Option</p></figure>
+							<div class="size">
+								<span class="lb-size">Size <span class="sta-red">*</span></span><span class="lb-color">Color <span class="sta-red">*</span></span>
+							</div>
+							<div class="select-custom">
+								<select>
+									<option>S</option>
+									<option>M</option>
+									<option>L</option>
+									<option>XL</option>
+								</select>
+								<a href="#"><span class="color-1"></span></a> <a href="#"><span class="color-2"></span></a> <a href="#"><span class="color-3"></span></a> <a href="#"><span class="color-4"></span></a> 
+								<p class="require">Required Fields <span>*</span></p>
+								<div class="Quality">
+									
+									<div class="input-group input-number-group">
+										<span class="text-qua">Quanty:</span>
+										  <div class="input-group-button">
+										    <span class="input-number-decrement">-</span>
+										  </div>
+										  <input class="input-number" type="number" min="0" max="1000" value="01" >
+										  <div class="input-group-button">
+										    <span class="input-number-increment">+</span>
+										  </div>
+										  <span class="dola">$ </span><span class="total">250.9</span>
+									</div>
+									
+								</div>
+								<div class="add-cart">
+									<a href="#" class="btn-add-cart">Add to cart</a>
+									<a href="#" class="list-icon icon-1"><i class="far fa-eye"></i></a>
+									<a href="#" class="list-icon icon-2"><i class="far fa-heart"></i></a>
+								</div>
+							</div>
+  						</div>	
+				</div>
+				<div id="img-pill-3" class="tab-pane fade">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 title-quick">
+							<figure class="fi-quick"><h1>QUICK VIEW</h1></figure>
+						</div>
+						<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+							<img src="{{ asset('images/frontend_images/340x420.png') }}" class="img-responsive" alt="holiwood">
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 detail">
+  							<h1>Lavender</h1>
+							<p class="p1">It is a long established fact that a reader will be distracted  by the readable content of a page when looking at its layout.</p>
+							<div class="star">
+								<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+								<span>10 Rating(s) | Add Your Rating</span>
+							</div>
+							<div class="prince"><span>$300.02</span><s class="strike">$250.9</s></div>
+							<figure class="fi-option"><p class="option">Option</p></figure>
+							<div class="size">
+								<span class="lb-size">Size <span class="sta-red">*</span></span><span class="lb-color">Color <span class="sta-red">*</span></span>
+							</div>
+							<div class="select-custom">
+								<select>
+									<option>S</option>
+									<option>M</option>
+									<option>L</option>
+									<option>XL</option>
+								</select>
+								<a href="#"><span class="color-1"></span></a> <a href="#"><span class="color-2"></span></a> <a href="#"><span class="color-3"></span></a> <a href="#"><span class="color-4"></span></a> 
+								<p class="require">Required Fields <span>*</span></p>
+								<div class="Quality">
+									
+									<div class="input-group input-number-group">
+										<span class="text-qua">Quanty:</span>
+										  <div class="input-group-button">
+										    <span class="input-number-decrement">-</span>
+										  </div>
+										  <input class="input-number" type="number" min="0" max="1000" value="01" >
+										  <div class="input-group-button">
+										    <span class="input-number-increment">+</span>
+										  </div>
+										  <span class="dola">$ </span><span class="total">250.9</span>
+									</div>
+									
+								</div>
+								<div class="add-cart">
+									<a href="#" class="btn-add-cart">Add to cart</a>
+									<a href="#" class="list-icon icon-1"><i class="far fa-eye"></i></a>
+									<a href="#" class="list-icon icon-2"><i class="far fa-heart"></i></a>
+								</div>
+							</div>
+  						</div>
+ 						
+				</div>
+				<div id="img-pill-4" class="tab-pane fade">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 title-quick">
+							<figure class="fi-quick"><h1>QUICK VIEW</h1></figure>
+						</div>
+						<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+							<img src="{{ asset('images/frontend_images/340x420.png') }}" class="img-responsive" alt="holiwood">
+						</div>
+					</div>
+ 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 detail">
+  							<h1>Queen Rose - Yellow</h1>
+							<p class="p1">It is a long established fact that a reader will be distracted  by the readable content of a page when looking at its layout.</p>
+							<div class="star">
+								<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+								<span>10 Rating(s) | Add Your Rating</span>
+							</div>
+							<div class="prince"><span>$300.02</span><s class="strike">$250.9</s></div>
+							<figure class="fi-option"><p class="option">Option</p></figure>
+							<div class="size">
+								<span class="lb-size">Size <span class="sta-red">*</span></span><span class="lb-color">Color <span class="sta-red">*</span></span>
+							</div>
+							<div class="select-custom">
+								<select>
+									<option>S</option>
+									<option>M</option>
+									<option>L</option>
+									<option>XL</option>
+								</select>
+								<a href="#"><span class="color-1"></span></a> <a href="#"><span class="color-2"></span></a> <a href="#"><span class="color-3"></span></a> <a href="#"><span class="color-4"></span></a> 
+								<p class="require">Required Fields <span>*</span></p>
+								<div class="Quality">
+									
+									<div class="input-group input-number-group">
+										<span class="text-qua">Quanty:</span>
+										  <div class="input-group-button">
+										    <span class="input-number-decrement">-</span>
+										  </div>
+										  <input class="input-number" type="number" min="0" max="1000" value="01" >
+										  <div class="input-group-button">
+										    <span class="input-number-increment">+</span>
+										  </div>
+										  <span class="dola">$ </span><span class="total">250.9</span>
+									</div>
+									
+								</div>
+								<div class="add-cart">
+									<a href="#" class="btn-add-cart">Add to cart</a>
+									<a href="#" class="list-icon icon-1"><i class="far fa-eye"></i></a>
+									<a href="#" class="list-icon icon-2"><i class="far fa-heart"></i></a>
+								</div>
+							</div>
+  						</div>	
+				</div>
+				</div>
+				<ul class="nav nav-pills col-lg-6 col-md-6 col-sm-6 col-xs-12 img-pill">
+				  <li class="active col-lg-4 col-md-4 col-sm-4 col-xs-12"><a data-toggle="pill" href="#img-pill-1"><img src="img/340x420.png" class="img-responsive" alt="holiwood"></a></li>
+				  <li class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><a data-toggle="pill" href="#img-pill-2"><img src="img/340x420.png" class="img-responsive" alt="holiwood"></a></li>
+				  <li class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><a data-toggle="pill" href="#img-pill-3"><img src="img/340x420.png" class="img-responsive" alt="holiwood"></a></li>
+				  <li class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><a data-toggle="pill" href="#img-pill-4"><img src="img/340x420.png" class="img-responsive" alt="holiwood"></a></li>
+				</ul>
+								      </div>
+								      
+								    </div>
+								
+								  </div>
+								</div>
+<!-- --------------------------- -->
+</footer>
 
+<!-- boostrap & jquery -->
+<script src="{{ asset('js/frontend_js/jquery.min_af.js') }}"></script>
+	<script src="{{ asset('js/frontend_js/bootstrap.min_0028.js') }}"></script>
+<!-- js file -->
+<script src="{{ asset('js/frontend_js/function-homev1.js') }}"></script>
+<script src="{{ asset('js/frontend_js/function-sidebar.js') }}"></script>
+<script src="{{ asset('js/frontend_js/function-back-top.js') }}"></script>
+<script src="{{ asset('js/frontend_js/function-select-custom.js') }}"></script>
+<script src="{{ asset('js/frontend_js/function-search-v2.js') }}"></script>
+<!-- scroll js -->
+<script type="text/javascript" src="{{ asset('scrolling/TweenMax.min.js') }}"></script>
+<script src="{{ asset('scrolling/jquery.superscrollorama.js') }}"></script>
+<script src="{{ asset('js/frontend_js/function-scroll.js') }}"></script>
+
+</body>
+</html>

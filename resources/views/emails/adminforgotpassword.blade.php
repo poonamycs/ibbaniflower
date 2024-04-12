@@ -14,7 +14,7 @@
 		<tr><td>New Password: {{ $password }}</td></tr>
 		<tr><td>&nbsp;</td></tr>
 		<tr><td>Thanks & Regards,</td></tr>
-		<tr><td>Veggi Mart</td></tr>
+		<tr><td>Ibbani Flower</td></tr>
 	</table>
 </body>
 </html>

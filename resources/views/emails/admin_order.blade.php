@@ -76,7 +76,7 @@
 				</table>
 			</td></tr>
 			<tr><td>&nbsp;</td></tr>
-			<tr><td>Regards,<br> <b>Veggi Mart</b><br> <b>Phone: </b>(+91) 9898989898<br> <b>Email :</b> example@gmail.com</td></tr>
+			<tr><td>Regards,<br> <b>Ibbani Flower</b><br> <b>Phone: </b>(+91) 9898989898<br> <b>Email :</b> example@gmail.com</td></tr>
 			<tr><td>&nbsp;</td></tr>
 		</table>
 </body>

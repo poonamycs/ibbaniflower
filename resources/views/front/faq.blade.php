@@ -17,7 +17,7 @@
 </div>
 	<div class="banner">
 		<div class="container">
-			<figure id="banner-about"><a href="#"><img src="{{ asset('front/img/1350x500.png') }}" class="img-responsive" alt="img-holiwood"></a></figure>
+			<figure id="banner-about"><a href="#"><img src="{{ asset('/images/frontend_images/1350x500.png') }}" class="img-responsive" alt="img-holiwood"></a></figure>
 		<div class="title-banner">
 			<h1>FAQ</h1>
 			<p><a href="#" title="Home">Home</a><i class="fa fa-caret-right"></i>FAQ</p>

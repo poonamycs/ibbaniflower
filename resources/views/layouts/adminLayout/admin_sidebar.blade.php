@@ -8,13 +8,17 @@
     use App\Models\Contact;
     use App\Models\CmsPage;
     use App\Models\Admin;
+
     use App\Models\StockCategory;
     use App\Models\StockItem;
+    use App\Models\Blog;
     $email = session('adminSession');
     $auth = Admin::where('email',$email)->first();
 
     $users = User::count();
     $products = Product::count();
+    $blog = Blog::count();
+
     $items = StockItem::count();
     $vendor_products = Product::where('email',$email)->count();
     $all_orders = Order::count();
@@ -128,6 +132,14 @@
         <li class="submenu"> <a href="#"><i class="fa fa-question-circle"></i> <span>Enquiries/Feedback</span> <span class="label label-important"> <?php echo $contacts ?> </span> </a>
             <ul <?php if(preg_match("/enquiries/i", $url)){ ?> style="display: block;" <?php } ?>>
                 <li <?php if(preg_match("/view-enquiries/i", $url)){ ?> class="active" <?php } ?>><a href="{{url('/admin/view-enquiries')}}"><i class="fa fa-arrow-right"></i> View Enquiries</a></li>
+            </ul>
+        </li>
+        @endif
+
+        @if($auth->vname == 'Superadmin')
+        <li class="submenu"> <a href="#"><i class="fa fa-list-alt"></i> <span>Blog</span> <span class="label label-important"> {{ $blog }} </span></a>
+            <ul <?php if(preg_match("/blog/i", $url)){ ?> style="display: block;" <?php } ?>>
+                <li <?php if(preg_match("/view-all-blogs/i", $url)){ ?> class="active" <?php } ?>><a href="{{url('/admin/view-all-blog')}}"><i class="fa fa-arrow-right"></i> View All Blogs</a></li>
             </ul>
         </li>
         @endif

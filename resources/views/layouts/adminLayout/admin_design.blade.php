@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Admin Panel | Veggi Mart</title>
+	<title>Admin Panel | Ibbani Flower</title>
 	<meta charset="UTF-8" />
 	<link rel="shortcut icon" type="image/png" href="{{ asset('images/frontend_images/favicon.png') }}">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />

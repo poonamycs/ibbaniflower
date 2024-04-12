@@ -10,6 +10,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BannersController;
 use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\CmsController;
+use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\TestimonialsController;
 /*
 |--------------------------------------------------------------------------
@@ -187,6 +188,12 @@ Route::group(['middleware' => ['adminlogin']],function(){
 	Route::get('/admin/check-pwd',[AdminController::class, 'chkPassword']);
 	Route::match(['get','post'],'/admin/update-pwd',[AdminController::class, 'updatePassword']);
 
+	// Products Routes (Admin)
+	Route::match(['get','post'],'/admin/add-blog',[BlogsController::class, 'addBlog']);
+	Route::get('/admin/view-all-blog',[BlogsController::class, 'viewAdminBlogs']);
+	Route::match(['get','post'],'admin/blog-approved/{id}',[BlogsController::class, 'blogApproved']);
+	
+
 	//Categories Routes (Admin)
 	Route::match(['get','post'],'/admin/add-category',[CategoryController::class, 'addCategory']);
 	Route::match(['get','post'],'/admin/edit-category/{id}',[CategoryController::class, 'editCategory']);
@@ -201,8 +208,8 @@ Route::group(['middleware' => ['adminlogin']],function(){
 	Route::get('/admin/view-products',[ProductsController::class, 'viewProducts']);
 	Route::get('/admin/view-all-products',[ProductsController::class, 'viewAdminProducts']);
 
-	Route::match(['get','post'],'admin/product-approved/{id}','ProductsController@productApproved');
-	Route::match(['get','post'],'admin/product-not-approved/','ProductsController@productsNotApproved');
+	Route::match(['get','post'],'admin/product-approved/{id}',[ProductsController::class, 'productApproved']);
+	Route::match(['get','post'],'admin/product-not-approved/',[ProductsController::class, 'productsNotApproved']);
 	// export products
 	Route::get('/admin/export-products/','ProductsController@exportProducts');
 

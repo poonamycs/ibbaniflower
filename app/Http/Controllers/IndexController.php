@@ -45,9 +45,9 @@ class IndexController extends Controller
         $banner2 = OfferBanner::where(['status'=>1,'id'=>3])->first();
         $banner3 = OfferBanner::where(['status'=>1,'id'=>4])->first();
 
-    	$meta_title = "Online Grocery Shop | Veggi Mart";
-    	$meta_description = "Veggi Mart";
-    	$meta_keywords = "online shopping, fruits, vegetables, veggimart, veggi mart, buy grocery, buy fruits, buy vegetables";
+    	$meta_title = "Online Grocery Shop | Ibbani Flower";
+    	$meta_description = "Ibbani Flower";
+    	$meta_keywords = "online shopping, fruits, vegetables, Ibbani Flower, Ibbani Flower, buy grocery, buy fruits, buy vegetables";
 
     	return view('index')->with(compact('featuredAll','productsAll','categories','banners','meta_title','meta_description','meta_keywords','testimonialAll','fruits','veg','banner1','banner2','banner3'));
     }
@@ -142,36 +142,22 @@ class IndexController extends Controller
                 'comment' => $data['comment']
             ];
             Mail::send('emails.enquiry',$messageData,function($message) use($email){
-                $message->to($email)->subject('Enquiry - Veggi Mart');    
+                $message->to($email)->subject('Enquiry - Ibbani Flower');    
             });
             /* Code for Order Email Ends */
             return redirect()->back()->with('flash_message_success','Thanks for your Enquiry/Feedback, We will get back to you soon!');
         }
         $contactDetails = ContactDetail::first();
         $categories = Category::with('categories')->where(['parent_id'=>0])->get();
-        $meta_title = 'Contact Us | Veggi Mart';
+        $meta_title = 'Contact Us | Ibbani Flower';
         return view('contact')->with(compact('categories','contactDetails','meta_title'));
     }
 
     public function vendorRegister(){
-    	$meta_title = 'Vendor Registration | Veggi Mart';
+    	$meta_title = 'Vendor Registration | Ibbani Flower';
     	$categories = Category::with('categories')->where(['parent_id'=>0])->get();
     	return view('users.vendor_register')->with(compact('categories','meta_title'));
     }
 
-    public function about(){
-        $meta_title = 'About Us | Veggi Mart';
-    	return view('about')->with(compact('meta_title'));
-    }
-
-    public function faq(){
-        $meta_title = "FAQ's | Veggi Mart";
-        return view('faq')->with(compact('meta_title'));
-    }
-
-    public function notFound(){
-        $meta_title = "OOP's Page Not Found";
-        return view('404')->with(compact('meta_title'));
-    }
-
+    
 }

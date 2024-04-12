@@ -10,41 +10,41 @@ class HomeController extends Controller
 {
     public function index(){
         $meta_title = 'Index | Ibbani flower';
-    	return view('front/index')->with(compact('meta_title'));
+    	return view('index')->with(compact('meta_title'));
     }
     public function about(){
         $meta_title = 'About Us | Ibbani flower';
-    	return view('front/about')->with(compact('meta_title'));
+    	return view('about')->with(compact('meta_title'));
     }
     public function notFound(){
         $meta_title = "OOP's Page Not Found";
         return view('404')->with(compact('meta_title'));
     }
     public function singel_detail(){
-        return view('/front/singel-detail');
+        return view('singel-detail');
     }
     public function shopping_cart(){
-        return view('/front/shopping-cart');
+        return view('shopping-cart');
     }
     public function pagenotfound(){
-        return view('/front/page404');
+        return view('page404');
     }
     public function checkout(){
-        return view('/front/checkout');
+        return view('checkout');
     }
     public function contact(){
-        return view('/front/contact1');
+        return view('contact');
     }
     public function faq(){
-        return view('/front/faq');
+        return view('faq');
     }
     public function blog(){
-        return view('/front/blog');
+        return view('blog');
     }
     public function order(){
-        return view('/front/order');
+        return view('order');
     }
     public function home1(){
-        return view('/front/homev1');
+        return view('homev1');
     }
 }

@@ -15,7 +15,7 @@
 		<tr><td>If you did not create an account, no further action is required.</td></tr>
 		<tr><td>&nbsp;</td></tr>
 		<tr><td>Thanks & Regards,</td></tr>
-		<tr><td>Veggi Mart</td></tr>
+		<tr><td>Ibbani Flower</td></tr>
 	</table>
 </body>
 </html>

@@ -14,7 +14,7 @@
 	</div>
 	<div class="banner">
 		<div class="container">
-			<figure id="banner-about"><a href="#"><img src="{{ asset('front/img/1350x500.png') }}" class="img-responsive" alt="img-holiwood"></a></figure>
+			<figure id="banner-about"><a href="#"><img src="{{ asset('images/frontend_images/1350x500.png') }}" class="img-responsive" alt="img-holiwood"></a></figure>
 		<div class="title-banner">
 			<h1>About Us</h1>
 			<p>It is a long established fact that a reader will<br>be distracted by the readable content of a page when looking at its layout</p>
@@ -27,7 +27,7 @@
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-well">
 				<div class="media">
-					<div class="media-left"><a href="#"><img src="{{ asset('front/img/115x115.png') }}" alt="img-holiwood"></a></div>
+					<div class="media-left"><a href="#"><img src="{{ asset('images/frontend_images/115x115.png') }}" alt="img-holiwood"></a></div>
 					<div class="media-body">
 						<h1>WELLCOME</h1>
 						<h2>Hello! I am Laura Ellie <br>Founder of Jenstore</h2>
@@ -46,7 +46,7 @@
 					</div>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 img-well">
-				<figure id="img-about"><a href="#"><img src="{{ asset('front/img/660x360.png') }}" alt="img-holiwood"></a></figure>
+				<figure id="img-about"><a href="#"><img src="{{ asset('images/frontend_images/660x360.png') }}" alt="img-holiwood"></a></figure>
 			</div>
 		</div>
 	</div>
@@ -58,7 +58,7 @@
 		<h3>Profestional and  Outstanding Ideas of our passlonate team makes us unique in every sense</h3>
 		<div class="row">
 			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 team-account">
-				<a href="#"><img src="{{ asset('front/img/315x400.png') }}" class="img-responsive" alt="img-holiwood"></a>
+				<a href="#"><img src="{{ asset('images/frontend_images/315x400.png') }}" class="img-responsive" alt="img-holiwood"></a>
 				<div class="title-acc">
 					<h2>LILA SIMPSON</h2>
 					<p>Stylist</p>
@@ -71,7 +71,7 @@
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 team-account">
-				<a href="#"><img src="{{ asset('front/img/315x400.png') }}" class="img-responsive" alt="img-holiwood"></a>
+				<a href="#"><img src="{{ asset('images/frontend_images/315x400.png') }}" class="img-responsive" alt="img-holiwood"></a>
 				<div class="title-acc">
 					<h2>JOHNSON SMITH</h2>
 					<p>Fashion Designer</p>
@@ -84,7 +84,7 @@
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 team-account">
-				<a href="#"><img src="{{ asset('front/img/315x400.png') }}" class="img-responsive" alt="img-holiwood"></a>
+				<a href="#"><img src="{{ asset('images/frontend_images/315x400.png') }}" class="img-responsive" alt="img-holiwood"></a>
 				<div class="title-acc">
 					<h2>BARNEY MOLLY</h2>
 					<p>Stylist</p>
@@ -97,7 +97,7 @@
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 team-account">
-				<a href="#"><img src="{{ asset('front/img/315x400.png') }}" class="img-responsive" alt="img-holiwood"></a>
+				<a href="#"><img src="{{ asset('images/frontend_images/315x400.png') }}" class="img-responsive" alt="img-holiwood"></a>
 				<div class="title-acc">
 					<h2>JUDY WINTER</h2>
 					<p>Model</p>
@@ -134,7 +134,7 @@
     <div class="item active">
 		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,<br class="hidden-sm hidden-xs"> when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap<br class="hidden-sm hidden-xs"> into electronic typesetting, remaining essentially unchanged</p>
 		<div class="img-customer">
-			<img src="{{ asset('front/img/115x115.png') }}" alt="img-holiwood">
+			<img src="{{ asset('images/frontend_images/115x115.png') }}" alt="img-holiwood">
 			<h1>JUDY BEAUTY - <span>Customers</span></h1>
 		</div>
     </div>
@@ -143,7 +143,7 @@
       
 		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,<br class="hidden-sm hidden-xs"> when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap<br class="hidden-sm hidden-xs"> into electronic typesetting, remaining essentially unchanged</p>
 		<div class="img-customer">
-			<img src="{{ asset('front/img/115x115.png') }}" alt="img-holiwood">
+			<img src="{{ asset('images/frontend_images/115x115.png') }}" alt="img-holiwood">
 			<h1>JUDY BEAUTY - <span>Customers</span></h1>
 		</div>
     </div>
@@ -152,7 +152,7 @@
       
 		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,<br class="hidden-sm hidden-xs"> when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap<br class="hidden-sm hidden-xs"> into electronic typesetting, remaining essentially unchanged</p>
 		<div class="img-customer">
-			<img src="{{ asset('front/img/115x115.png') }}" alt="img-holiwood">
+			<img src="{{ asset('images/frontend_images/115x115.png') }}" alt="img-holiwood">
 			<h1>JUDY BEAUTY - <span>Customers</span></h1>
 		</div>
     </div>
@@ -168,7 +168,7 @@
 			<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 				<div class="img-color-1">
 					<div class="img-content">
-					<img src="{{ asset('front/img/70x71.png') }}" class="img-responsive" alt="img-holiwood">
+					<img src="{{ asset('images/frontend_images/70x71.png') }}" class="img-responsive" alt="img-holiwood">
 					</div>
 				<h1>100%</h1>
 				<h2>Product quality protection</h2>
@@ -178,7 +178,7 @@
 			<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
 				<div class="img-color-2">
 					<div class="img-content">
-					<img src="{{ asset('front/img/82x62.png') }}" class="img-responsive" alt="img-holiwood">
+					<img src="{{ asset('images/frontend_images/82x62.png') }}" class="img-responsive" alt="img-holiwood">
 				</div>
 				<h1>100%</h1>
 				<h2>Payment protection</h2>
@@ -188,7 +188,7 @@
 			<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 				<div class="img-color-3">
 					<div class="img-content">
-					<img src="{{ asset('front/img/62x62.png') }}" class="img-responsive" alt="img-holiwood">
+					<img src="{{ asset('images/frontend_images/62x62.png') }}" class="img-responsive" alt="img-holiwood">
 				</div>
 				<h1>100%</h1>
 				<h2>On-time shipment protection</h2>

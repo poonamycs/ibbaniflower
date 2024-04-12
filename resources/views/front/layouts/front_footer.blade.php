@@ -51,7 +51,7 @@
 <div class="footer-logo">
 	<div class="row footer-row">
 		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-			<a href="#"><img src="{{ asset('front/img/logo.png') }}" style="height:100px;width:100px;padding-top:10px"/></a>
+			<a href="#"><img src="{{ asset('/images/frontend_images/logo.png') }}" style="height:100px;width:100px;padding-top:10px"/></a>
 		</div>
 		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 cop">
 			<span>Copyright</span><i class="far fa-copyright"></i><span>2018 by EngoTheme</span>
@@ -134,7 +134,7 @@
 							<figure class="fi-quick"><h1>QUICK VIEW</h1></figure>
 						</div>
 						<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-							<img src="{{ asset('front/img/340x420.png') }}" class="img-responsive" alt="holiwood">
+							<img src="{{ asset('/images/frontend_images/340x420.png') }}" class="img-responsive" alt="holiwood">
 						</div>
 					</div>
   					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 detail">
@@ -187,7 +187,7 @@
 							<figure class="fi-quick"><h1>QUICK VIEW</h1></figure>
 						</div>
 						<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-							<img src="{{ asset('front/img/340x420.png') }}" class="img-responsive" alt="holiwood">
+							<img src="{{ asset('images/frontend_images/340x420.png') }}" class="img-responsive" alt="holiwood">
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 detail">
@@ -241,7 +241,7 @@
 							<figure class="fi-quick"><h1>QUICK VIEW</h1></figure>
 						</div>
 						<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-							<img src="{{ asset('front/img/340x420.png') }}" class="img-responsive" alt="holiwood">
+							<img src="{{ asset('images/frontend_images/340x420.png') }}" class="img-responsive" alt="holiwood">
 						</div>
 					</div>
  					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 detail">
@@ -305,18 +305,18 @@
 </footer>
 
 <!-- boostrap & jquery -->
-<script src="{{ asset('front/js/jquery.min_af.js') }}"></script>
-	<script src="{{ asset('front/js/bootstrap.min_0028.js') }}"></script>
+<script src="{{ asset('js/frontend_js/jquery.min_af.js') }}"></script>
+	<script src="{{ asset('js/frontend_js/bootstrap.min_0028.js') }}"></script>
 <!-- js file -->
-<script src="{{ asset('front/js/function-homev1.js') }}"></script>
-<script src="{{ asset('front/js/function-sidebar.js') }}"></script>
-<script src="{{ asset('front/js/function-back-top.js') }}"></script>
-<script src="{{ asset('front/js/function-select-custom.js') }}"></script>
-<script src="{{ asset('front/js/function-search-v2.js') }}"></script>
+<script src="{{ asset('js/frontend_js/function-homev1.js') }}"></script>
+<script src="{{ asset('js/frontend_js/function-sidebar.js') }}"></script>
+<script src="{{ asset('js/frontend_js/function-back-top.js') }}"></script>
+<script src="{{ asset('js/frontend_js/function-select-custom.js') }}"></script>
+<script src="{{ asset('js/frontend_js/function-search-v2.js') }}"></script>
 <!-- scroll js -->
-<script type="text/javascript" src="{{ asset('front/scrolling/TweenMax.min.js') }}"></script>
-<script src="{{ asset('front/scrolling/jquery.superscrollorama.js') }}"></script>
-<script src="{{ asset('front/js/function-scroll.js') }}"></script>
+<script type="text/javascript" src="{{ asset('scrolling/TweenMax.min.js') }}"></script>
+<script src="{{ asset('scrolling/jquery.superscrollorama.js') }}"></script>
+<script src="{{ asset('js/frontend_js/function-scroll.js') }}"></script>
 
 </body>
 </html>

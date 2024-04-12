@@ -200,7 +200,7 @@
 					<span class="mt-4">Share On: </span>
 					<div class="addthis_inline_share_toolbox mt-2"></div>
 
-					<h6 class="mb-3 mt-4">Why shop from Veggi Mart?</h6>
+					<h6 class="mb-3 mt-4">Why shop from Ibbani flower?</h6>
 					<div class="row">
 						<div class="col-md-6">
 							<div class="feature-box"> <i class="mdi mdi-truck-fast"></i>
