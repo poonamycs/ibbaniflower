@@ -43,12 +43,12 @@
 					<a href="blog-post.html"><img src="{{ asset('/images/frontend_images/blog-1.jpg') }}" class="img-responsive" alt="img-holiwood"></a>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 title-blog">
-					<h2><a href="blog-post.html">Choose for yourself the Flobal chiffon dress</a></h2>
+					<h2><a href="blog-post.html">The Secret Language of Flowers: Unveiling Their Hidden Meanings</a></h2>
 				<div class="time-blog">
-					<span class="time"><i class="far fa-calendar-alt"></i><span>May, 12 2018</span></span>
+					<span class="time"><i class="far fa-calendar-alt"></i><span>May, 12 2023</span></span>
 					<span class="time"><i class="far fa-edit"></i><span>Pixel-Creative</span></span>
 				</div>
-				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+				<p>Flowers carry a rich history of symbolism, forming a silent language all their own</p>
 				<a href="#">Read more</a>
 				</div>
 				<!--  -->
@@ -56,12 +56,12 @@
 					<a href="#"><img src="{{ asset('/images/frontend_images/blog-2.jpg') }}" class="img-responsive" alt="img-holiwood"></a>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 title-blog">
-					<h2><a href="#">Choose for yourself the Flobal chiffon dress</a></h2>
+					<h2><a href="#">From Seed to Stunning: The Enchanting Journey of Your Flowers</a></h2>
 				<div class="time-blog">
-					<span class="time"><i class="far fa-calendar-alt"></i><span>May, 12 2018</span></span>
+					<span class="time"><i class="far fa-calendar-alt"></i><span>May, 12 2023</span></span>
 					<span class="time"><i class="far fa-edit"></i><span>Pixel-Creative</span></span>
 				</div>
-				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+				<p>Here at IBBANI FLOWERS, we're passionate about sharing the magic behind every flower.</p>
 				<a href="#">Read more</a>
 				</div>
 				<!--  -->
@@ -69,12 +69,12 @@
 					<a href="#"><img src="{{ asset('/images/frontend_images/blog-3.jpg') }}" class="img-responsive" alt="img-holiwood"></a>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 title-blog">
-					<h2><a href="#">Choose for yourself the Flobal chiffon dress</a></h2>
+					<h2><a href="#">Beyond the Bouquet: Creative Ways to Use Flowers in Your Home</a></h2>
 				<div class="time-blog">
-					<span class="time"><i class="far fa-calendar-alt"></i><span>May, 12 2018</span></span>
+					<span class="time"><i class="far fa-calendar-alt"></i><span>May, 12 2023</span></span>
 					<span class="time"><i class="far fa-edit"></i><span>Pixel-Creative</span></span>
 				</div>
-				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+				<p>Flowers aren't just for special occasions! They have the power to instantly transform the ambiance of your home, adding a touch of elegance, cheer, or tranquility.</p>
 				<a href="#">Read more</a>
 				</div>
 				<!--  -->
@@ -82,12 +82,12 @@
 					<a href="#"><img src="{{ asset('/images/frontend_images/blog-4.jpg') }}" class="img-responsive" alt="img-holiwood"></a>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 title-blog">
-					<h2><a href="#">Choose for yourself the Flobal chiffon dress</a></h2>
+					<h2><a href="#">The Secret Language of Flowers: Unveiling Their Hidden Meanings</a></h2>
 				<div class="time-blog">
 					<span class="time"><i class="far fa-calendar-alt"></i><span>May, 12 2018</span></span>
 					<span class="time"><i class="far fa-edit"></i><span>Pixel-Creative</span></span>
 				</div>
-				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+				<p>IBBANI FLOWERS can help you craft the perfect expression with the language of blooms.</p>
 				<a href="#">Read more</a>
 				</div>
 				<!--  -->

@@ -16,7 +16,7 @@
                             
 </div>
 	<div class="container banner">
-		<figure id="banner-figure"><a href="#"><img src="{{ asset('/images/frontend_images/1350x500.png') }}" class="img-responsive" alt="img-holiwood"></a></figure>
+		<figure id="banner-figure"><a href="#"><img src="{{ asset('/images/frontend_images/aboutus_page_banner.png') }}" class="img-responsive" alt="img-holiwood"></a></figure>
 		<div class="text-banner">
 			<h1>Tulips<br>Collection</h1>
 			<p>SALE UP TO 20% OFF</p>

@@ -423,8 +423,8 @@ making it a cornerstone for environmental stewardship in the region.</p>
 </div>
 <div class="holiday" id="showcase-4">
 <div class="container">
-	<h1>Holiday</h1>
-	<h2>- Lorem Ipsum is<span class="hidden-xs"> simply dummy</span> text of the printing -</h2>
+	<h1>Occasional Splendors</h1>
+	<h2>- Transforming words into experiences -</h2>
 	<div class="gallery clearfix">
 	<figure>
 	<div class="row">
@@ -549,30 +549,30 @@ making it a cornerstone for environmental stewardship in the region.</p>
 	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 product-blog">
 		<a href="#"><img src="{{ asset('/images/frontend_images/blog-1.jpg') }}" class="img-responsive" title="img-blog" alt="img-holiwood"></a>
 		<div class="time-blog">
-			<span class="time"><i class="far fa-calendar-alt"></i><span>May, 12 2018</span></span>
+			<span class="time"><i class="far fa-calendar-alt"></i><span>May, 12 2023</span></span>
 			<span class="time"><i class="far fa-edit"></i><span>Pixel-Creative</span></span>
 		</div>
-		<h2><a href="#">Choose for yourself the Flobal chiffon dress</a></h2>
-		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+		<h2><a href="#">The Secret Language of Flowers: Unveiling Their Hidden Meanings</a></h2>
+		<p> Flowers carry a rich history of symbolism, forming a silent language all their own.</p>
 	</div>
 	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 product-blog">
 		<a href="#"><img src="{{ asset('/images/frontend_images/blog-2.jpg') }}" class="img-responsive" title="img-blog" alt="img-holiwood"></a>
 		<div class="time-blog">
-			<span class="time"><i class="far fa-calendar-alt"></i><span>May, 12 2018</span></span>
+			<span class="time"><i class="far fa-calendar-alt"></i><span>May, 12 2023</span></span>
 			<span class="time"><i class="far fa-edit"></i><span>Pixel-Creative</span></span>
 		</div>
-		<h2><a href="#">Choose for yourself the Flobal chiffon dress</a></h2>
-		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+		<h2><a href="#">From Seed to Stunning: The Enchanting Journey of Your Flowers</a></h2>
+		<p>Here at IBBANI FLOWERS, we're passionate about sharing the magic behind every flower.</p>
 
 	</div>
 	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 product-blog">
 		<a href="#"><img src="{{ asset('/images/frontend_images/blog-3.jpg') }}" class="img-responsive" title="img-blog" alt="img-holiwood"></a>
 		<div class="time-blog">
-			<span class="time"><i class="far fa-calendar-alt"></i><span>May, 12 2018</span></span>
+			<span class="time"><i class="far fa-calendar-alt"></i><span>May, 12 2023</span></span>
 			<span class="time"><i class="far fa-edit"></i><span>Pixel-Creative</span></span>
 		</div>
-		<h2><a href="#">Choose for yourself the Flobal chiffon dress</a></h2>
-		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+		<h2><a href="#">Beyond the Bouquet: Creative Ways to Use Flowers in Your Home</a></h2>
+		<p>Flowers aren't just for special occasions! They have the power to instantly transform the ambiance of your home, adding a touch of elegance, cheer, or tranquility.</p>
 
 	</div>
 </div>

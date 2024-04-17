@@ -1,27 +1,28 @@
 @extends('layouts.frontLayout.design')
 
 @section('content')
-
+<style>
+.product-content .img-content img{
+  width:65%;
+}
+</style>
 <main>
 	<div class="content-search">
-
-                            <div class="container container-100">
-                            	<i class="far fa-times-circle" id="close-search"></i>
-                                <h3 class="text-center">what are your looking for ?</h3>
-                                <form method="get" action="/search" role="search" style="position: relative;">
-                                  <input type="text" class="form-control control-search" value="" autocomplete="off" placeholder="Enter Search ..." aria-label="SEARCH" name="q">
-
-                                  <button class="button_search" type="submit">search</button>
-                                </form>
-                            </div>
-                            
-</div>
+		<div class="container container-100">
+			<i class="far fa-times-circle" id="close-search"></i>
+			<h3 class="text-center">what are your looking for ?</h3>
+			<form method="get" action="/search" role="search" style="position: relative;">
+				<input type="text" class="form-control control-search" value="" autocomplete="off" placeholder="Enter Search ..." aria-label="SEARCH" name="q">
+				<button class="button_search" type="submit">search</button>
+			</form>
+		</div>                          
+	</div>
 	<div class="container">
 		<div class="menu-breadcrumb">
 				<ul class="breadcrumb">
   					<li><a href="homev3.html">Home</a></li>
   					<li><a href="flower.html">FLOWER</a></li>
-  					<li><a href="#">Queen Rose - Pink</a></li>
+  					<li><a href="#">{{$product->product_name}}</a></li>
 				</ul>
 		</div>
 	</div>
@@ -38,15 +39,15 @@
       							<img src="{{ url('/images/backend_images/products/medium/'.$product->image) }}" class="img-responsive" alt="img-holiwood">
       					</div>
       						<div class="col-lg-7 col-md-6 col-sm-12 col-xs-12 detail">
-      							<h1>Queen Rose - Pink</h1>
-								<p class="p1">It is a long established fact that a reader will be distracted  by the readable<br class="hidden-md hidden-sm hidden-xs"> content of a page when looking at its layout.</p>
+      							<h1>{{$product->product_name}}</h1>
+								<p class="p1">{{ Str::limit(strip_tags($product->description), 50) }}</p>
 								<div class="star">
 									<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
 									<span>10 Rating(s) | Add Your Rating</span>
 								</div>
-								<div class="prince"><span>$250.9</span><s class="strike">$300.02</s></div>
-								<figure class="fi-option"><p class="option">Option</p></figure>
-								<div class="size col-lg-4 col-md-6 col-sm-6 col-xs-12">
+								<div class="prince"><span>&#8377;&nbsp;{{$product->price}}</span><s class="strike">&#8377;{{$product->discount}}</s></div>
+								<!-- <figure class="fi-option"><p class="option">Option</p></figure> -->
+								<!-- <div class="size col-lg-4 col-md-6 col-sm-6 col-xs-12">
 									<span class="lb-size">Size <span class="sta-red">*</span></span>
 								<div class="select-custom">
 									<select>
@@ -56,14 +57,14 @@
 										<option>XL</option>
 									</select>
 								</div>
-								</div>
-								<div class="color col-lg-8 col-md-6 col-sm-6 col-xs-12">
+								</div> -->
+								<!-- <div class="color col-lg-8 col-md-6 col-sm-6 col-xs-12">
 									<div class="div-color"><span class="lb-color">Color <span class="sta-red">*</span></span></div>
 									<a href="#"><span class="color-1"></span></a> <a href="#"><span class="color-2"></span></a> <a href="#"><span class="color-3"></span></a>
 									 <a href="#"><span class="color-4"></span></a> <a href="#"><span class="color-5"></span></a>
-								</div>
+								</div> -->
 									
-									<p class="require">Required Fields <span>*</span></p>
+									<!-- <p class="require">Required Fields <span>*</span></p> -->
 									<div class="Quality">
 										
 										<div class="input-group input-number-group">
@@ -71,11 +72,12 @@
 											  <div class="input-group-button">
 											    <span class="input-number-decrement">-</span>
 											  </div>
+											  <input type="hidden" class="productprice" value="{{ $product->price }}">
 											  <input class="input-number" type="number" min="0" max="1000" value="01" >
 											  <div class="input-group-button">
 											    <span class="input-number-increment">+</span>
 											  </div>
-											  <span class="dola">$ </span><span class="total-prince">250.9</span>
+											  <span class="dola">&#8377; </span><span class="total-prince">{{$product->price}}</span>
 										</div>
 										
 									</div>
@@ -95,14 +97,14 @@
 									<img src="{{ url('/images/backend_images/products/medium/'.$product_img->image) }}" class="img-responsive" alt="img-holiwood">
 								</div>
 								<div class="col-lg-7 col-md-6 col-sm-12 col-xs-12 detail">
-									<h1>Queen Rose - Pink</h1>
-									<p class="p1">It is a long established fact that a reader will be distracted  by the readable<br class="hidden-md hidden-sm hidden-xs"> content of a page when looking at its layout.</p>
+									<h1>{{ $product->product_name }}</h1>
+									<p class="p1">{{ Str::limit($product->description, 50) }}</p>
 									<div class="star">
 										<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
 										<span>10 Rating(s) | Add Your Rating</span>
 									</div>
-									<div class="prince"><span>$250.9</span><s class="strike">$300.02</s></div>
-									<figure class="fi-option"><p class="option">Option</p></figure>
+									<div class="prince"><span>&#8377;&nbsp;{{ $product->price }}</span><s class="strike">&#8377;{{$product->discount}}</s></div>
+									<!-- <figure class="fi-option"><p class="option">Option</p></figure>
 									<div class="size col-lg-4 col-md-6 col-sm-12 col-xs-12">
 										<span class="lb-size">Size <span class="sta-red">*</span></span>
 									<div class="select-custom">
@@ -119,7 +121,7 @@
 										<a href="#"><span class="color-1"></span></a> <a href="#"><span class="color-2"></span></a> <a href="#"><span class="color-3"></span></a>
 										<a href="#"><span class="color-4"></span></a> <a href="#"><span class="color-5"></span></a>
 									</div>
-										<p class="require">Required Fields <span>*</span></p>
+										<p class="require">Required Fields <span>*</span></p> -->
 										<div class="Quality">
 											
 											<div class="input-group input-number-group">
@@ -131,7 +133,7 @@
 												<div class="input-group-button">
 													<span class="input-number-increment">+</span>
 												</div>
-												<span class="dola">$ </span><span class="total-prince">250.9</span>
+												<span class="dola">&#8377; </span><span class="total-prince">{{ $product->price }}</span>
 											</div>
 											
 										</div>
