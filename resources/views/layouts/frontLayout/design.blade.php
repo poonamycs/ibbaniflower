@@ -13,6 +13,18 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-form-search-mobile.css') }}">
 		<!-- slick -->
 	
+		<!-- singel-detail -->
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-product-detail.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-res-product-detail.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-fix-nav.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-form-search-mobile.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('slick/slick.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('slick/slick-theme.css') }}">
+	
+		<!-- listing -->
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-flower.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-res-flower.css') }}">
+
 	<!-- GG FONT -->
 	<link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700" rel="stylesheet">
@@ -20,13 +32,13 @@
 </head>
 <body>
 
-	@include('front.layouts.header')
+	@include('layouts.frontLayout.header')
 	
 	@yield('content')
 
 	<!-- main-container-part -->
 	
-	@include('front.layouts.front_footer')
+	@include('layouts.frontLayout.footer')
 	
 	<!-- boostrap & jquery -->
 	<script src="{{ asset('js/frontend_js/jquery.min_af.js') }}"></script>
@@ -39,5 +51,18 @@
 	<script src="{{ asset('js/frontend_js/function-sidebar.js') }}"></script>
 	<script src="{{ asset('js/frontend_js/funtion-header-v3.js') }}"></script>
 	<script src="{{ asset('js/frontend_js/function-search-v2.js') }}"></script>
+
+	<!-- singel-detail -->
+	<script src="{{ asset('slick/slick.js') }}"></script>
+	<script src="{{ asset('js/frontend_js/function-slick.js') }}"></script>
+	<script src="{{ asset('js/frontend_js/function-flower.js') }}"></script>
+	<script src="{{ asset('js/frontend_js/function-input-number.js') }}"></script>
+	<script src="{{ asset('js/frontend_js/function-select-custom.js') }}"></script>
+
+	<!-- listing -->
+	
+	<script src="{{ asset('js/frontend_js/function-show-sidebar.js') }}"></script>
+	<script src="{{ asset('js/frontend_js/function-shop.js') }}"></script>
+	<script src="{{ asset('js/frontend_js/function-range.js') }}"></script>
 </body>
 </html>

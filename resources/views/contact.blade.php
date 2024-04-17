@@ -1,26 +1,24 @@
-@extends('front.layouts.design')
+@extends('layouts.frontLayout.design')
 @section('content')
 
 <main>
 	<div class="content-search">
+		<div class="container container-100">
+			<i class="far fa-times-circle" id="close-search"></i>
+			<h3 class="text-center">what are your looking for ?</h3>
+			<form method="get" action="/search" role="search" style="position: relative;">
+				<input type="text" class="form-control control-search" value="" autocomplete="off" placeholder="Enter Search ..." aria-label="SEARCH" name="q">
 
-                            <div class="container container-100">
-                            	<i class="far fa-times-circle" id="close-search"></i>
-                                <h3 class="text-center">what are your looking for ?</h3>
-                                <form method="get" action="/search" role="search" style="position: relative;">
-                                  <input type="text" class="form-control control-search" value="" autocomplete="off" placeholder="Enter Search ..." aria-label="SEARCH" name="q">
-
-                                  <button class="button_search" type="submit">search</button>
-                                </form>
-                            </div>
-                            
-</div>
+				<button class="button_search" type="submit">search</button>
+			</form>
+		</div>                    
+	</div>
 	<div class="banner">
 		<div class="container">
-			<figure id="banner-about"><a href="#"><img src="{{ asset('/images/frontend_images/contact-banner.jpg') }}" class="img-responsive" alt="img-holiwood"></a></figure>
+			<figure id="banner-about"><a href="#"><img src="{{ asset('/images/frontend_images/contactus_page_banner.png') }}" class="img-responsive" alt="img-holiwood"></a></figure>
 		<div class="title-banner">
 			<h1>Contact Us</h1>
-			<p>It is a long established fact that a reader will<br>be distracted by the readable content of a page when looking at its layout</p>
+			<p>How about "Reach out and let your floral dreams bloom with us"?</p>
 		</div>
 		</div>
 		

@@ -3,7 +3,6 @@
 <?php 
 use Illuminate\Support\Facades\Crypt;
 ?>
-
 <div id="content">
   <div id="content-header">
     <div id="breadcrumb"> <a href="{{ url('admin/dashboard') }}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#">Banners</a> <a href="#" class="current">View Banners</a> </div>
@@ -50,7 +49,7 @@ use Illuminate\Support\Facades\Crypt;
                 <?php $eid = Crypt::encrypt($banner->id); ?>
                 <tr class="gradeX">
                   <!-- <td>{{ $loop->index+1 }}</td> -->
-                  <td class="text-center">{{ $banner->id }} </td>
+                  <td class="text-center">{{ $banner->index+1 }} </td>
                   <td class="text-center">{{ $banner->title }}</td>
                   <td class="text-center"><a href="{{ $banner->link }}" target="_blank">{{ $banner->link }}</a></td>
                   <td class="text-center">

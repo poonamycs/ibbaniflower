@@ -53,48 +53,42 @@
                 <?php $i=0 ?>
                 @foreach($blogs as $blog)
                 <tr class="gradeX">
-                    <td class="text-center"><span style="display: none;">{{ $loop->index+1 }}</span></td>
+                    <td class="text-center">{{ $loop->index+1 }}</td>
                     <td class="text-center">{{ $blog->name }}</td>
-                    <td>{{ Str::limit($blog->description, 25) }}</td>
+                    <td>{{ Str::limit($blog->content, 25) }}</td>
                     <td class="text-center">
                         @if(!empty($blog->image))
                         <img src="{{ asset('/images/backend_images/blogs/small/'.$blog->image) }}" style="height: 40px;">
                         @endif
                     </td>
                     <td style="text-align: center;">
-                    <form action="{{ url('admin/blog-approved/'.$product->id) }}" method="post">
+                    <form action="{{ url('admin/blog-approved/'.$blog->id) }}" method="post">
                         {{ csrf_field() }}
                         <input type="checkbox" class="custom-control-input" name="status" @if($blog->status=="1") checked @endif value="1" onchange="javascript:this.form.submit();">
                     </form>
                     </td>
 
                     <td class="text-center">
-                        <a href="#myModal{{ $product->id }}" data-toggle="modal" class="btn btn-success" title="View Product"><i class="fa fa-eye"></i></a>
-                        <a href="{{ url('/admin/edit-product/'.$pid) }}" class="btn btn-primary" title="Edit Product "><i class="fa fa-pencil-square-o"></i></a>
-                        <a href="{{ url('/admin/add-attributes/'.$pid) }}" class="btn btn-info" title="Add Attributes"><i class="fa fa-list"></i></a>
-                        <a href="{{ url('/admin/add-images/'.$pid) }}" class="btn btn-warning" title="Add Images"><i class="fa fa-picture-o"></i></a>
-                        <a rel="{{ $pid }}" rel1="delete-product" href="javascript:" class="btn btn-danger deleteProduct" title="Delete product"><i class="fa fa-trash"></i></a>
+                        <a href="#myModal{{ $blog->id }}" data-toggle="modal" class="btn btn-success" title="View Blog"><i class="fa fa-eye"></i></a>
+                        <a href="{{ url('/admin/edit-blog/'.encrypt($blog->id)) }}" class="btn btn-primary" title="Edit Blog"><i class="fa fa-pencil-square-o"></i></a>
+                        <!-- <a href="{{ url('/admin/add-images/'.$blog->id) }}" class="btn btn-warning" title="Add Images"><i class="fa fa-picture-o"></i></a> -->
+                        <a rel="{{ encrypt($blog->id) }}" rel1="delete-blog" href="javascript:" class="btn btn-danger deleteProduct" title="Delete blog"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
-                <div id="myModal{{ $product->id }}" class="modal hide">
+                <div id="myModal{{ $blog->id }}" class="modal hide">
                     <div class="modal-header">
                         <button data-dismiss="modal" class="close" type="button">×</button>
-                        <h3>"{{ $product->product_name }}" &nbsp;Full Details</h3>
+                        <h3>"{{ $blog->name }}" &nbsp;Full Details</h3>
                     </div>
                     <div class="modal-body">
-                        <p><b>Product ID :</b> {{ $product->id }}</p>
-                        <p><b>Product Status :</b> @if($product->status==1)<span style="color: green; font-weight: bold;">Active</span>@else<span style="color: red; font-weight: bold;">Inactive</span>@endif</p>
-                        <p><b>Featured Product :</b> @if($product->featured==1)<span style="color: green; font-weight: bold;">Yes</span>@else<span style="color: red; font-weight: bold;">No</span>@endif</p>
-                        <p><b>Category Name :</b> {{ $product->category_name }}</p>
-                        <p><b>Product Code :</b> {{ $product->product_code }}</p>
-                        <p><b>Product Brand :</b> {{ $product->product_brand }}</p>
-                        <p><b>Price :</b> ₹ {{ $product->price }}</p>
-                        <p><b>Additional Specs. :</b> <?php echo nl2br($product->care) ?></p>
-                        <p><b>Description :</b> <?php echo nl2br($product->description) ?></p>
-                        <p><b>Created On :</b> {{ date('d M Y | h:i a', strtotime($product->created_at)) }}</p>
-                        <p><b>Updated On :</b> {{ date('d M Y | h:i a', strtotime($product->updated_at)) }}</p>
-                        <p><b>Product Image: </b></p>
-                        <center><img src="{{ asset('/images/backend_images/products/small/'.$product->image) }}"></center>
+                        <p><b>Blog ID :</b> {{ $blog->id }}</p>
+                        <p><b>Blog Status :</b> @if($blog->status==1)<span style="color: green; font-weight: bold;">Active</span>@else<span style="color: red; font-weight: bold;">Inactive</span>@endif</p>
+                        <p><b>Name :</b> {{ $blog->name }}</p>
+                        <p><b>Description :</b> <?php echo nl2br($blog->content) ?></p>
+                        <p><b>Created On :</b> {{ date('d M Y | h:i a', strtotime($blog->created_at)) }}</p>
+                        <p><b>Updated On :</b> {{ date('d M Y | h:i a', strtotime($blog->updated_at)) }}</p>
+                        <p><b>Blog Image: </b></p>
+                        <center><img src="{{ asset('/images/backend_images/blogs/small/'.$blog->image) }}"></center>
                     </div>
                 </div>
                 @endforeach

@@ -1,4 +1,4 @@
-@extends('front.layouts.design')
+@extends('layouts.frontLayout.design')
 @section('content')
 
 <main>
@@ -16,7 +16,7 @@
                             
 </div>
 	<div class="container banner">
-		<figure id="banner-figure"><a href="#"><img src="{{ asset('/images/frontend_images/blog-banner.jpg') }}" class="img-responsive" alt="img-holiwood"></a></figure>
+		<figure id="banner-figure"><a href="#"><img src="{{ asset('/images/frontend_images/blog_page_banner.jpg') }}" class="img-responsive" alt="img-holiwood"></a></figure>
 		<div class="text-banner">
 			<h1>Tulips<br>Collection</h1>
 			<p>SALE UP TO 20% OFF</p>

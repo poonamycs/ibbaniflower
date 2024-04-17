@@ -46,9 +46,9 @@ class BlogsController extends Controller
     				$small_image_path = 'images/backend_images/blogs/small/'.$filename;
 
     				// Resizes image
-    				Image::make($image_tmp)->stream($large_image_path);
-    				Image::make($image_tmp)->resize(600,600)->stream($medium_image_path);
-    				Image::make($image_tmp)->resize(300,300)->stream($small_image_path);
+    				Image::make($image_tmp)->save($large_image_path);
+    				Image::make($image_tmp)->resize(600,600)->save($medium_image_path);
+    				Image::make($image_tmp)->resize(300,300)->save($small_image_path);
 
     				// Store image name in products table
     				$blog->image = $filename;
@@ -62,7 +62,7 @@ class BlogsController extends Controller
             }
     		$blog->status = $status;
             $blog->save();
-    		return redirect('/admin/view-all-blogs')->with('flash_message_success','Blog has been Added Successfully');  		
+    		return redirect('/admin/view-all-blog')->with('flash_message_success','Blog has been Added Successfully');  		
     	}
 
     	return view('admin.blogs.add_blog');
@@ -112,34 +112,8 @@ class BlogsController extends Controller
     		Blog::where(['id'=>$id])->update(['name'=>$data['name'],'content'=>$data['content'],'image'=>$filename,'status'=>$status]);
     		return redirect()->back()->with('flash_message_success','Blog Updated Successfully!');
     	}
-
-    	// Get product Details
-    	$productDetails = Product::where(['id'=>$id])->first();
-
-    	// Ctaegories dropdown start
-    	$categories = Category::where(['parent_id'=>0])->get();
-        $categories_dropdown = "<option value='' selected disabled>Select</option>";
-        foreach($categories as $cat){
-            if($cat->id==$productDetails->category_id){
-                $selected = "Selected";
-            }else{
-                $selected = "";
-            }
-
-            $categories_dropdown .= "<option value='".$cat->id."' ".$selected.">".$cat->name."</option>";
-            $sub_categories = Category::where(['parent_id' => $cat->id])->get();
-            foreach($sub_categories as $sub_cat){
-                if($sub_cat->id==$productDetails->category_id){
-                    $selected = "selected";
-                }else{
-                    $selected = "";
-                }
-                $categories_dropdown .= "<option value='".$sub_cat->id."' ".$selected.">&nbsp;&nbsp;--&nbsp;".$sub_cat->name."</option>";  
-            }
-        }
-    	// categories dropdown ends
-
-    	return view('admin.products.edit_product')->with(compact('productDetails','categories_dropdown'));
+        $blog = Blog::where(['id'=>$id])->first();
+    	return view('admin.blogs.edit_blog')->with(compact('blog'));
     }
 
     public function deleteBlog($pid){
@@ -160,33 +134,33 @@ class BlogsController extends Controller
             return redirect()->back()->with('flash_message_success','Blog approval status updated successfully.');
         }
     }
-    public function deleteProductImage($id = null){
+    public function deleteBlogImage($id = null){
         //Get product image name
-        $productImage = Product::where(['id'=>$id])->first();
+        $blogImage = Blog::where(['id'=>$id])->first();
 
         //get image path
-        $large_image_path  = 'images/backend_images/products/large/';
-        $medium_image_path = 'images/backend_images/products/medium/';
-        $small_image_path  = 'images/backend_images/products/small/';
+        $large_image_path  = 'images/backend_images/blogs/large/';
+        $medium_image_path = 'images/backend_images/blogs/medium/';
+        $small_image_path  = 'images/backend_images/blogs/small/';
 
         //delete large image if not exits in folder
-        if(file_exists($large_image_path.$productImage->image)){
+        if(file_exists($large_image_path.$blogImage->image)){
             // echo $large_image_path.$productImage->image; die;
-            unlink($large_image_path.$productImage->image);
+            unlink($large_image_path.$blogImage->image);
         }
 
         //delete medium image if not exits in folder
-        if(file_exists($medium_image_path.$productImage->image)){
-            unlink($medium_image_path.$productImage->image);
+        if(file_exists($medium_image_path.$blogImage->image)){
+            unlink($medium_image_path.$blogImage->image);
         }
 
         //delete small image if not exits in folder
-        if(file_exists($small_image_path.$productImage->image)){
-            unlink($small_image_path.$productImage->image);
+        if(file_exists($small_image_path.$blogImage->image)){
+            unlink($small_image_path.$blogImage->image);
         }
 
-        //delete image from product table
-    	Product::where(['id'=>$id])->update(['image'=>'']);
+        //delete image from blog table
+    	Blog::where(['id'=>$id])->update(['image'=>'']);
     	return redirect()->back()->with('flash_message_success','Product Image has been Deleted');
     }
 

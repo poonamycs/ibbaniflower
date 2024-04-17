@@ -1,5 +1,122 @@
-@include('front.layouts.front_header')
+@include('layouts.frontLayout.front_header')
+<style>
+	*, ::after, ::before {
+    box-sizing: border-box;
+	}
+	.sections-shpping01 {
+    padding: 50px 0;
+    position: relative;
 
+    & .inside-flowers{
+        background: #FFF;
+        box-shadow: 0px 4px 20px 0px rgba(113, 113, 113, 0.26);
+        padding: 32px 47px;
+        border-radius: 150px;
+    }
+    & .comon-sert{
+        &::after{
+            position: absolute;
+            right: 0;
+            top: 0;
+            content: "";
+            width: 1px;
+            height: 52px;
+            background: #efefef;
+            display: inline-block;
+            
+        }
+        & .c-icon{
+            width: 55px;
+            display: inline-block;
+        }
+        & .cd-text-div{
+            padding-left: 20px;
+            & h5{
+                font-weight: 700;
+                font-size: 18px;
+                font-family: 'Inter', sans-serif;
+            }
+            & p{
+                font-size: 14px;
+                font-family: 'Inter', sans-serif;
+            }
+        }
+    }
+}
+.justify-content-lg-center {
+    justify-content: center !important;
+	.container{
+		max-width: 1320px;
+	}
+}
+.position-relative {
+    position: relative !important;
+}
+.d-grid {
+    display: grid !important;
+}
+.row-cols-md-3>* {
+    flex: 0 0 auto;
+    width: 33.3333333333%;
+}
+.w-100 {
+    width: 100% !important;
+}
+.d-inline-block {
+    display: inline-block !important;
+}
+.g-lg-5, .gy-lg-5 {
+    --bs-gutter-y: 3rem;
+}
+.row {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(var(--bs-gutter-y)* -1);
+    margin-right: calc(var(--bs-gutter-x)* -.5);
+    margin-left: calc(var(--bs-gutter-x)* -.5);
+}
+.align-items-center {
+    align-items: center !important;
+}
+.cd-text-div h5 {
+    font-weight: 700;
+    font-size: 18px;
+    font-family: "Inter", sans-serif;
+}
+.d-flex {
+    display: flex !important;
+}
+	/* .sections-shpping01 .inside-flowers {
+		background: #fff;
+		box-shadow: 0px 4px 20px 0px rgba(113,113,113,.26);
+		padding: 32px 47px;
+		border-radius: 150px
+	} */
+	.leftd-div {
+		position: relative;
+		z-index: 2;
+		margin-left: auto;
+		display: table;
+		top: -20px;
+	}
+	.rosetd-div {
+		position: absolute;
+		left: -40px;
+		bottom: -30px;
+		width: 320px;
+	}
+	.img1 {
+		vertical-align: top;
+		max-width: 60px;
+		border: none;
+	}
+	.carousel-indicators li
+	{
+		border: 2px solid #7bb8e5;
+	}
+</style>
 <main>
 <div class="content-search">
 
@@ -20,26 +137,26 @@
 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 <li data-target="#myCarousel" data-slide-to="1"></li>
 <li data-target="#myCarousel" data-slide-to="2"></li>
-<li data-target="#myCarousel" data-slide-to="3"></li>
 </ol>
+
 
 <!-- Wrapper for slides -->
 <div class="carousel-inner">
-
+<!-- @foreach($banners as $banner) -->
 <div class="item active slide-1">
-	<img src="{{ asset('/images/frontend_images/crousel_banner1.png') }}" alt="img-holiwood">
+	<img src="{{ asset('/images/frontend_images/crausol_banner1.png') }}" alt="img-holiwood">
 	<div class="carousel-caption">
       <h3>EXPLORE THE</h3>
       <h1>New Arrivals</h1>
-      <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
-      <!-- <img src="{{ asset('front/img/crousel_banner1.png') }}" alt="img-holiwood"><br> -->
+      <p>Discover Evergreen Elegance: Where Sustainability Blossoms in Every Petal.</p><br/>
+      <!-- <img src="img/310x26.png" alt="img-holiwood"><br> -->
       <a href="#">Shop now</a>
     </div>
   	
 </div>
-
+<!-- @endforeach -->
 <div class="item slide-2">
-	<img src="{{ asset('/images/frontend_images/crousel_banner1.png') }}" alt="img-holiwood">
+	<img src="{{ asset('/images/frontend_images/crausol_banner2.png') }}" alt="img-holiwood">
 	<div class="carousel-caption">
       <h3>A Ferfect</h3>
       <h1>Bouquet</h1>
@@ -51,18 +168,18 @@
 </div>
 
 <div class="item slide-1">
-	<img src="{{ asset('/images/frontend_images/crousel_banner1.png') }}" alt="img-holiwood">
+	<img src="{{ asset('/images/frontend_images/crausol_banner3.png') }}" alt="img-holiwood">
 	<div class="carousel-caption">
       <h3>EXPLORE THE</h3>
       <h1>New Arrivals</h1>
-      <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
-      <!-- <img src="{{ asset('front/img/crousel_banner1.png') }}" alt="img-holiwood"><br> -->
+      <p>Discover Evergreen Elegance: Where Sustainability Blossoms in Every Petal.</p>
+      <!-- <img src="img/310x26.png" alt="img-holiwood"><br> -->
       <a href="#">Shop now</a>
     </div>
   	
 </div>
 
-<div class="item slide-2">
+<!-- <div class="item slide-2">
 	<img src="{{ asset('/images/frontend_images/crousel_banner1.png') }}" alt="img-holiwood">
 	<div class="carousel-caption">
       <h3>A Ferfect</h3>
@@ -72,10 +189,58 @@
       <a href="#">Shop now</a>
     </div>
   
-</div>
+</div> -->
 
 </div>
 </div>
+	<section class="sections-shpping01 d-inline-block w-100">
+       <div class="container position-relative">
+          <div class="inside-flowers d-inline-block w-100">
+              <div class="row row-cols-1 row-cols-md-3 gy-5 g-lg-5">
+                <div class="col position-relative d-grid justify-content-lg-center">
+                    <div class="comon-sert d-flex align-items-center w-100">
+                        <div class="c-icon">
+                           <img class="img1" alt="ser" src="{{ asset('/images/frontend_images/2058414.png') }}">
+                        </div>
+                        <div class="cd-text-div">
+                           <h5> Free shipping </h5>
+                           <p> There are many variations $30</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col position-relative d-grid justify-content-lg-center">
+                  <div class="comon-sert d-flex align-items-center w-100">
+                      <div class="c-icon">
+                         <img class="img1" alt="ser" src="{{ asset('/images/frontend_images/1261038.png') }}">
+                      </div>
+                      <div class="cd-text-div">
+                         <h5> Secure checkout </h5>
+                         <p> There are many </p>
+                      </div>
+                  </div>
+                </div>
+                <div class="col position-relative d-grid justify-content-lg-center">
+                  <div class="comon-sert d-flex align-items-center w-100 afte">
+                      <div class="c-icon">
+                         <img class="img1" alt="ser" src="{{ asset('/images/frontend_images/1585176.png') }}">
+                      </div>
+                      <div class="cd-text-div">
+                         <h5> Offer &amp; gift here</h5>
+                         <p> Contrary to popular belief </p>
+                      </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="leftd-div">
+             <img alt="sy" src="{{ asset('/images/frontend_images/bg-left.png') }}">
+          </div>
+          <div class="rosetd-div">
+            <img alt="sy" style="width:350px" src="{{ asset('/images/frontend_images/rosert.png') }}">
+         </div>
+       </div>
+    </section>
+
 
 <div class="who" id="showcase">
 <div class="gallery clearfix">
@@ -83,11 +248,12 @@
 <img src="{{ asset('/images/frontend_images/second_banner.png') }}" alt="img-holiwood">
 <h1>who we are ?</h1>
 <h1 class="h2">who we are ?</h1>
-<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has<br class="hidden-md hidden-sm hidden-xs">
-been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type<br class="hidden-md hidden-sm hidden-xs"> and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into<br class="hidden-md hidden-sm hidden-xs"> electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of <br class="hidden-md hidden-sm hidden-xs">
-Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing <br class="hidden-md hidden-sm hidden-xs">
-software like Aldus PageMaker including versions of Lorem Ipsum
-</p>
+  
+
+<p>IBBANI FLOWERS, located in the bustling neighborhood of Bellandur, Bangalore, stands as a beacon of sustainability in floral retail.<br class="hidden-md hidden-sm hidden-xs">
+This eco-conscious shop specializes in locally-sourced, organic blooms, ensuring a reduced carbon footprint and support for community growers.<br class="hidden-md hidden-sm hidden-xs">Their innovative practices, such as biodegradable packaging and a waste-minimization policy, set them apart in the green initiative. <br class="hidden-md hidden-sm hidden-xs"> Customers at IBBANI FLOWERS not only indulge in the aesthetic beauty of fresh flowers but also contribute to a healthier planet. <br class="hidden-md hidden-sm hidden-xs">
+The shop is committed to educating patrons on the importance of sustainable choices,  <br class="hidden-md hidden-sm hidden-xs">
+making it a cornerstone for environmental stewardship in the region.</p>
 </figure>
 </div>
 </div>
@@ -96,8 +262,8 @@ software like Aldus PageMaker including versions of Lorem Ipsum
 
 
 <div class="container collection" id="showcase-2">
-<h1>Shop by collection</h1>
-<h2>- All Category of Jenstore -</h2>
+<h1>Explore a world of blooms</h1>
+<h2>- All Category of IBBANI FLOWERS -</h2>
 <div class="gallery clearfix">
 <figure>
 <div class="row">
@@ -179,29 +345,31 @@ software like Aldus PageMaker including versions of Lorem Ipsum
 
 
 
-<h1>Wedding</h1>
-<h2>- Lorem Ipsum is<span class="hidden-xs"> simply dummy</span> text of the printing -</h2>
+<h1>Elegance</h1>
+<h2> -Experience the timeless <span class="hidden-xs">allure of elegance through </span> the beauty of flowers -</h2>
 <div class="gallery clearfix">
 <figure>
 	<div class="img-wedding"><img src="{{ asset('/images/frontend_images/fourth_banner.png') }}" alt="img-holiwood"></div>
 	<div class="container wedding-content">
 		<div class="row">
-	<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 product-wedding">
-		<div class="product-image-wedding">
-			<figure class="sale"><a href="#"><img src="{{ asset('/images/frontend_images/product1.webp') }}" class="img-responsive" alt="img-holiwood"></a></figure>
-				<div class="product-icon-wedding">
-					<a href="#"><i class="far fa-eye"></i></a>
-					<a href="#"><i class="fas fa-shopping-basket"></i></a>
-					<a href="#"><i class="far fa-heart"></i></a>
+			@foreach($products as $product)
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 product-wedding">
+					<div class="product-image-wedding">
+						<figure class="sale"><a href="{{ url('/singel-detail/'.encrypt($product->id)) }}"><img src="{{ url('/images/backend_images/products/medium/'.$product->image) }}" class="img-responsive" alt="img-holiwood"></a></figure>
+							<div class="product-icon-wedding">
+								<a href="#"><i class="far fa-eye"></i></a>
+								<a href="#"><i class="fas fa-shopping-basket"></i></a>
+								<a href="#"><i class="far fa-heart"></i></a>
+							</div>
+					</div>
+					<div class="product-title-wedding">
+							<h5><a href="{{ url('/singel-detail/'.encrypt($product->id)) }}">{{$product->product_name}}</a></h5>
+							<div class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+							<div class="prince">&#8377;&nbsp;{{$product->price}}<s class="strike">&#8377;{{$product->discount}}</s></div>
+					</div>
 				</div>
-		</div>
-		<div class="product-title-wedding">
-				<h5><a href="#">Queen Rose - Pink</a></h5>
-				<div class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-				<div class="prince">$300.2<s class="strike">$250.9</s></div>
-		</div>
-	</div>
-	<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 product-wedding">
+			@endforeach
+	<!-- <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 product-wedding">
 		<div class="product-image-wedding">
 				<a href="#"><img src="{{ asset('/images/frontend_images/product6.webp') }}" class="img-responsive" alt="img-holiwood"></a>
 				<div class="product-icon-wedding">
@@ -245,7 +413,7 @@ software like Aldus PageMaker including versions of Lorem Ipsum
 				<div class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
 				<div class="prince">$350.4</div>
 		</div>
-	</div>
+	</div> -->
 </div>
 	</div>
 	
@@ -410,4 +578,4 @@ software like Aldus PageMaker including versions of Lorem Ipsum
 </div>
 </div>
 </main>
-@include('front.layouts.front_footer')
+@include('layouts.frontLayout.front_footer')

@@ -1,4 +1,5 @@
-@extends('front.layouts.design')
+@extends('layouts.frontLayout.design')
+
 @section('content')
 
 <main>
@@ -31,9 +32,10 @@
 		
 			<div class="row">
 				<div class="slider-for">
+				
 					<div class="product-content">
 						<div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 img-content">
-      							<img src="{{ asset('images/frontend_images/340x420.png') }}" class="img-responsive" alt="img-holiwood">
+      							<img src="{{ url('/images/backend_images/products/medium/'.$product->image) }}" class="img-responsive" alt="img-holiwood">
       					</div>
       						<div class="col-lg-7 col-md-6 col-sm-12 col-xs-12 detail">
       							<h1>Queen Rose - Pink</h1>
@@ -85,62 +87,65 @@
 								
       						</div>
 					</div>
+				
 					<!-- ------ end content 1----- -->
-					<div class="product-content">
-						<div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 img-content">
-      							<img src="{{ asset('images/frontend_images/340x420.png') }}" class="img-responsive" alt="img-holiwood">
-      						</div>
-      						<div class="col-lg-7 col-md-6 col-sm-12 col-xs-12 detail">
-      							<h1>Queen Rose - Pink</h1>
-								<p class="p1">It is a long established fact that a reader will be distracted  by the readable<br class="hidden-md hidden-sm hidden-xs"> content of a page when looking at its layout.</p>
-								<div class="star">
-									<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-									<span>10 Rating(s) | Add Your Rating</span>
+					@foreach($product_imgs as $product_img)
+						<div class="product-content">
+							<div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 img-content">
+									<img src="{{ url('/images/backend_images/products/medium/'.$product_img->image) }}" class="img-responsive" alt="img-holiwood">
 								</div>
-								<div class="prince"><span>$250.9</span><s class="strike">$300.02</s></div>
-								<figure class="fi-option"><p class="option">Option</p></figure>
-								<div class="size col-lg-4 col-md-6 col-sm-12 col-xs-12">
-									<span class="lb-size">Size <span class="sta-red">*</span></span>
-								<div class="select-custom">
-									<select>
-										<option>S</option>
-										<option>M</option>
-										<option>L</option>
-										<option>XL</option>
-									</select>
-								</div>
-								</div>
-								<div class="color col-lg-8 col-md-6 col-sm-12 col-xs-12">
-									<div class="div-color"><span class="lb-color">Color <span class="sta-red">*</span></span></div>
-									<a href="#"><span class="color-1"></span></a> <a href="#"><span class="color-2"></span></a> <a href="#"><span class="color-3"></span></a>
-									 <a href="#"><span class="color-4"></span></a> <a href="#"><span class="color-5"></span></a>
-								</div>
-									<p class="require">Required Fields <span>*</span></p>
-									<div class="Quality">
-										
-										<div class="input-group input-number-group">
-											<span class="text-qua">Quanty:</span>
-											  <div class="input-group-button">
-											    <span class="input-number-decrement">-</span>
-											  </div>
-											  <input class="input-number" type="number" min="0" max="1000" value="01" >
-											  <div class="input-group-button">
-											    <span class="input-number-increment">+</span>
-											  </div>
-											  <span class="dola">$ </span><span class="total-prince">250.9</span>
+								<div class="col-lg-7 col-md-6 col-sm-12 col-xs-12 detail">
+									<h1>Queen Rose - Pink</h1>
+									<p class="p1">It is a long established fact that a reader will be distracted  by the readable<br class="hidden-md hidden-sm hidden-xs"> content of a page when looking at its layout.</p>
+									<div class="star">
+										<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+										<span>10 Rating(s) | Add Your Rating</span>
+									</div>
+									<div class="prince"><span>$250.9</span><s class="strike">$300.02</s></div>
+									<figure class="fi-option"><p class="option">Option</p></figure>
+									<div class="size col-lg-4 col-md-6 col-sm-12 col-xs-12">
+										<span class="lb-size">Size <span class="sta-red">*</span></span>
+									<div class="select-custom">
+										<select>
+											<option>S</option>
+											<option>M</option>
+											<option>L</option>
+											<option>XL</option>
+										</select>
+									</div>
+									</div>
+									<div class="color col-lg-8 col-md-6 col-sm-12 col-xs-12">
+										<div class="div-color"><span class="lb-color">Color <span class="sta-red">*</span></span></div>
+										<a href="#"><span class="color-1"></span></a> <a href="#"><span class="color-2"></span></a> <a href="#"><span class="color-3"></span></a>
+										<a href="#"><span class="color-4"></span></a> <a href="#"><span class="color-5"></span></a>
+									</div>
+										<p class="require">Required Fields <span>*</span></p>
+										<div class="Quality">
+											
+											<div class="input-group input-number-group">
+												<span class="text-qua">Quanty:</span>
+												<div class="input-group-button">
+													<span class="input-number-decrement">-</span>
+												</div>
+												<input class="input-number" type="number" min="0" max="1000" value="01" >
+												<div class="input-group-button">
+													<span class="input-number-increment">+</span>
+												</div>
+												<span class="dola">$ </span><span class="total-prince">250.9</span>
+											</div>
+											
 										</div>
-										
-									</div>
-									<div class="add-cart">
-										<a href="#" class="btn-add-cart">Add to cart</a>
-										<a href="#" class="list-icon icon-1"><i class="far fa-eye"></i></a>
-										<a href="#" class="list-icon icon-2"><i class="far fa-heart"></i></a>
-									</div>
-								
-      						</div>
-					</div>
+										<div class="add-cart">
+											<a href="#" class="btn-add-cart">Add to cart</a>
+											<a href="#" class="list-icon icon-1"><i class="far fa-eye"></i></a>
+											<a href="#" class="list-icon icon-2"><i class="far fa-heart"></i></a>
+										</div>
+									
+								</div>
+						</div>
+					@endforeach
 					<!-- ------ end content 2----- -->
-					<div class="product-content">
+					<!-- <div class="product-content">
 						<div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 img-content">
       							<img src="{{ asset('images/frontend_images/340x420.png') }}" class="img-responsive" alt="img-holiwood">
       						</div>
@@ -192,9 +197,9 @@
 									</div>
 								
       						</div>
-					</div>
+					</div> -->
 					<!-- ------ end content 3----- -->
-					<div class="product-content">
+					<!-- <div class="product-content">
 						<div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 img-content">
       							<img src="{{ asset('images/frontend_images/340x420.png') }}" class="img-responsive" alt="img-holiwood">
       						</div>
@@ -246,14 +251,14 @@
 									</div>
 								
       						</div>
-					</div>
+					</div> -->
 					<!-- ------ end content 4----- -->
 				</div>
 				<div class="slider-nav col-lg-5 col-md-6 col-sm-12 col-xs-12">
-					<div><img src="{{ asset('/images/frontend_images/340x420.png') }}" class="img-responsive" alt="img-holiwood"></div>
-					<div><img src="{{ asset('/images/frontend_images/340x420.png') }}" class="img-responsive" alt="img-holiwood"></div>
-					<div><img src="{{ asset('/images/frontend_images/340x420.png') }}" class="img-responsive" alt="img-holiwood"></div>
-					<div><img src="{{ asset('/images/frontend_images/340x420.png') }}" class="img-responsive" alt="img-holiwood"></div>
+					<div><img src="{{ url('/images/backend_images/products/medium/'.$product->image) }}" class="img-responsive" alt="img-holiwood"></div>
+					@foreach($product_imgs as $product_img)
+						<div><img src="{{ url('/images/backend_images/products/medium/'.$product_img->image) }}" class="img-responsive" alt="img-holiwood"></div>
+					@endforeach
 				</div>
   				
 				<div class="col-lg-7 connect-us col-md-6 col-sm-12 col-xs-12">
@@ -305,36 +310,36 @@ Fusce aliquet, ante cursus gravida sagittis, justo erat rhoncus sapien, eget con
 			<h1>Related Products</h1>
 			<div class="row">
 				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 product-category">
-			<div class="product-image-category">
-				<figure class="sale"><a href="#"><img src="{{ asset('images/frontend_images/340x420.png') }}" class="img-responsive" alt="img-holiwood"></a></figure>
-					<div class="product-icon-category">
-						<a href="#"><i class="far fa-eye"></i></a>
-						<a href="#"><i class="fas fa-shopping-basket"></i></a>
-						<a href="#"><i class="far fa-heart"></i></a>
+					<div class="product-image-category">
+						<figure class="sale"><a href="#"><img src="{{ asset('images/frontend_images/340x420.png') }}" class="img-responsive" alt="img-holiwood"></a></figure>
+							<div class="product-icon-category">
+								<a href="#"><i class="far fa-eye"></i></a>
+								<a href="#"><i class="fas fa-shopping-basket"></i></a>
+								<a href="#"><i class="far fa-heart"></i></a>
+							</div>
 					</div>
-			</div>
-			<div class="product-title-category">
-					<h5><a href="#">Queen Rose - Pink</a></h5>
-					<div class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-					<div class="prince">$300.2<s class="strike">$250.9</s></div>
-			</div>
-		</div>
-		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 product-category">
-			<div class="product-image-category">
-					<a href="#"><img src="{{ asset('images/frontend_images/340x420.png') }}" class="img-responsive" alt="img-holiwood"></a>
-					<div class="product-icon-category">
-						<a href="#"><i class="far fa-eye"></i></a>
-						<a href="#"><i class="fas fa-shopping-basket"></i></a>
-						<a href="#"><i class="far fa-heart"></i></a>
+					<div class="product-title-category">
+							<h5><a href="#">Queen Rose - Pink</a></h5>
+							<div class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+							<div class="prince">$300.2<s class="strike">$250.9</s></div>
 					</div>
-			</div>
-			<div class="product-title-category">
-					<h5><a href="#">Bouquet Lavender</a></h5>
-					<div class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
-					<div class="prince">$160.8</div>
-			</div>
-		</div>
-		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 product-category">
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 product-category">
+					<div class="product-image-category">
+							<a href="#"><img src="{{ asset('images/frontend_images/340x420.png') }}" class="img-responsive" alt="img-holiwood"></a>
+							<div class="product-icon-category">
+								<a href="#"><i class="far fa-eye"></i></a>
+								<a href="#"><i class="fas fa-shopping-basket"></i></a>
+								<a href="#"><i class="far fa-heart"></i></a>
+							</div>
+					</div>
+					<div class="product-title-category">
+							<h5><a href="#">Bouquet Lavender</a></h5>
+							<div class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
+							<div class="prince">$160.8</div>
+					</div>
+				</div>
+		<!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 product-category">
 			<div class="product-image-category">
 				<figure class="hot"><a href="#"><img src="{{ asset('images/frontend_images/340x420.png') }}" class="img-responsive" alt="img-holiwood"></a></figure>
 					<div class="product-icon-category">
@@ -363,7 +368,7 @@ Fusce aliquet, ante cursus gravida sagittis, justo erat rhoncus sapien, eget con
 					<div class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
 					<div class="prince">$350.4</div>
 			</div>
-		</div>
+		</div> -->
 <!-- ------------------------------------------------ -->
 		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 product-category">
 			<div class="product-image-category">
@@ -431,9 +436,6 @@ Fusce aliquet, ante cursus gravida sagittis, justo erat rhoncus sapien, eget con
 		
 	</div>
 </div>
-<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-product-detail.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-res-product-detail.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('/slick/slick.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ asset('/slick/slick-theme.css') }}">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
 @endsection

@@ -1293,8 +1293,8 @@ figure.bg-input::after {
   .content-search .container-100 form .button_search {
     right: 0; } }
 @media (max-width: 1600px) {
-  .carousel-inner .slide-1 .carousel-caption {
-    top: 120px; }
+  /* .carousel-inner .slide-1 .carousel-caption {
+    top: 120px; } */
   .carousel-inner .slide-2 .carousel-caption {
     top: 120px;
     left: 20px; }

@@ -325,7 +325,8 @@ body {
   width: 100%; }
 .carousel-inner .slide-1 .carousel-caption {
   bottom: unset;
-  top: 220px; }
+  top: 220px; 
+}
   .carousel-inner .slide-1 .carousel-caption h3 {
     font-family: poppins;
     font-weight: 400;

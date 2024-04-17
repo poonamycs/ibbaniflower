@@ -4,7 +4,6 @@ $(document).ready(function(){
 
 	//get quantity according to category
 	$("#category_id").change(function(){
-		alert('clicked');
 		var idCat = $(this).val();
 		if(idCat==""){
 			return false;
@@ -23,7 +22,7 @@ $(document).ready(function(){
 					$("#Availability").html("<span class='text-success'> <i class='fa fa-check'></i></span>");
 				}
 			},error:function(){
-				alert("Check Quantity");
+				console.log("Check Quantity");
 			}
 		});
 	});
@@ -48,7 +47,7 @@ $(document).ready(function(){
 					$("#Availability").html("<span class='text-success'> <i class='fa fa-check'></i></span>");
 				}
 			},error:function(){
-				alert("Check Quantity");
+				console.log("Check Quantity");
 			}
 		});
 	});

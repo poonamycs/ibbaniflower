@@ -29,7 +29,6 @@ Route::get('/clear-cache', function() {
     return "Cache is cleared"; //Return anything
 });
 
-// Route::get('/', [IndexController::class, 'index']);
 Route::get('home/', 'IndexController@index');
 
 Route::get('admin/charts', function () { return view('admin.charts');  });
@@ -163,7 +162,7 @@ Route::match(['get','post'],'/page/{url}','CmsController@cmsPage');
 
 
 // used
-Route::get('/singel-detail', [HomeController::class, 'singel_detail']);
+
 Route::get('/shopping-cart', [HomeController::class, 'shopping_cart']);
 Route::get('/page404', [HomeController::class, 'pagenotfound']);
 Route::get('/checkout', [HomeController::class, 'checkout']);
@@ -174,7 +173,9 @@ Route::get('/home1', [HomeController::class, 'home1']);
 Route::get('/about', [HomeController::class, 'about']);
 Route::get('/contact', [HomeController::class, 'contact']);
 Route::get('/blog', [HomeController::class, 'blog']);
+Route::get('/product-list', [HomeController::class, 'product_list']);
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/singel-detail/{id?}', [HomeController::class, 'singel_detail']);
 Route::match(['get','post'],'user-login/',[UsersController::class, 'login']);
 Route::match(['get','post'],'user-register/',[UsersController::class, 'register']);
 //Admin login
@@ -192,7 +193,9 @@ Route::group(['middleware' => ['adminlogin']],function(){
 	Route::match(['get','post'],'/admin/add-blog',[BlogsController::class, 'addBlog']);
 	Route::get('/admin/view-all-blog',[BlogsController::class, 'viewAdminBlogs']);
 	Route::match(['get','post'],'admin/blog-approved/{id}',[BlogsController::class, 'blogApproved']);
-	
+	Route::match(['get','post'],'/admin/edit-blog/{pid}',[BlogsController::class, 'editBlog']);
+	Route::get('/admin/delete-blog/{pid}',[BlogsController::class, 'deleteBlog']);
+	Route::match(['get','post'],'/admin/delete-blog-image/{id}',[BlogsController::class, 'deleteBlogImage']);
 
 	//Categories Routes (Admin)
 	Route::match(['get','post'],'/admin/add-category',[CategoryController::class, 'addCategory']);
@@ -216,9 +219,9 @@ Route::group(['middleware' => ['adminlogin']],function(){
 	// Products Attributes and images (Admin)
 	Route::match(['get','post'],'admin/add-attributes/{pid}','ProductsController@addAttributes');
 	Route::match(['get','post'],'admin/edit-attributes/{pid}','ProductsController@editAttributes');
-	Route::match(['get','post'], '/admin/add-images/{pid}','ProductsController@addImages');
-	Route::match(['get','post'],'/admin/delete-alt-image/{id}','ProductsController@deleteAltImage');
-	Route::match(['get','post'],'/admin/delete-attributes/{id}','ProductsController@deleteAttribute');
+	Route::match(['get','post'], '/admin/add-images/{pid}',[ProductsController::class, 'addImages']);
+	Route::match(['get','post'],'/admin/delete-alt-image/{id}',[ProductsController::class, 'deleteAltImage']);
+	Route::match(['get','post'],'/admin/delete-attributes/{id}',[ProductsController::class, 'deleteAttribute']);
 
 	// Banner Routes(Admin)
 	Route::match(['get','post'],'/admin/add-banner/',[BannersController::class, 'addBanner']);
@@ -313,7 +316,7 @@ Route::group(['middleware' => ['adminlogin']],function(){
 	Route::match(['get','post'],'admin/add-vendor-items/{id}','StockController@addVendorItems');
 	Route::match(['get','post'],'admin/stock-distribution/','StockController@vendorDistribution');
 	Route::get('/admin/export-stock-items/','StockController@exportStockItems');
-	Route::get('/get-item-quantity','StockController@getItemQuantity');
+	Route::get('/get-item-quantity',[StockController::class, 'getItemQuantity']);
 	Route::match(['get','post'],'admin/stock-distribution/{id}','StockController@editVendorStockItem');
 	Route::match(['get','post'],'admin/delete-vendor-stock-item/{id}','StockController@deleteVendorStockItem');
 	Route::match(['get','post'],'admin/view-single-vendor-stock','StockController@viewSingleVendorStock');

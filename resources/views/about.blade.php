@@ -1,4 +1,4 @@
-@extends('front.layouts.design')
+@extends('layouts.frontLayout.design')
 @section('content')
 
 <main>
@@ -14,7 +14,7 @@
 	</div>
 	<div class="banner">
 		<div class="container">
-			<figure id="banner-about"><a href="#"><img src="{{ asset('images/frontend_images/1350x500.png') }}" class="img-responsive" alt="img-holiwood"></a></figure>
+			<figure id="banner-about"><a href="#"><img src="{{ asset('images/frontend_images/aboutus_page_banner.png') }}" class="img-responsive" alt="img-holiwood"></a></figure>
 		<div class="title-banner">
 			<h1>About Us</h1>
 			<p>It is a long established fact that a reader will<br>be distracted by the readable content of a page when looking at its layout</p>
