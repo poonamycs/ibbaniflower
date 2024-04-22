@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\About;
 use App\Models\Banner;
 use App\Models\Product;
+use App\Models\Category;
 use App\Models\ProductsImage;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
@@ -15,7 +16,8 @@ class HomeController extends Controller
         $meta_title = 'Index | Ibbani flower';
         $banners = Banner::where('status',1)->get();
         $products = Product::where('status',1)->orderBy('id','Desc')->take(4)->get();
-    	return view('index')->with(compact('meta_title','banners','products'));
+        $categories = Category::where('status',1)->orderBy('id','DESC')->take(4)->get();
+    	return view('index')->with(compact('meta_title','banners','products','categories'));
     }
     public function about(){
         $meta_title = 'About Us | Ibbani flower';

@@ -32,7 +32,7 @@
                 <label class="control-label">Image : </label>
                 <div class="controls">
                   <input type="file" name="image" id="image"><br>
-                  <small>Banner Size should be 1350x400px</small>
+                  <small>Banner Size should be 1920*1080px</small>
                 </div>
               </div>
               <div class="control-group">

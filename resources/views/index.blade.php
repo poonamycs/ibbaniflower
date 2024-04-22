@@ -140,20 +140,20 @@
 </ol>
 
 
-<!-- Wrapper for slides -->
 <div class="carousel-inner">
-<!-- @foreach($banners as $banner) -->
-<div class="item active slide-1">
-	<img src="{{ asset('/images/frontend_images/crausol_banner1.png') }}" alt="img-holiwood">
+@foreach($banners as $key => $banner)
+<div class="item {{$key == 0 ? 'active' : '' }} slide-1">
+	<img src="{{ asset('/images/frontend_images/banners/'.$banner->image) }}" alt="img-holiwood">
 	<div class="carousel-caption">
       <h3>EXPLORE THE</h3>
       <h1>New Arrivals</h1>
-      <p>Discover Evergreen Elegance: Where Sustainability Blossoms in Every Petal.</p><br/>
+      <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
       <a href="#">Shop now</a>
     </div>
-  	
 </div>
-<!-- @endforeach -->
+
+@endforeach
+<!-- 
 <div class="item slide-2">
 	<img src="{{ asset('/images/frontend_images/crausol_banner2.png') }}" alt="img-holiwood">
 	<div class="carousel-caption">
@@ -164,21 +164,24 @@
       <a href="#">Shop now</a>
     </div>
   
-</div>
-
+</div> -->
+<!-- 
 <div class="item slide-1">
 	<img src="{{ asset('/images/frontend_images/crausol_banner3.png') }}" alt="img-holiwood">
 	<div class="carousel-caption">
       <h3>EXPLORE THE</h3>
       <h1>New Arrivals</h1>
-      <p>Discover Evergreen Elegance: Where Sustainability Blossoms in Every Petal.</p>
-      <!-- <img src="img/310x26.png" alt="img-holiwood"><br> -->
+      <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
       <a href="#">Shop now</a>
     </div>
   	
+</div> -->
+
+
+
 </div>
 </div>
-</div>
+
 	<section class="sections-shpping01 d-inline-block w-100">
        <div class="container position-relative">
           <div class="inside-flowers d-inline-block w-100">
@@ -261,9 +264,10 @@ making it a cornerstone for environmental stewardship in the region.</p>
 		<a href="#">Shop now</a>
 	</div>
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+		@foreach($categories as $category)
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 product-collection">
 			<div class="product-image-collec">
-				<figure class="hot"><a href="#"><img src="{{ asset('/images/frontend_images/product4.webp') }}" class="img-responsive" alt="img-holiwood"></a></figure>
+				<figure class="hot"><a href="#"><img src="{{ asset('/images/frontend_images/category/'.$category->image) }}" class="img-responsive" alt="img-holiwood"></a></figure>
 				<div class="product-icon-collec">
 					<a href="#" data-toggle="modal" data-target="#myModal"><i class="far fa-eye"></i></a>
 					<a href="#"><i class="fas fa-shopping-basket"></i></a>
@@ -271,15 +275,15 @@ making it a cornerstone for environmental stewardship in the region.</p>
 				</div>
 			</div>
 			<div class="product-title-collec">
-				<h5><a href="#"> Pink roses</a></h5>
+				<h5><a href="#"> {{ $category->name }}</a></h5>
 				<div class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
-				<div class="prince">$207.2</div>
+				<div class="prince">Rs{{ $category->price }}</div>
 			</div>
-			
 		</div>
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 product-collection">
+		@endforeach
+		<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 product-collection">
 			<div class="product-image-collec">
-				<a href="#"><img src="{{ asset('/images/frontend_images/product2.webp') }}" class="img-responsive" alt="img-holiwood"></a>
+				<a href="#"><img src="{{ asset('/images/frontend_images/category2.png') }}" class="img-responsive" alt="img-holiwood"></a>
 				<div class="product-icon-collec">
 					<a href="#" data-toggle="modal" data-target="#myModal"><i class="far fa-eye"></i></a>
 					<a href="#"><i class="fas fa-shopping-basket"></i></a>
@@ -294,7 +298,7 @@ making it a cornerstone for environmental stewardship in the region.</p>
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 product-collection">
 			<div class="product-image-collec">
-				<a href="#"><img src="{{ asset('/images/frontend_images/product3.webp') }}" class="img-responsive" alt="img-holiwood"></a>
+				<a href="#"><img src="{{ asset('/images/frontend_images/category3.png') }}" class="img-responsive" alt="img-holiwood"></a>
 				<div class="product-icon-collec">
 					<a href="#" data-toggle="modal" data-target="#myModal"><i class="far fa-eye"></i></a>
 					<a href="#"><i class="fas fa-shopping-basket"></i></a>
@@ -306,10 +310,10 @@ making it a cornerstone for environmental stewardship in the region.</p>
 				<div class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
 				<div class="prince">$250.6</div>
 			</div>
-		</div>
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 product-collection">
+		</div> -->
+		<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 product-collection">
 			<div class="product-image-collec">
-				<figure class="sale"><a href="#"><img src="{{ asset('/images/frontend_images/product4.webp') }}" class="img-responsive" alt="img-holiwood"></a></figure>
+				<figure class="sale"><a href="#"><img src="{{ asset('/images/frontend_images/category4.png') }}" class="img-responsive" alt="img-holiwood"></a></figure>
 				<div class="product-icon-collec">
 					<a href="#" data-toggle="modal" data-target="#myModal"><i class="far fa-eye"></i></a>
 					<a href="#"><i class="fas fa-shopping-basket"></i></a>
@@ -321,7 +325,7 @@ making it a cornerstone for environmental stewardship in the region.</p>
 				<div class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></div>
 				<div class="prince">$100.9<s class="strike">$150.9</s></div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </div>
 </figure>
@@ -429,7 +433,7 @@ making it a cornerstone for environmental stewardship in the region.</p>
 		<div class="product-title-holiday">
 				<h5><a href="#">Fun & Flirty By BloomNation</a></h5>
 				<div class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
-				<div class="prince">$200.2</div>
+				<div class="prince">&#8377;&nbsp;200.2</div>
 		</div>
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 product-holiday">
@@ -444,12 +448,12 @@ making it a cornerstone for environmental stewardship in the region.</p>
 		<div class="product-title-holiday">
 				<h5><a href="#">Winter White Bouquet</a></h5>
 				<div class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-				<div class="prince">$240.2</div>
+				<div class="prince">&#8377;&nbsp;240.2</div>
 		</div>
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 product-holiday">
 			<div class="product-image-holiday">
-				<a href="#"><img src="{{ asset('/images/frontend_images/flower1.png') }}" class="img-responsive" alt="img-holiwood"></a>
+				<a href="#"><img src="{{ asset('/images/frontend_images/flower4.png') }}" class="img-responsive" alt="img-holiwood"></a>
 				<div class="product-icon-holiday">
 					<a href="#"><i class="far fa-eye"></i></a>
 					<a href="#"><i class="fas fa-shopping-basket"></i></a>
@@ -459,12 +463,12 @@ making it a cornerstone for environmental stewardship in the region.</p>
 		<div class="product-title-holiday">
 				<h5><a href="#">Tulipa Floriade - Red</a></h5>
 				<div class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></div>
-				<div class="prince">$105.7</div>
+				<div class="prince">&#8377;&nbsp;105.7</div>
 		</div>
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 product-holiday">
 			<div class="product-image-holiday">
-				<figure class="sale"><a href="#"><img src="{{ asset('/images/frontend_images/flower2.png') }}" class="img-responsive" alt="img-holiwood"></a></figure>
+				<figure class="sale"><a href="#"><img src="{{ asset('/images/frontend_images/flower3.png') }}" class="img-responsive" alt="img-holiwood"></a></figure>
 				<div class="product-icon-holiday">
 					<a href="#"><i class="far fa-eye"></i></a>
 					<a href="#"><i class="fas fa-shopping-basket"></i></a>
@@ -474,7 +478,7 @@ making it a cornerstone for environmental stewardship in the region.</p>
 		<div class="product-title-holiday">
 				<h5><a href="#">West Palm Beach Florist</a></h5>
 				<div class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
-				<div class="prince">$209.2<s class="strike">$180.9</s></div>
+				<div class="prince">&#8377;&nbsp;209.2<s class="strike">&#8377;180.9</s></div>
 		</div>
 		</div>
 	</div>
@@ -530,10 +534,10 @@ making it a cornerstone for environmental stewardship in the region.</p>
 </div>
 <div class="container blog">
 <h1>Latest Blogs</h1>
-<p>- Lorem Ipsum is<span class="hidden-xs"> simply dummy</span> text of the printing -</p>
+<p>- Discovere the wide range of topics<span class="hidden-xs"> and blogs</span> here -</p>
 <div class="row">
 	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 product-blog">
-		<a href="#"><img src="{{ asset('/images/frontend_images/blog-1.jpg') }}" class="img-responsive" title="img-blog" alt="img-holiwood"></a>
+		<a href="#"><img src="{{ asset('/images/frontend_images/blog-1.png') }}" class="img-responsive" title="img-blog" alt="img-holiwood"></a>
 		<div class="time-blog">
 			<span class="time"><i class="far fa-calendar-alt"></i><span>May, 12 2023</span></span>
 			<span class="time"><i class="far fa-edit"></i><span>Pixel-Creative</span></span>
@@ -542,7 +546,7 @@ making it a cornerstone for environmental stewardship in the region.</p>
 		<p> Flowers carry a rich history of symbolism, forming a silent language all their own.</p>
 	</div>
 	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 product-blog">
-		<a href="#"><img src="{{ asset('/images/frontend_images/blog-2.jpg') }}" class="img-responsive" title="img-blog" alt="img-holiwood"></a>
+		<a href="#"><img src="{{ asset('/images/frontend_images/blog-2.png') }}" class="img-responsive" title="img-blog" alt="img-holiwood"></a>
 		<div class="time-blog">
 			<span class="time"><i class="far fa-calendar-alt"></i><span>May, 12 2023</span></span>
 			<span class="time"><i class="far fa-edit"></i><span>Pixel-Creative</span></span>
@@ -552,7 +556,7 @@ making it a cornerstone for environmental stewardship in the region.</p>
 
 	</div>
 	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 product-blog">
-		<a href="#"><img src="{{ asset('/images/frontend_images/blog-3.jpg') }}" class="img-responsive" title="img-blog" alt="img-holiwood"></a>
+		<a href="#"><img src="{{ asset('/images/frontend_images/blog-3.png') }}" class="img-responsive" title="img-blog" alt="img-holiwood"></a>
 		<div class="time-blog">
 			<span class="time"><i class="far fa-calendar-alt"></i><span>May, 12 2023</span></span>
 			<span class="time"><i class="far fa-edit"></i><span>Pixel-Creative</span></span>

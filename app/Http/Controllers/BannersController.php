@@ -45,7 +45,7 @@ class BannersController extends Controller
     				$banner_path = 'images/frontend_images/banners/'.$filename;
 
     				// Resizes image
-    				Image::make($image_tmp)->resize(1350,400)->save($banner_path);
+    				Image::make($image_tmp)->resize(1920,1080)->save($banner_path);
 
     				// Store image name in banner table
     				$banner->image = $filename;
@@ -91,7 +91,7 @@ class BannersController extends Controller
     				$banner_path = 'images/frontend_images/banners/'.$filename;
 
     				// Resizes image
-    				Image::make($image_tmp)->resize(1350,400)->save($banner_path);
+    				Image::make($image_tmp)->resize(1920,1080)->save($banner_path);
                 }
             }else if(!empty($data['current_image'])){
                 $filename = $data['current_image'];

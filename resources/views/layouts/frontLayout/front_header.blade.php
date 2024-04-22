@@ -106,7 +106,7 @@
 					</ul>
 				</li>
 				<li class="col-lg-4 col-md-4 hidden-sm hidden-xs li-banner">
-					<a href="#"><img src="{{ asset('/images/frontend_images/flower1.png') }}" alt="img-holiwood"></a>
+					<a href="#"><img src="{{ asset('images/frontend_images/shop_banner.png') }}" alt="img-holiwood"></a>
 				</li>
 				
 					</ul>
