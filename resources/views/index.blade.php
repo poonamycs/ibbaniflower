@@ -149,7 +149,6 @@
       <h3>EXPLORE THE</h3>
       <h1>New Arrivals</h1>
       <p>Discover Evergreen Elegance: Where Sustainability Blossoms in Every Petal.</p><br/>
-      <!-- <img src="img/310x26.png" alt="img-holiwood"><br> -->
       <a href="#">Shop now</a>
     </div>
   	
@@ -178,19 +177,6 @@
     </div>
   	
 </div>
-
-<!-- <div class="item slide-2">
-	<img src="{{ asset('/images/frontend_images/crousel_banner1.png') }}" alt="img-holiwood">
-	<div class="carousel-caption">
-      <h3>A Ferfect</h3>
-      <h1>Bouquet</h1>
-      <div class="line"></div>
-      <p>It is a long established fact that a reader will be distracted by the redable content of a page when looking at its latout</p>
-      <a href="#">Shop now</a>
-    </div>
-  
-</div> -->
-
 </div>
 </div>
 	<section class="sections-shpping01 d-inline-block w-100">
