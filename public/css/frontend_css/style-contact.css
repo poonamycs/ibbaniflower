@@ -851,7 +851,7 @@ header {
   font-family: Poppins;
   font-weight: 600;
   font-size: 18px;
-  color: black;
+  /* color: black; */
   padding: 25px 0 10px 0; }
   .message .message-contact form label span {
     color: red; }

@@ -1461,7 +1461,20 @@ class ProductsController extends Controller
             echo $pincodeCount = DB::table('shipping_charges')->where('pincode',$data['pincode'])->count();
         }
     }
-
+    public function checkTimeslot(Request $request){
+        if($request->isMethod('post')){
+            $data = $request->all();
+            $time_slots = DB::table('shipping_methods')->where('name',$data['slottext'])->get();
+            return $time_slots;
+        }
+    }
+    public function checkshippingmethod(Request $request){
+        if($request->isMethod('post')){
+            $data = $request->all();
+            $shipping = DB::table('shipping_methods')->select('name')->groupBy('name')->get();
+            return $shipping;
+        }
+    }
     public function exportProducts(){
         return Excel::download(new productsExport,'product-details.xlsx');
     }

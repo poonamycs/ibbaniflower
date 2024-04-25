@@ -74,8 +74,7 @@ Route::get('/cart/update-quantity/{id}/{quantity}/','ProductsController@updateCa
 //products filter page
 Route::match(['get','post'],'/products-filter','ProductsController@filter');
 
-// Check Pincode
-Route::post('/check-pincode/','ProductsController@checkPincode');
+
  
 // All Routes after login
 Route::group(['middleware'=>['frontlogin']],function(){
@@ -172,6 +171,7 @@ Route::get('/home1', [HomeController::class, 'home1']);
 
 Route::get('/about', [HomeController::class, 'about']);
 Route::get('/contact', [HomeController::class, 'contact']);
+Route::post('/contact-form',[HomeController::class, 'contact_form']);
 Route::get('/blog', [HomeController::class, 'blog']);
 Route::get('/product-list', [HomeController::class, 'product_list']);
 Route::get('/', [HomeController::class, 'index']);
@@ -180,6 +180,12 @@ Route::match(['get','post'],'user-login/',[UsersController::class, 'login']);
 Route::match(['get','post'],'user-register/',[UsersController::class, 'register']);
 //Admin login
 Route::match(['get','post'],'/admin',[AdminController::class, 'login']);
+
+// Check Pincode
+Route::post('/check-pincode/',[ProductsController::class, 'checkPincode']);
+Route::post('/check-time-slot/',[ProductsController::class, 'checkTimeslot']);
+Route::post('/check-shipping-method/',[ProductsController::class, 'checkShippingmethod']);
+
 // Auth::routes(['verify'=>true]);
 Auth::routes();
 

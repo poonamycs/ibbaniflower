@@ -487,7 +487,7 @@ function selectPaymentMethod(){
 	}
 }
 
-function checkPincode(){
+function checkPincode1(){
 	var pincode = $("#chkPincode").val();
 	if(pincode==""){
 		alert("Please Enter Pincode"); return false;
@@ -495,8 +495,9 @@ function checkPincode(){
 	$.ajax({
 		type:'post',
 		data:{pincode:pincode},
+		headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 		url:'/check-pincode',
-		success:function(resp){			
+		success:function(resp){		
 			if(resp>0){
 				$("#pincodeResponse").html("<font color='green' style='font-size: 13px; font-weight: bold'><i class='fa fa-check'></i> This pincode is available for delivery.</font>");
 			}else{
@@ -510,6 +511,7 @@ function checkPincode(){
 
 function checkPincodeHeader(){
 	var pincode = $("#checkPincode").val();
+	alert(pincode);
 	if(pincode==""){
 		alert("Please Enter Pincode"); return false;
 	}
