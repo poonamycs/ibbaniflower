@@ -5,7 +5,7 @@
 	.select{
 		width:215px;
 	}
-	#selectedSlot,#selectedTime,#selectedDate{
+	.selectedSlot,.selectedTime,.selectedDate{
 		width:200px;
 		height:36px;
 	}
@@ -31,6 +31,9 @@
             right: 10px; /* Position the close button 10px from the right */
             cursor: pointer; /* Set cursor to pointer */
         }
+		.slider-nav{
+			height:max-content;
+		}
 </style>
 <?php 
 	$date = date("Y-m-d");
@@ -104,29 +107,29 @@
 									<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 									<h6><i class="fa fa-shopping-bag"></i> Check product availability in your area</h6>
 										<div class="form-inline pincode-search">
-											<input type="number" name="pincode" id="chkPincode" class="form-control" name="product" placeholder="Enter your pincode">
-											<button type="button" id="checkpin" class="pl-2 pr-2 btn btn-secondary btn-lg" style="padding: 7px; margin: 15px 5px"><i class="fa fa-search"></i>
+											<input type="number" name="pincode"  class="form-control chkPincode{{$product->id}}" name="product" placeholder="Enter your pincode">
+											<button type="button" data-id="{{$product->id}}" class="pl-2 pr-2 btn btn-secondary btn-lg checkpin" style="padding: 7px; margin: 15px 5px"><i class="fa fa-search"></i>
 											</button>
-													<div class="form-inline" id="datePopup" style="display:none">
-														<input type="date" id="selectedDate" onchange="nextStep('datePopup', 'timeSlotPopup')">
+													<div class="form-inline" id="datePopup{{$product->id}}" style="display:none">
+														<input type="date" data-id="{{$product->id}}" class="selectedDate">
 													</div>
 											</div>
 											<div class="form-inline">
 											<div id="timeSlotPopup">
-												<div id="selectedSlot1">
+												<div class="selectedSlot1" data-id="{{$product->id}}">
 												</div>
 											</div>
 
-											<div id="deliveryTimePopup" style="display:none">
-												<div id="deliveryTimePopup1">
+											<div id="deliveryTimePopup">
+												<div class="selectedTime1" data-id="{{$product->id}}">
 												</div>
 											</div>
 											</div>
 											<div id="confirmation">
-												<div id="slotdetails"></div>
+												<div class="slotdetails"></div>
 											</div>
 
-										<span id="pincodeResponse"></span>
+										<span class="pincodeResponse"></span>
 
 										<hr>
 									<!-- <h6><i class="mdi mdi-truck-fast"></i> Order will be delivered between <b><?php echo $datetime->format('d M').' to '.$datetime1->format('d M') ?></b></h6> -->
@@ -139,12 +142,11 @@
 						</form>
 					</div>
 				
-					<!-- ------ end content 1----- -->
 					@foreach($product_imgs as $product_img)
 						<div class="product-content">
 							<div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 img-content">
-									<img src="{{ url('/images/backend_images/products/medium/'.$product_img->image) }}" class="img-responsive" alt="img-holiwood">
-								</div>
+								<img src="{{ url('/images/backend_images/products/medium/'.$product_img->image) }}" class="img-responsive" alt="img-holiwood">
+							</div>
 								<div class="col-lg-7 col-md-6 col-sm-12 col-xs-12 detail">
 									<h1>{{ $product->product_name }}</h1>
 									<p class="p1">{{ Str::limit($product->description, 50) }}</p>
@@ -169,6 +171,35 @@
 											</div>
 											
 										</div>
+
+										<h6><i class="fa fa-shopping-bag"></i> Check product availability in your area</h6>
+										<div class="form-inline pincode-search">
+											<input type="number" name="pincode" class="form-control chkPincode{{$product_img->id}}" name="product" placeholder="Enter your pincode">
+											<button type="button" data-id="{{$product_img->id}}" class="pl-2 pr-2 btn btn-secondary btn-lg checkpin" style="padding: 7px; margin: 15px 5px"><i class="fa fa-search"></i>
+											</button>
+													<div class="form-inline" id="datePopup{{$product_img->id}}" style="display:none">
+														<input type="date" data-id="{{$product_img->id}}" class="selectedDate">
+													</div>
+											</div>
+											<div class="form-inline">
+											<div id="timeSlotPopup">
+												<div class="selectedSlot1" data-id="{{$product_img->id}}">
+												</div>
+											</div>
+
+											<div id="deliveryTimePopup">
+												<div class="selectedTime1" data-id="{{$product_img->id}}">
+												</div>
+											</div>
+											</div>
+											<div id="confirmation">
+												<div id="slotdetails"></div>
+											</div>
+
+										<span class="pincodeResponse"></span>
+
+										<hr>
+										
 										<div class="add-cart">
 											<a href="#" class="btn-add-cart">Add to cart</a>
 											<a href="#" class="list-icon icon-1"><i class="far fa-eye"></i></a>
@@ -179,7 +210,6 @@
 						</div>
 					@endforeach
 					
-					<!-- ------ end content 4----- -->
 				</div>
 				<div class="slider-nav col-lg-5 col-md-6 col-sm-12 col-xs-12">
 					<div><img src="{{ url('/images/backend_images/products/medium/'.$product->image) }}" class="img-responsive" alt="img-holiwood"></div>
@@ -273,17 +303,21 @@ Add-ons: Personalized message card, vase, or chocolates for a complete gift pack
 	// $( document ).ready(function() {
 		
 	// });
-	$("#deliveryTimePopup1").change(function() {
-		var slot = $("#selectedTime").val();
-		if(slot > 0)
+	$(".selectedTime1").change(function() {
+		var slot = $(this).find(":selected").val();
+		alert(slot);
+		if(slot > -1)
 		{
 			confirmSlot();
 		}
 	});
-	$("#selectedSlot1").change(function() {
-		var slot = $("#selectedSlot").val();
-		var slottext = $("#selectedSlot").find(":selected").text();
-
+	$(".selectedSlot1").change(function() {
+		var slot = $(this).find(":selected").val();
+		var slottext = $(this).find(":selected").text();
+		var data_id = $(this).attr("data-id");
+		alert(slot);
+		alert(slottext);
+		alert(data_id);
 		if(slot > -1)
 		{
 			$.ajax({
@@ -293,7 +327,7 @@ Add-ons: Personalized message card, vase, or chocolates for a complete gift pack
 				url:'/check-time-slot',
 				success:function(resp){	
 					var select = ('<select></select>');
-					var option = '<select id = "selectedTime"><option value="-1">Select Time</option>';
+					var option = '<select data-id="'+data_id+'" class = "selectedTime"><option value="-1">Select Time</option>';
 					console.log(resp);	
 					if(resp){
 					for (i = 0; i < resp.length; ++i) {
@@ -301,11 +335,11 @@ Add-ons: Personalized message card, vase, or chocolates for a complete gift pack
 							console.log(option);
 						}
 						option += '</select>';						
-						$("#deliveryTimePopup1").html(option);
+						$(".selectedTime1").html(option);
 						
 					}else{
 						
-						$("#deliveryTimePopup1").html(select);
+						$(".selectedTime1").html(select);
 					}
 				$("#deliveryTimePopup").css({"display":"inline-block"});
 
@@ -317,8 +351,9 @@ Add-ons: Personalized message card, vase, or chocolates for a complete gift pack
 		
 	});
 
-		$("#checkpin").click(function() {
-		var pincode = $("#chkPincode").val();
+		$(".checkpin").click(function() {
+		var pincode = $(this).prev().val();
+		var dataid = $(this).attr("data-id");
 		if(pincode==""){
 			alert("Please Enter Pincode"); return false;
 		}
@@ -329,10 +364,10 @@ Add-ons: Personalized message card, vase, or chocolates for a complete gift pack
 				url:'/check-pincode',
 				success:function(resp){		
 					if(resp>0){
-						$("#pincodeResponse").html("<font color='green' style='font-size: 13px; font-weight: bold'><i class='fa fa-check'></i> This pincode is available for delivery.</font>");
-						$("#datePopup").css({"display":"inline-block"});
+						$(".pincodeResponse").html("<font color='green' style='font-size: 13px; font-weight: bold'><i class='fa fa-check'></i> This pincode is available for delivery.</font>");
+						$("#datePopup" + dataid).css({"display":"inline-block"});
 					}else{
-						$("#pincodeResponse").html("<font color='red' style='font-size: 13px; font-weight: bold'><i class='fa fa-ban'></i> This pincode is not available for delivery.</font>");
+						$(".pincodeResponse").html("<font color='red' style='font-size: 13px; font-weight: bold'><i class='fa fa-ban'></i> This pincode is not available for delivery.</font>");
 					}
 				},error:function(){
 					alert("Error");
@@ -341,11 +376,16 @@ Add-ons: Personalized message card, vase, or chocolates for a complete gift pack
 		});
 
         // Function to proceed to the next step
-        function nextStep(currentPopup, nextPopup) {
-			if(currentPopup == "datePopup")
-			{
-				$("#pincodeResponse").hide();
-				var shipping_date= $("#selectedDate").val();
+        // function nextStep(currentPopup, nextPopup) {
+		// 	if(currentPopup == "datePopup")
+		// 	{
+
+				
+				$(".selectedDate").change(function() {
+
+					$(".pincodeResponse").hide();
+					var shipping_date= $(this).val();
+					var data_id = $(this).attr("data-id");
 				if(shipping_date.length > 0)
 				{
 					$.ajax({
@@ -355,7 +395,7 @@ Add-ons: Personalized message card, vase, or chocolates for a complete gift pack
 						url:'/check-shipping-method',
 						success:function(resp){	
 							var select = ('<select></select>');
-    						var option = '<select id = "selectedSlot"><option value="-1">Select Shipping Method</option>';
+    						var option = '<select data-id="'+data_id+'" class="selectedSlot"><option value="-1">Select Shipping Method</option>';
 							console.log(resp);	
 							if(resp){
 							for (i = 0; i < resp.length; ++i) {
@@ -365,32 +405,32 @@ Add-ons: Personalized message card, vase, or chocolates for a complete gift pack
 								option += '</select>';
 								console.log("hi");
 								
-								$("#selectedSlot1").html(option);
+								$(".selectedSlot1").html(option);
 								
 							}else{
 								console.log("hi1");
-								$("#selectedSlot1").html(select);
+								$(".selectedSlot1").html(select);
 							}
 						},error:function(){
 							alert("Error");
 						}
 					});
 				}
-			}
-            document.getElementById(nextPopup).style.display = 'block';
-        }
-
+			// }
+            // document.getElementById(nextPopup).style.display = 'block';
+        // }
+	});
         function confirmSlot() {
-            var date = $('#selectedDate').val();
-            var slot = $('#selectedSlot1').text();
-            var time = $('#selectedTime').val();
+            var date = $('.selectedDate').text();
+            var slot = $(".selectedSlot1").find(":selected").text();
+            var time = $('.selectedTime1').find(":selected").text();
 
            document.getElementById('confirmation').style.display = 'block';
 
             var slotdetails = document.getElementById('slotdetails');
             slotdetails.innerHTML = '';
             var button = document.createElement('label');
-            button.innerText = `Confirmed: Date - ${date}, Slot - ${slot}, Time - ${time}`;
+            button.innerText = `Order will be delivered between - ${date}, Slot - ${slot}, Time - ${time}`;
            
             slotdetails.appendChild(button);
         }

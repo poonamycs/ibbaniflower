@@ -22,65 +22,65 @@
 							<li class="col-lg-4 col-md-4 col-sm-12 col-xs-12 menu-home-lv2">
 								<ul>
 									<li><a href="#">By Occaions</a> </li>
-									<li class="li-home li-one"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="#" style="color: black;">Birthday</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="#" style="color: black;">Anniversary</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="#" style="color: black;">Wedding</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="#" style="color: black;">Love n Romance</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="#" style="color: black;">Congratulations</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="#" style="color: black;">Sympathy n Funeral</a></li>
+									<li class="li-home li-one"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Birthday</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Anniversary</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Wedding</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Love n Romance</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Congratulations</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Sympathy n Funeral</a></li>
 									
 								</ul>
 							</li>
 							<li class="col-lg-4 col-md-4 col-sm-12 col-xs-12 menu-home-lv2">
 								<ul>
 									<li><a href="#">By type</a></li> 
-									<li class="li-home li-one"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="#" style="color: black;">Roses</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="#" style="color: black;">Carnations</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="#" style="color: black;">Orchids</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="#" style="color: black;">Gerberas</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="#" style="color: black;">Lilies</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="#" style="color: black;">Mixed Flowers</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="#" style="color: black;">Exotic Flowers</a></li>
+									<li class="li-home li-one"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Roses</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Carnations</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Orchids</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Gerberas</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Lilies</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Mixed Flowers</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Exotic Flowers</a></li>
 								</ul>
 							</li>
 							<li class="col-lg-4 col-md-4 col-sm-12 col-xs-12 menu-home-lv2">
 								<ul>
 									<li><a href="#">By collection</a></li>
-									<li class="li-home li-one"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="#" style="color: black;">Flower Subscription</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="#" style="color: black;">Flower Boquets</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="#" style="color: black;">Flower Arrangment</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="#" style="color: black;">Tracking</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="#" style="color: black;">Flagship Collection</a></li>
+									<li class="li-home li-one"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Flower Subscription</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Flower Boquets</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Flower Arrangment</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Tracking</a></li>
+									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Flagship Collection</a></li>
 								</ul>
 							</li>
 							
 						</ul>
 					</li>
 					<li class="col-lg-4 col-md-4 hidden-sm hidden-xs li-banner">
-						<a href="#"><img src="{{ asset('images/frontend_images/shop_banner.png') }}" alt="img-holiwood"></a>
+						<a href="#"><img src="{{ asset('images/frontend_images/shopbanner.png') }}" alt="img-holiwood"></a>
 					</li>
 					
 						</ul>
 					</div>
 				</div>
 					</li>
-					<li class="wedding-menu"><a href="#">About Us</a><figure id="wedding-1" class=" hidden-sm hidden-md hidden-xs"></figure></li>
+					<li class="wedding-menu"><a href="{{ url('/about') }}">About Us</a><figure id="wedding-1" class=" hidden-sm hidden-md hidden-xs"></figure></li>
 					<li class="blog-menu dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Corporate</a><figure id="blog-1" class=" hidden-sm hidden-md hidden-xs"></figure>
 						<ul class="menu-home-lv2 dropdown-menu">
-							<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="#" style="color: black;">Occaions Details</a></li>
-							<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="#" style="color: black;">Decoration</a></li>
+							<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="blog.html" style="color: black;">Occaions Details</a></li>
+							<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="blog-left-sidebar.html" style="color: black;">Decoration</a></li>
 						</ul>
 					</li>
 					<li class="blog-menu dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Media</a><figure id="blog-1" class=" hidden-sm hidden-md hidden-xs"></figure>
 						<ul class="menu-home-lv2 dropdown-menu">
-							<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="#" style="color: black;">Gallery</a></li>
-							<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="#" style="color: black;">Blog</a></li>
+							<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="blog.html" style="color: black;">Gallery</a></li>
+							<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/blog') }}" style="color: black;">Blog</a></li>
 						</ul>
 					</li>
 					<li class="wedding-menu menu-item"><a href="{{ url('/contact') }}" id="about-menu" style="font-weight:normal">Contact</a><figure id="contact-1" class=" hidden-sm hidden-md hidden-xs"></figure></li>
-					<li class="hidden-lg hidden-md"><a href="#"><i class="far fa-user"></i> My Account</a></li>
+					<li class="hidden-lg hidden-md"><a href="{{ url('user-login') }}"><i class="far fa-user"></i> My Account</a></li>
 					<li><figure id="btn-close-menu" class="hidden-lg hidden-md"><i class="far fa-times-circle"></i></figure></li>
 				</ul>
 				</div>
@@ -101,10 +101,10 @@
 								<i class="far fa-user"></i>
 							</a>
 							<ul class="menu-home-lv2 dropdown-menu">
-								<li class="li-home"><a href="#">My Orders</a></li>
-								<li class="li-home"><a href="#">My Wishlist</a></li>
-								<li class="li-home"><a href="#">My Account</a></li>
-								<li class="li-home"><a href="#">Change Password</a></li>
+								<li class="li-home"><a href="{{ url('orders/') }}">My Orders</a></li>
+								<li class="li-home"><a href="{{ url('my-wishlist') }}">My Wishlist</a></li>
+								<li class="li-home"><a href="{{ url('account/') }}">My Account</a></li>
+								<li class="li-home"><a href="{{ url('password-setting/') }}">Change Password</a></li>
 								<li class="li-home"><a href="{{ url('user-logout/') }}">Logout</a></li>
 							</ul>
 

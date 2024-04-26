@@ -22,6 +22,12 @@
 	.error{
 		color:red;
 	}
+	header .menu-main li.shop-menu .dropdown-menu .li-banner {
+		padding:0px 0px 0px 0px;
+	}
+	.col-lg-4{
+		 padding-right: 15px;
+	}
 </style>
 <body>
 <header class="container" id="header-v3">
@@ -83,7 +89,7 @@
 						</ul>
 					</li>
 					<li class="col-lg-4 col-md-4 hidden-sm hidden-xs li-banner">
-						<a href="#"><img src="{{ asset('images/frontend_images/shop_banner.png') }}" alt="img-holiwood"></a>
+						<a href="#"><img src="{{ asset('images/frontend_images/shopbanner.png') }}" alt="img-holiwood"></a>
 					</li>
 					
 						</ul>
