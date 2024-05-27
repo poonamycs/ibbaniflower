@@ -34,6 +34,17 @@
 		.slider-nav{
 			height:max-content;
 		}
+		/* .modal-content .detail .add-cart .btn-add-cart {
+			display:block;
+			background:none;
+			color:none;
+		} */
+		div#timeslot {
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+		}
+		
 </style>
 <?php 
 	$date = date("Y-m-d");
@@ -45,6 +56,7 @@
 	$datetime1->modify('+2 day');
 	$datetime1->format('d M');
 ?>
+
 <main>
 	<div class="content-search">
 		<div class="container container-100">
@@ -77,8 +89,14 @@
 						<div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 img-content">
       							<img src="{{ url('/images/backend_images/products/medium/'.$product->image) }}" class="img-responsive" alt="img-holiwood">
       					</div>
-						  <form name="addtocartForm" id="addtocartForm" action="#" method="post">
+						  <form name="addtocartForm" id="addtocartForm" action="{{ url('add-cart') }}" method="post">
 							{{ csrf_field() }}
+							<input type="hidden" name="product_id" value="{{$product->id}}">
+							<input type="hidden" name="product_brand" value="{{ $product->brand }}">
+							<input type="hidden" name="product_name" value="{{ $product->name }}">
+							<input type="hidden" name="price" value="{{ $product->price }}">
+							<input type="hidden" name="user_email" value="{{ Auth::user()->email }}">
+							<input type="hidden" name="image" value="{{ $product->image }}">
       						<div class="col-lg-7 col-md-6 col-sm-12 col-xs-12 detail">
       							<h1>{{$product->product_name}}</h1>
 								<p class="p1">{{ Str::limit(strip_tags($product->description), 50) }}</p>
@@ -91,12 +109,12 @@
 									<div class="Quality">
 										
 										<div class="input-group input-number-group">
-											<span class="text-qua">Quanty:</span>
+											<span class="text-qua">Quantity:</span>
 											  <div class="input-group-button">
 											    <span class="input-number-decrement">-</span>
 											  </div>
 											  <input type="hidden" class="productprice" value="{{ $product->price }}">
-											  <input class="input-number" type="number" min="0" max="1000" value="01" >
+											  <input class="input-number" type="number" min="0" max="1000" name="quantity" value="1" readonly>
 											  <div class="input-group-button">
 											    <span class="input-number-increment">+</span>
 											  </div>
@@ -114,36 +132,25 @@
 														<input type="date" data-id="{{$product->id}}" class="selectedDate">
 													</div>
 											</div>
-											<div class="form-inline">
-											<div id="timeSlotPopup">
-												<div class="selectedSlot1" data-id="{{$product->id}}">
-												</div>
-											</div>
-
-											<div id="deliveryTimePopup">
-												<div class="selectedTime1" data-id="{{$product->id}}">
-												</div>
-											</div>
-											</div>
-											<div id="confirmation">
-												<div class="slotdetails"></div>
-											</div>
-
+											
 										<span class="pincodeResponse"></span>
-
+										
 										<hr>
 									<!-- <h6><i class="mdi mdi-truck-fast"></i> Order will be delivered between <b><?php echo $datetime->format('d M').' to '.$datetime1->format('d M') ?></b></h6> -->
 									<div class="add-cart">
-										<a href="#" class="btn-add-cart">Add to cart</a>
+										<button type="submit" class="btn-add-cart" id="cartButton" name="cartButton" value="Shopping Cart" title="Add this Product to cart"><i class="mdi mdi-cart-outline"></i> Add To Cart</button>
+										<!-- <a href="#" class="btn-add-cart">Add to cart</a> -->
 										<a href="#" class="list-icon icon-1"><i class="far fa-eye"></i></a>
 										<a href="#" class="list-icon icon-2"><i class="far fa-heart"></i></a>
 									</div>
       						</div>
 						</form>
 					</div>
-				
+					
 					@foreach($product_imgs as $product_img)
 						<div class="product-content">
+						<form name="addtocartForm" id="addtocartForm" action="{{ url('add-cart') }}" method="post">
+							{{ csrf_field() }}
 							<div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 img-content">
 								<img src="{{ url('/images/backend_images/products/medium/'.$product_img->image) }}" class="img-responsive" alt="img-holiwood">
 							</div>
@@ -181,23 +188,9 @@
 														<input type="date" data-id="{{$product_img->id}}" class="selectedDate">
 													</div>
 											</div>
-											<div class="form-inline">
-											<div id="timeSlotPopup">
-												<div class="selectedSlot1" data-id="{{$product_img->id}}">
-												</div>
-											</div>
-
-											<div id="deliveryTimePopup">
-												<div class="selectedTime1" data-id="{{$product_img->id}}">
-												</div>
-											</div>
-											</div>
-											<div id="confirmation">
-												<div id="slotdetails"></div>
-											</div>
-
+											
 										<span class="pincodeResponse"></span>
-
+										
 										<hr>
 										
 										<div class="add-cart">
@@ -207,6 +200,7 @@
 										</div>
 									
 								</div>
+							</form>
 						</div>
 					@endforeach
 					
@@ -220,15 +214,16 @@
   				
 				<div class="col-lg-7 connect-us col-md-6 col-sm-12 col-xs-12">
 					<a href="#" id="like-fb"></a>
-					<a href="#" id="like-tw"></a>
 					<a href="#" id="like-gg"></a>
-					<a href="#" id="like-share"></a>
 				</div>
 			
 				
 			</div>
 		
 	</div>
+	<input type="hidden" id="confirm_date" value="">
+	<input type="hidden" id="confirm_slot" value="">
+	<input type="hidden" id="confirm_time" value="">
 	<div class="product-text">
 		<div class="container">
 			<ul class="nav nav-tabs menu-tab">
@@ -292,6 +287,52 @@ Add-ons: Personalized message card, vase, or chocolates for a complete gift pack
 		
 	</div>
 </div>
+
+<div id="myModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+
+	<!-- Modal content-->
+	<div class="modal-content" style="width:700px">
+		<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		
+		</div>
+		<div class="modal-body">
+		<div class="tab-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div id="img-pill-1" class="tab-pane fade in active">
+			
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 detail">
+					<h1>Select Shipping Method</h1><hr/>
+					<div id="shippingslot"></div>
+							
+				</div>
+			</div>
+
+
+		</div>
+		
+	</div>
+	</div>
+	</div>
+</div>
+
+<div id="myModal1" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content" style="width:700px">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body" style="width:100%">
+				<div class="tab-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div id="img-pill-1" class="tab-pane fade in active">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 detail" id="timeslot"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- --------------------------- -->
 <!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->
 <!-- <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script> -->
 
@@ -300,57 +341,51 @@ Add-ons: Personalized message card, vase, or chocolates for a complete gift pack
 
 <script src='https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js'></script>
 <script>
-	// $( document ).ready(function() {
-		
-	// });
-	$(".selectedTime1").change(function() {
-		var slot = $(this).find(":selected").val();
-		alert(slot);
-		if(slot > -1)
-		{
-			confirmSlot();
-		}
-	});
-	$(".selectedSlot1").change(function() {
-		var slot = $(this).find(":selected").val();
-		var slottext = $(this).find(":selected").text();
-		var data_id = $(this).attr("data-id");
-		alert(slot);
-		alert(slottext);
-		alert(data_id);
-		if(slot > -1)
-		{
-			$.ajax({
+
+	$(document).on('click',".shipping_radio", function(){
+		// $('input[type=radio][name=shipping_method]').change(function() {
+		var slottext = $('input[name="shipping_method"]:checked').val();
+		$("#myModal").modal('hide');
+		$("#confirm_slot").val(slottext);
+		$.ajax({
 				type:'post',
 				data:{slottext:slottext},
 				headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 				url:'/check-time-slot',
 				success:function(resp){	
-					var select = ('<select></select>');
-					var option = '<select data-id="'+data_id+'" class = "selectedTime"><option value="-1">Select Time</option>';
-					console.log(resp);	
-					if(resp){
+					console.log(resp);
+					var timeslot = '<h1>Select Time Slot</h1><hr/><h2>Express Delivery</h2>';
 					for (i = 0; i < resp.length; ++i) {
-							option += ('<option value="' + i + '">' + resp[i]['time_slot'] + '</option>');
-							console.log(option);
+						timeslot += '<div style="border: 1px solid black;height: 28px;width: 220px;"><input style="margin-left:45px" class="btn-add-time" type="radio" value="'+ resp[i]['time_slot'] +'" name="time_slot"> &nbsp;<span>'+ resp[i]['time_slot'] +'&nbsp;hrs</span></div><br/>'
+							console.log(resp[i]['time_slot']);
 						}
-						option += '</select>';						
-						$(".selectedTime1").html(option);
-						
-					}else{
-						
-						$(".selectedTime1").html(select);
-					}
-				$("#deliveryTimePopup").css({"display":"inline-block"});
-
+					$("#timeslot").html(timeslot);
+					$("#myModal1").modal('show');
 				},error:function(){
 					alert("Error");
 				}
 			});
-		}
-		
 	});
 
+	$(document).on('click',".btn-add-time", function(){
+	var timetext = $('input[name="time_slot"]:checked').val();
+		$("#myModal1").modal('hide');
+		$("#confirm_time").val(timetext);
+		
+			var date = $("#confirm_date").val();
+            var slot = $("#confirm_slot").val();
+            var time = $("#confirm_time").val();
+			
+        //    document.getElementByClassName('confirmation').style.display = 'block';
+
+        //     var slotdetails = document.getElementByClassName('slotdetails');
+        //     // var slotdetails = $("#slotdetails");
+		// 	alert(slotdetails);
+        //     slotdetails.innerHTML = '';
+        //     var button = document.createElement('label');
+            var confirm = `Order will be delivered between - ${date}, Slot - ${slot}, Time - ${time}`;
+           alert(confirm);
+	});
 		$(".checkpin").click(function() {
 		var pincode = $(this).prev().val();
 		var dataid = $(this).attr("data-id");
@@ -382,7 +417,6 @@ Add-ons: Personalized message card, vase, or chocolates for a complete gift pack
 
 				
 				$(".selectedDate").change(function() {
-
 					$(".pincodeResponse").hide();
 					var shipping_date= $(this).val();
 					var data_id = $(this).attr("data-id");
@@ -394,46 +428,39 @@ Add-ons: Personalized message card, vase, or chocolates for a complete gift pack
 						headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
 						url:'/check-shipping-method',
 						success:function(resp){	
-							var select = ('<select></select>');
-    						var option = '<select data-id="'+data_id+'" class="selectedSlot"><option value="-1">Select Shipping Method</option>';
-							console.log(resp);	
-							if(resp){
+							console.log(resp);
+							var shippingslot = '';
 							for (i = 0; i < resp.length; ++i) {
-									option += ('<option value="' + i + '">' + resp[i]['name'] + '</option>');
-									console.log(option);
+								shippingslot += '<div style="border: 1px solid black;height: 62px;"><input class="shipping_radio" type="radio" value="' + resp[i]['slot'] + '" name="shipping_method" style="margin-bottom: -78px;margin-top: 38px;margin-left: 10px;"/><h4 style="margin-left:40px">' + resp[i]['slot'] + '</h4><h5 style="margin-left:40px">Choose from any 5 hour slot during the day</h5><div class="add-cart" style="margin-top: -67px;margin-left: 420px;"><a href="#" class="btn-add-cart" style="background:#7d8035;width: 140px;">Rs.' + resp[i]['price'] + '</a></div></div><br/>	'
+									console.log(resp[i]['slot']);
 								}
-								option += '</select>';
-								console.log("hi");
-								
-								$(".selectedSlot1").html(option);
-								
-							}else{
-								console.log("hi1");
-								$(".selectedSlot1").html(select);
-							}
-						},error:function(){
-							alert("Error");
-						}
-					});
-				}
-			// }
-            // document.getElementById(nextPopup).style.display = 'block';
-        // }
+								$("#shippingslot").html(shippingslot);
+								$("#confirm_date").val(shipping_date);
+								$("#myModal").modal('show');
+								// $("#myModal").modal('show');
+						}	
+							
+						});
+					}
 	});
-        function confirmSlot() {
-            var date = $('.selectedDate').text();
-            var slot = $(".selectedSlot1").find(":selected").text();
-            var time = $('.selectedTime1').find(":selected").text();
+        // function confirmSlot() {
+        //     var date = $("#confirm_date").val();
+        //     var slot = $("#confirm_slot").val();
+        //     var time = $("#confirm_time").val();
+		// 	alert(date);
+		// 	alert(slot);
+		// 	alert(time);
+        //    document.getElementByClassName('confirmation').style.display = 'block';
 
-           document.getElementById('confirmation').style.display = 'block';
-
-            var slotdetails = document.getElementById('slotdetails');
-            slotdetails.innerHTML = '';
-            var button = document.createElement('label');
-            button.innerText = `Order will be delivered between - ${date}, Slot - ${slot}, Time - ${time}`;
+        //     var slotdetails = document.getElementByClassName('slotdetails');
+        //     // var slotdetails = $("#slotdetails");
+		// 	alert(slotdetails);
+        //     slotdetails.innerHTML = '';
+        //     var button = document.createElement('label');
+        //     button.innerText = `Order will be delivered between - ${date}, Slot - ${slot}, Time - ${time}`;
            
-            slotdetails.appendChild(button);
-        }
+        //     slotdetails.appendChild(button);
+        // }
 		
 </script>
 

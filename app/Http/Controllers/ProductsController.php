@@ -12,6 +12,8 @@ use Image;
 use App\Models\Category;
 use App\Models\Admin;
 use App\Models\Product;
+use App\Models\Subproduct;
+use App\Models\Trending;
 use App\Models\ProductsAttribute;
 use App\Models\ProductsImage;
 use App\Models\User;
@@ -53,14 +55,15 @@ class ProductsController extends Controller
     		$product->product_name = $data['product_name'];
     		$product->product_code = $data['product_code'];
             $product->email = $data['email'];
+            $product->slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $data['product_name'])).'-'.rand(10000,99999);
             $product->admin_approved = $data['admin_approved'];
             $product->unit = $data['unit'];
 
-    		if(!empty($data['product_brand'])){
-                $product->product_brand = $data['product_brand'];
-            }else{
-                $product->product_brand = '';
-            }
+    		// if(!empty($data['product_brand'])){
+            //     $product->product_brand = $data['product_brand'];
+            // }else{
+            //     $product->product_brand = '';
+            // }
 
             if(!empty($data['description'])){
                 $product->description = $data['description'];
@@ -110,11 +113,11 @@ class ProductsController extends Controller
                 $status = 1;  
             }
 
-            if(empty($data['featured'])){
-                $featured = 0;                
-            }else{
-                $featured = 1;  
-            }
+            // if(empty($data['featured'])){
+            //     $featured = 0;                
+            // }else{
+            //     $featured = 1;  
+            // }
 
     		$product->status = $status;
             $product->featured = $featured;
@@ -198,8 +201,9 @@ class ProductsController extends Controller
             }else{
                 $featured = 1;  
             }
+            $slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $data['product_name'])).'-'.rand(10000,99999);
 
-    		Product::where(['id'=>$id])->update(['category_id'=>$data['category_id'],'product_name'=>$data['product_name'],'product_code'=>$data['product_code'],'product_brand'=>$data['product_brand'],'description'=>$data['description'],'care'=>$data['care'],'price'=>$data['price'],'discount'=>$data['discount'],'image'=>$filename,'featured'=>$featured,'status'=>$status,'unit'=>$data['unit']]);
+    		Product::where(['id'=>$id])->update(['category_id'=>$data['category_id'],'product_name'=>$data['product_name'],'product_code'=>$data['product_code'],'description'=>$data['description'],'care'=>$data['care'],'price'=>$data['price'],'discount'=>$data['discount'],'image'=>$filename,'status'=>$status,'unit'=>$data['unit'],'slug'=>$slug]);
     		return redirect()->back()->with('flash_message_success','Product Updated Successfully!');
     	}
 
@@ -238,6 +242,11 @@ class ProductsController extends Controller
         return redirect()->back()->with('flash_message_success','Product Deleted Successfully!');
     }
 
+    public function deletesubproduct($pid){
+        $id = Crypt::decrypt($pid);
+        subproduct::where(['id'=>$id])->delete(); 
+        return redirect()->back()->with('flash_message_success','Subproduct Deleted Successfully!');
+    }
     public function deleteProductImage($id = null){
         //Get product image name
         $productImage = Product::where(['id'=>$id])->first();
@@ -288,6 +297,154 @@ class ProductsController extends Controller
         return view('admin.products.view_all_products')->with(compact('productsAdmin'));
     }
 
+    public function viewSubProducts(){
+        $subproducts = Subproduct::orderBy('id','DESC')->get();
+        return view('admin.subproduct.view_all_sub_products')->with(compact('subproducts'));
+    }
+    
+    public function addsubProduct(Request $request){
+    	if($request->isMethod('post')){
+    		$data = $request->all();
+
+            $productCount = Subproduct::where('product_name',$data['product_name'])->count();
+    		if($productCount>0){
+                return redirect()->back()->with('flash_message_error',''. $data['product_name'] .', name is already used! Use another product name.'); 
+            }
+
+    		// echo "<pre>"; print_r($data); die;
+    		$product = new Subproduct;
+    		$product->product_name = $data['product_name'];
+    		$product->product_code = $data['product_code'];
+            $product->slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $data['product_name'])).'-'.rand(10000,99999);
+            $product->admin_approved = $data['admin_approved'];
+            $product->unit = $data['unit'];
+
+    		// if(!empty($data['product_brand'])){
+            //     $product->product_brand = $data['product_brand'];
+            // }else{
+            //     $product->product_brand = '';
+            // }
+
+            if(!empty($data['description'])){
+                $product->description = $data['description'];
+            }else{
+                $product->description = '';
+            }
+
+            // if(!empty($data['care'])){
+            //     $product->care = $data['care'];
+            // }else{
+            //     $product->care = '';
+            // }
+
+            // if(!empty($data['discount'])){
+            //     $product->discount = $data['discount'];
+            // }else{
+            //     $product->discount = '';
+            // }
+
+    		$product->price = $data['price'];
+
+    		// Upload Product image
+    		if($request->hasFile('image')){
+    			$image_tmp = $request->image;
+    			$filename = time() . '.'.$image_tmp->clientExtension();
+
+    			if($image_tmp->isValid()){
+    				$extension = $image_tmp->getClientOriginalExtension();
+    				$filename = rand(111,99999).'.'.$extension;
+    				$large_image_path = 'images/backend_images/subproducts/large/'.$filename;
+    				$medium_image_path = 'images/backend_images/subproducts/medium/'.$filename;
+    				$small_image_path = 'images/backend_images/subproducts/small/'.$filename;
+
+    				// Resizes image
+    				Image::make($image_tmp)->save($large_image_path);
+    				Image::make($image_tmp)->resize(600,600)->save($medium_image_path);
+    				Image::make($image_tmp)->resize(300,300)->save($small_image_path);
+
+    				// Store image name in products table
+    				$product->image = $filename;
+    			}
+    		}
+
+            if(empty($data['status'])){
+                $status = 0;                
+            }else{
+                $status = 1;  
+            }
+    		$product->status = $status;
+            $product->save();
+    		return redirect('/admin/view-all-sub-products')->with('flash_message_success','Product has been Added Successfully');  		
+    	}
+
+    	
+    	return view('admin.subproduct.add_sub_product');
+    }
+    public function addtrendingImages(Request $request){
+        // $id = Crypt::decrypt($pid);
+        // $productDetails = Product::with('attributes')->where(['id' => $id])->first();
+
+        // $categoryDetails = Category::where(['id'=>$productDetails->category_id])->first();
+        // $category_name = $categoryDetails->name;
+        if($request->isMethod('post')){
+            $data = $request->all();
+            if($request->hasFile('image')){
+                $files = $request->file('image');
+                foreach($files as $file){
+                    // Upload Images after Resize
+                    $image = new Trending;
+                    $extension = $file->getClientOriginalExtension();
+                    $fileName = rand(111,99999).'.'.$extension;                  
+
+                    $large_image_path  = 'images/backend_images/trending/large/'.$fileName;
+                    $medium_image_path = 'images/backend_images/trending/medium/'.$fileName;
+                    $small_image_path  = 'images/backend_images/trending/small/'.$fileName;   
+
+                    Image::make($file)->save($large_image_path);
+                    Image::make($file)->resize(332, 412)->save($medium_image_path);
+                    // Image::make($file)->resize(300, 300)->save($small_image_path);
+
+                    $image->image = $fileName;  
+                    $image->name = $request->name;
+                    $image->save();
+                }   
+            }
+            return redirect()->back()->with('flash_message_success', 'Product Images has been added successfully');
+        }
+        $productImages = Trending::orderBy('id','DESC')->get();
+        $title = "Add Images";
+        return view('admin.trending.add_trending_images')->with(compact('title','productImages'));
+    }
+
+    public function deletetrendingImage($id=null){
+        //Get product image name
+        $productImage = Trending::where(['id'=>$id])->first();
+
+        //get image path
+        $large_image_path  = 'images/backend_images/trending/large/';
+        $medium_image_path = 'images/backend_images/trending/medium/';
+        $small_image_path  = 'images/backend_images/trending/small/';
+
+        //delete large image if not exits in folder
+        if(file_exists($large_image_path.$productImage->image)){
+            // echo $large_image_path.$productImage->image; die;
+            unlink($large_image_path.$productImage->image);
+        }
+
+        //delete medium image if not exits in folder
+        if(file_exists($medium_image_path.$productImage->image)){
+            unlink($medium_image_path.$productImage->image);
+        }
+
+        //delete small image if not exits in folder
+        if(file_exists($small_image_path.$productImage->image)){
+            unlink($small_image_path.$productImage->image);
+        }
+
+        //delete image from product table
+        Trending::where(['id'=>$id])->delete();
+        return redirect()->back()->with('flash_message_success','Product Alternate Image has been Deleted');
+    }
     public function addAttributes(Request $request, $pid=null){
         $id = Crypt::decrypt($pid);
         $productDetails = Product::with('attributes')->where(['id'=>$id])->first();
@@ -402,6 +559,7 @@ class ProductsController extends Controller
         return redirect()->back()->with('flash_message_success','Product Alternate Image has been Deleted');
     }
 
+
     public function deleteAttribute($id = null){
         ProductsAttribute::where(['id'=>$id])->delete();
         return redirect()->back()->with('flash_message_success','Attributes has been Deleted Successfully!');
@@ -412,7 +570,6 @@ class ProductsController extends Controller
         $countCategory = Category::where(['url'=>$url])->count();
         if($countCategory == 0 ){
             return view('404');
-            // abort('404');
         }
 
         //Get all categories and sub categories
@@ -424,20 +581,16 @@ class ProductsController extends Controller
             foreach($subCategories as $subcat){
                 $cat_ids[] = $subcat->id;
             }
-            $productsAll = Product::whereIn('products.category_id', $cat_ids)->where(['products.status'=>1,'admin_approved'=>1])->orderBy('products.id','DESC');
+            $products = Product::whereIn('products.category_id', $cat_ids)->where(['products.status'=>1,'admin_approved'=>1])->orderBy('products.id','DESC');
             $breadcrumb = "<a href='../../home'><span class='mdi mdi-home'></span> <strong>Home</strong></a> <span class='mdi mdi-chevron-right'></span> <a class='text-capitalize' href='".$categoryDetails->url."'>".$categoryDetails->name."</a>";
         }else{
             //if url is subcategory url
-            $productsAll = Product::where(['products.category_id'=>$categoryDetails->id])->where('products.status','1')->orderBy('products.id','DESC');
+            $products = Product::where(['products.category_id'=>$categoryDetails->id])->where('products.status','1')->orderBy('products.id','DESC');
             $mainCategory = Category::where('id',$categoryDetails->parent_id)->first();
             $breadcrumb = "<a href='../../home/'><span class='mdi mdi-home'></span> <strong>Home</strong></a> <span class='mdi mdi-chevron-right'></span> <a class='text-capitalize' href='".$mainCategory->url."'>".$mainCategory->name."</a> <span class='mdi mdi-chevron-right'></span> <a class='text-capitalize' href='/products/".$categoryDetails->url."'>".$categoryDetails->name."</a>";
         }
 
-        // if(!empty($_GET['brand'])){
-        //     $brandArray = explode("-",$_GET['brand']);
-        //     $productsAll = $productsAll->whereIn('product_brand',$brandArray);
-        // }
-        $productsAll = $productsAll->paginate(9);
+        $products = $products->paginate(9);
 
         $brandArray = Product::select('product_brand')->groupBy('product_brand')->get();
         $brandArray = Arr::flatten(json_decode(json_encode($brandArray),true));
@@ -446,7 +599,9 @@ class ProductsController extends Controller
         $meta_description = $categoryDetails->meta_description;
         $meta_keywords = $categoryDetails->meta_keywords;
 
-        return view('products.listing')->with(compact('categoryDetails','productsAll','categories','meta_title','meta_description','meta_keywords','breadcrumb','url','brandArray'));
+        
+
+        return view('products.listing')->with(compact('categoryDetails','products','categories','meta_title','meta_description','meta_keywords','breadcrumb','url','brandArray'));
     }
 
     public function categories($url=null){
@@ -501,48 +656,42 @@ class ProductsController extends Controller
     }
 
     public function product($id = null){
+        $id = base64_decode($id);
+        
         $productsCount = Product::where(['id'=>$id, 'status'=>1])->count();
         if($productsCount == 0){
            return view('404'); 
         }
-
-        $productDetails = Product::with('attributes')->where('id',$id)->first();
-        $productDetails = json_decode(json_encode($productDetails));
-        // echo "<pre>"; print_r($productDetails); die;
-        $relatedProducts = Product::where('id','!=',$id)->where(['category_id'=>$productDetails->category_id])->get();
-        // dd($productDetails->category_id);
-
-        // foreach ($relatedProducts->chunk(3) as $chunk) {
-        //     foreach ($chunk as $item) {
-        //         echo $item; echo "<br />";
-        //     }
-        //     echo "<br><br><br>";
-        // }
-
-        //Get categories and Subcategories
+        $product = Product::with('attributes')->where('id',$id)->first();
+        $product = json_decode(json_encode($product));
+        $products = Product::where('id','!=',$id)->where(['category_id'=>$product->category_id])->get();
+       
         $categories = Category::with('categories')->where(['parent_id'=>0])->get();
 
-        $categoryDetails = Category::where('id', $productDetails->category_id)->first();
-        if($categoryDetails->parent_id==0){            
-            $breadcrumb = "<a href='/'><span class='mdi mdi-home'></span> <strong>Home</strong></a> <span class='mdi mdi-chevron-right'></span> <a class='text-capitalize' href='".$categoryDetails->url."'>".$categoryDetails->name."</a><span class='mdi mdi-chevron-right'></span> ".$productDetails->product_name;
-        }else{
-            $mainCategory = Category::where('id',$categoryDetails->parent_id)->first();
-            $breadcrumb = "<a href='/'><span class='mdi mdi-home'></span> <strong>Home</strong></a> <span class='mdi mdi-chevron-right'></span> <a class='text-capitalize' href='/products/".$mainCategory->url."'>".$mainCategory->name."</a> <span class='mdi mdi-chevron-right'></span> <a class='text-capitalize' href='/products/".$categoryDetails->url."'>".$categoryDetails->name."</a> <span class='mdi mdi-chevron-right'></span> ".$productDetails->product_name;
+        $categoryDetails = Category::where('id', $product->category_id)->first();
+        $breadcrumb = "<a href='/'><span class='mdi mdi-home'></span> <strong>Home</strong></a>";
+        if($categoryDetails)
+        {
+            if($categoryDetails->parent_id==0){            
+                $breadcrumb = "<a href='/'><span class='mdi mdi-home'></span> <strong>Home</strong></a> <span class='mdi mdi-chevron-right'></span> <a class='text-capitalize' href='".$categoryDetails->url."'>".$categoryDetails->name."</a><span class='mdi mdi-chevron-right'></span> ".$product->product_name;
+            }else{
+                $mainCategory = Category::where('id',$categoryDetails->parent_id)->first();
+                $breadcrumb = "<a href='/'><span class='mdi mdi-home'></span> <strong>Home</strong></a> <span class='mdi mdi-chevron-right'></span> <a class='text-capitalize' href='/products/".$mainCategory->url."'>".$mainCategory->name."</a> <span class='mdi mdi-chevron-right'></span> <a class='text-capitalize' href='/products/".$categoryDetails->url."'>".$categoryDetails->name."</a> <span class='mdi mdi-chevron-right'></span> ".$product->product_name;
+            }
         }
-        
         if(!empty($mainCategory)){
             $mainCategory = $mainCategory;
         }
 
         //Get Product Alternate images
-        $productAltImages = ProductsImage::where('product_id',$id)->get();
+        $product_imgs = ProductsImage::where('product_id',$id)->get();
         $total_stock = ProductsAttribute::where('product_id',$id)->sum('stock');
-
-        $meta_title = $productDetails->product_name.' | Ibbani Flower';
-        $meta_description = $productDetails->product_name.' | Ibbani Flower';
-        $meta_keywords = $productDetails->product_name.' | Ibbani Flower';
-        return view('products.detail')->with(compact('productDetails','categories','productAltImages','total_stock','relatedProducts','meta_title','meta_description','meta_keywords','breadcrumb'));
-    }
+        $subproduct = Subproduct::where('status',1)->get();
+        $meta_title = $product->product_name.' | Ibbani Flower';
+        $meta_description = $product->product_name.' | Ibbani Flower';
+        $meta_keywords = $product->product_name.' | Ibbani Flower';
+        return view('product-detail')->with(compact('product','subproduct','categories','product_imgs','total_stock','products','meta_title','meta_description','meta_keywords','breadcrumb'));
+}
 
     public function getProductPrice(Request $request){
         $data = $request->all(); 
@@ -555,6 +704,7 @@ class ProductsController extends Controller
     }
 
     public function addtocart(Request $request){
+        dd($request->all());
         $data = $request->all();
         // dd($data);
 
@@ -588,7 +738,7 @@ class ProductsController extends Controller
             }
 
         }else{
-
+           
             //if product added from wishlist
             if(!empty($data['cartButton']) && $data['cartButton']=="Add to Cart"){
                 $data['quantity'] = 1;
@@ -596,11 +746,25 @@ class ProductsController extends Controller
 
             //check product stock available or not
             $product_size = explode("-",$data['size']);
-            $getProductStock = ProductsAttribute::where(['product_id'=>$data['product_id'],'size'=>$product_size[1]])->first();
+            if($data['size'] != "0")
+            {
+                $getProductStock = ProductsAttribute::where(['product_id'=>$data['product_id'],'size'=>$product_size[1]])->first();
+                if($getProductStock->stock<$data['quantity']){
+                    return redirect()->back()->with('flash_message_error','Required quantity is not available!');
+                }
+                $sizeArr = explode("-", $data['size']);
+                $product_size = $sizeArr[1];
+                $getSKU = ProductsAttribute::select('sku')->where(['product_id'=>$data['product_id'],'size'=>$product_size])->first();
+                $sku = $getSKU->sku;
 
-            if($getProductStock->stock<$data['quantity']){
-                return redirect()->back()->with('flash_message_error','Required quantity is not available!');
             }
+            else
+            {
+                $product_size = 0;
+                $sku = "null";
+            }
+            
+            
 
             if(empty(Auth::User()->email)){
                 $data['user_email'] = '';
@@ -614,27 +778,24 @@ class ProductsController extends Controller
                 Session::put('session_id',$session_id);            
             }
 
-            $sizeArr = explode("-", $data['size']);
-            $product_size = $sizeArr[1];
-
+            
+            
             if(empty(Auth::check())){
-                $countProducts = DB::table('cart')->where(['product_id' => $data['product_id'],'product_brand' => $data['product_brand'],'size' => $product_size,'session_id' => $session_id])->count();
+               
+                $countProducts = DB::table('cart')->where(['product_id' => $data['product_id'],'size' => $product_size,'session_id' => $session_id])->count();
                 if($countProducts>0){
-                    return redirect()->back()->with('flash_message_error','Product already added in cart. <a href="../cart"> View Shopping Cart</a>');
+                    return redirect()->back()->with('flash_message_error','Product already added in cart. <a href="/cart"> View Shopping Cart</a>');
                 }
             }else{
-                $countProducts = DB::table('cart')->where(['product_id' => $data['product_id'],'product_brand' => $data['product_brand'],'size' => $product_size,'user_email' => $data['user_email']])->count();
+                
+                $countProducts = DB::table('cart')->where(['product_id' => $data['product_id'],'size' => $product_size,'user_email' => $data['user_email']])->count();
                 if($countProducts>0){
-                    return redirect()->back()->with('flash_message_error','Product already added in cart.<a href="../cart"> View Shopping Cart</a>');
+                    return redirect()->back()->with('flash_message_error','Product already added in cart.<a href="/cart"> View Shopping Cart</a>');
                 }
             }
 
-            $getSKU = ProductsAttribute::select('sku')->where(['product_id'=>$data['product_id'],'size'=>$product_size])->first();
-            // echo $getSKU['sku']; die;
-
-            DB::table('cart')->insert(['product_id' => $data['product_id'],'product_name' => $data['product_name'],'product_code' => $getSKU->sku,'product_brand' => $data['product_brand'],'price' => $data['price'],'size' => $product_size,'quantity' => $data['quantity'],'user_email' => $data['user_email'],'session_id' => $session_id,'email' => $data['email'],'image' => $data['image']]);
-
-            return redirect()->back()->with('flash_message_success','Product added in Cart! <a href="../cart"> View Shopping Cart</a>');
+            DB::table('cart')->insert(['product_id' => $data['product_id'],'product_name' => $data['product_name'],'product_code' => $sku,'price' => $data['price'],'size' => $product_size,'quantity' => $data['quantity'],'user_email' => $data['user_email'],'session_id' => $session_id,'email' => $data['email'],'image' => $data['image']]);
+            return redirect()->back()->with('flash_message_success','Product added in Cart! <a href="/cart"> View Shopping Cart</a>');
         }
     }
 
@@ -649,14 +810,16 @@ class ProductsController extends Controller
             $session_id = Session::get('session_id');
             $userCart = DB::table('cart')->where(['session_id' => $session_id])->get();    
         }
-
+        
         foreach($userCart as $key => $product){
             $productDetails = Product::where('id',$product->product_id)->first();
             $userCart[$key]->image = $productDetails->image;
         }
         // echo "<pre>"; print_r($userCart);
+        
         $meta_title = "Shopping Cart | Ibbani Flower";
-        return view('products.cart')->with(compact('userCart','meta_title'));
+        return view('shopping-cart')->with(compact('userCart','meta_title'));
+        // return view('products.cart')->with(compact('userCart','meta_title'));
     }
 
     public function wishList(Request $request){
@@ -1464,14 +1627,15 @@ class ProductsController extends Controller
     public function checkTimeslot(Request $request){
         if($request->isMethod('post')){
             $data = $request->all();
-            $time_slots = DB::table('shipping_methods')->where('name',$data['slottext'])->get();
+            $time_slots = DB::table('shipping_methods')->where('slot',$data['slottext'])->get();
             return $time_slots;
         }
     }
     public function checkshippingmethod(Request $request){
         if($request->isMethod('post')){
             $data = $request->all();
-            $shipping = DB::table('shipping_methods')->select('name')->groupBy('name')->get();
+            $shipping = DB::table('shipping_methods')->select('slot','price')->groupBy('slot','price')->get();
+          
             return $shipping;
         }
     }
@@ -1507,7 +1671,32 @@ class ProductsController extends Controller
             return redirect()->back()->with('flash_message_success','Product approval status updated successfully.');
         }
     }
-    
+    public function subproductApproved(Request $request, $id = null){
+        if($request->isMethod('post')){
+            $data = $request->all();
+            if(empty($data['status'])){
+                $status='0';
+            }else{
+                $status='1';
+            }
+            Subproduct::where('id',$id)->update(['status'=>$status]);
+            return redirect()->back()->with('flash_message_success','Subproduct approval status updated successfully.');
+        }
+    }
+    public function trendingproductApproved(Request $request, $id = null){
+        if($request->isMethod('post')){
+            $data = $request->all();
+            // echo "<pre>"; print_r($data); die;
+            if(empty($data['status'])){
+                $status='0';
+            }else{
+                $status='1';
+            }
+
+            Trending::where('id',$id)->update(['status'=>$status]);
+            return redirect()->back()->with('flash_message_success','Product approval status updated successfully.');
+        }
+    }
     public function productsNotApproved(){
         // echo session('adminSession'); die;
         $products = Product::orderBy('id','DESC')->where('admin_approved', 0)->get();

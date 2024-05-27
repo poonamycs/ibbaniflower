@@ -1,6 +1,10 @@
 @extends('layouts.adminLayout.admin_design')
 @section('content')
-
+<style>
+  .error{
+			color:red;
+		}
+</style>
 <div id="content">
 
   <div id="content-header">
@@ -28,7 +32,7 @@
             <h5>Edit Details</h5>
           </div>
           <div class="widget-content nopadding">
-            <form enctype="multipart/form-data" class="form-horizontal" method="post" action="{{ url('/admin/edit-contact-details/'.$contactDetails->id) }}" name="edit_banner" id="edit_banner" novalidate="novalidate"> {{ csrf_field() }}
+            <form enctype="multipart/form-data" class="form-horizontal" method="post" id="contcatForm" action="{{ url('/admin/edit-contact-details/'.$contactDetails->id) }}" novalidate="novalidate"> {{ csrf_field() }}
               
               <div class="control-group">
                 <label class="control-label">Address :</label>
@@ -39,7 +43,7 @@
               <div class="control-group">
                 <label class="control-label">Phone :</label>
                 <div class="controls">
-                  <input type="text" name="phone" id="phone" value="{{ $contactDetails->phone }}" style="width: 65%" required>
+                  <input type="text" name="phone" id="phone" value="{{ $contactDetails->phone }}" style="width: 65%" maxlength="10" minlength="10" required>
                 </div>
               </div>
               <div class="control-group">
@@ -63,3 +67,49 @@
 </div>
 
 @endsection
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+	<script src='https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js'></script>
+      
+        <script>
+        
+          $(document).ready(function () {
+            
+            jQuery.validator.addMethod("emailcheck", function(value, element) {
+                return this.optional(element) || /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/i.test(value);
+            }, "Please enter a valid email address.");
+        
+            $("#contcatForm").validate({
+                rules:{
+                    email:{
+                        required:true,
+                        email: true,
+                    },
+                    
+                    phone:{
+                        required:true,
+                        number:true,
+                    },
+                   
+                },
+                messages:{
+                    email:{ 
+                        email: "Please enter valid email",
+                        required: "Please enter your email",
+                    },
+                   
+                    phone:{ 
+                        required: "Please enter your name",
+                        number: "Please enter numbers only",
+                    },     
+                },
+               highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                    // $(element).removeClass("error");
+                },
+                submitHandler: function(form) {
+                    // $("#contcatForm").attr("disabled", true);
+                    form.submit();
+                }
+            });
+        });
+        </script>

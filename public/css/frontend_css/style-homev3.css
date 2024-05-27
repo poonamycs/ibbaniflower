@@ -831,7 +831,7 @@ input[type=number]::-webkit-inner-spin-button {
       color: black; }
   .modal-content .detail .add-cart .btn-add-cart {
     display: inline-block;
-    font-family: Abril Fatface;
+    font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-size: 24px;
     color: black;
@@ -1549,7 +1549,7 @@ header {
       header .icon-menu .cart-menu .dropdown-menu #div-cart-menu {
         display: inline-flex; }
       header .icon-menu .cart-menu .dropdown-menu a {
-        font-family: Abril Fatface;
+        font-family: "Poppins", sans-serif;
         font-weight: 400;
         font-size: 18px;
         color: black;
@@ -1629,7 +1629,7 @@ header {
   left: 15%;
   padding-bottom: 255px; }
   .slide1 .carousel-caption h1, .slide2 .carousel-caption h1 {
-    font-family: Abril Fatface;
+    font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-size: 108px;
     color: black;
@@ -1648,7 +1648,7 @@ header {
     color: black;
     margin-bottom: 0; }
   .slide1 .carousel-caption a, .slide2 .carousel-caption a {
-    font-family: Abril Fatface;
+    font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-size: 18px;
     color: black;
@@ -1705,7 +1705,7 @@ header {
       top: 96px;
       text-align: left; }
       .show-img .show-item .show-title-1 h1, .show-img .show-item .show-title-2 h1 {
-        font-family: Abril Fatface;
+        font-family: "Poppins", sans-serif;
         font-weight: 400;
         font-size: 55px;
         color: black; }
@@ -1717,7 +1717,7 @@ header {
         color: #888888;
         padding-bottom: 40px; }
       .show-img .show-item .show-title-1 a, .show-img .show-item .show-title-2 a {
-        font-family: Abril Fatface;
+        font-family: "Poppins", sans-serif;
         font-weight: 400;
         font-size: 18px;
         color: black;
@@ -1879,7 +1879,7 @@ header {
   text-align: center;
   position: relative; }
   .category h1 {
-    font-family: Abril Fatface;
+    font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-size: 55px;
     color: black; }
@@ -2071,7 +2071,7 @@ header {
   background: #dbe7e9;
   margin-top: 80px; }
   .count h1 {
-    font-family: Abril Fatface;
+    font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-size: 55px;
     color: black;
@@ -2232,7 +2232,7 @@ header {
 .blog {
   padding-bottom: 15px; }
   .blog h1 {
-    font-family: Abril Fatface;
+    font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-size: 60px;
     color: black;
@@ -2253,7 +2253,7 @@ header {
     transition: all .5s ease-in-out;
     padding-top: 15px; }
   .blog .product-blog h2 a {
-    font-family: Abril Fatface;
+    font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-size: 24px;
     color: black;
@@ -2292,13 +2292,13 @@ header {
           padding-right: 5px; }
 
 .feedback h1 {
-  font-family: Abril Fatface;
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-size: 60px;
   color: black;
   text-align: center; }
 .feedback h2 {
-  font-family: Abril Fatface;
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-size: 200px;
   color: black;
@@ -2369,7 +2369,7 @@ header {
 .info-footer {
   padding-bottom: 150px; }
   .info-footer h3 {
-    font-family: Abril Fatface;
+    font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-size: 18px;
     color: black;
@@ -2442,7 +2442,7 @@ header {
     .info-footer .social a:hover {
       opacity: 1; }
   .info-footer .social h1 {
-    font-family: Abril Fatface;
+    font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-size: 30px;
     color: black;

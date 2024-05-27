@@ -7,10 +7,12 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\BannersController;
 use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\CmsController;
 use App\Http\Controllers\BlogsController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\TestimonialsController;
 /*
 |--------------------------------------------------------------------------
@@ -55,15 +57,6 @@ Route::get('/product/{id}','ProductsController@product');
 
 //Admin forgot password
 Route::match(['get','post'],'admin/forgot-password/','AdminController@forgotPassword');
-
-//get product attribute price
-Route::get('/get-product-price','ProductsController@getProductPrice');
-
-//Add to cart
-Route::match(['get','post'],'/add-cart/','ProductsController@addtocart');
-
-// Cart Page
-Route::match(['get','post'],'/cart/','ProductsController@cart');
 
 // Delete Cart Product
 Route::get('/cart/delete-product/{id}','ProductsController@deleteCartProduct');
@@ -162,7 +155,8 @@ Route::match(['get','post'],'/page/{url}','CmsController@cmsPage');
 
 // used
 
-Route::get('/shopping-cart', [HomeController::class, 'shopping_cart']);
+Route::get('/cart', [ProductsController::class, 'cart']);
+// Route::get('/corporate', [HomeController::class, 'corporate']);
 Route::get('/page404', [HomeController::class, 'pagenotfound']);
 Route::get('/checkout', [HomeController::class, 'checkout']);
 Route::get('/faq', [HomeController::class, 'faq']);
@@ -170,21 +164,31 @@ Route::get('/order', [HomeController::class, 'order']);
 Route::get('/home1', [HomeController::class, 'home1']);
 
 Route::get('/about', [HomeController::class, 'about']);
+Route::get('/trending', [HomeController::class, 'trending']);
 Route::get('/contact', [HomeController::class, 'contact']);
 Route::post('/contact-form',[HomeController::class, 'contact_form']);
 Route::get('/blog', [HomeController::class, 'blog']);
-Route::get('/product-list', [HomeController::class, 'product_list']);
+Route::get('/gallery', [HomeController::class, 'gallery']);
+Route::get('/corporate/decoration', [HomeController::class, 'corporate_decoration']);
+Route::get('/category/{slug?}', [HomeController::class, 'products']);
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/singel-detail/{id?}', [HomeController::class, 'singel_detail']);
+Route::get('/product/{id?}/{slug?}', [ProductsController::class, 'product']);
 Route::match(['get','post'],'user-login/',[UsersController::class, 'login']);
 Route::match(['get','post'],'user-register/',[UsersController::class, 'register']);
 //Admin login
 Route::match(['get','post'],'/admin',[AdminController::class, 'login']);
 
+//Add to cart
+Route::match(['get','post'],'/add-cart/',[ProductsController::class, 'addtocart']);
+
 // Check Pincode
 Route::post('/check-pincode/',[ProductsController::class, 'checkPincode']);
 Route::post('/check-time-slot/',[ProductsController::class, 'checkTimeslot']);
 Route::post('/check-shipping-method/',[ProductsController::class, 'checkShippingmethod']);
+
+//get product attribute price
+Route::get('/get-product-price',[ProductsController::class, 'getProductPrice']);
+
 
 // Auth::routes(['verify'=>true]);
 Auth::routes();
@@ -209,6 +213,22 @@ Route::group(['middleware' => ['adminlogin']],function(){
 	Route::match(['get','post'],'/admin/delete-category/{id}',[CategoryController::class, 'deleteCategory']);
 	Route::get('/admin/view-categories',[CategoryController::class, 'viewCategories']);
 
+	//gallery
+	Route::match(['get','post'],'/admin/album-type',[GalleryController::class, 'editAlbumtype']);
+	Route::match(['get','post'], '/admin/add-gallery-images',[GalleryController::class, 'addImages']);
+	Route::match(['get','post'],'/admin/delete-gallery-image/{id}',[GalleryController::class, 'deleteAltImage']);
+
+	//corporate
+	Route::match(['get','post'],'/admin/corporate-category',[GalleryController::class, 'editcorporatecategory']);
+	Route::match(['get','post'], '/admin/add-corporate-images',[GalleryController::class, 'addcorporateimage']);
+	Route::match(['get','post'],'/admin/delete-corporate-image/{id}',[GalleryController::class, 'deletecorporateimage']);
+
+	// brand
+	Route::match(['get','post'],'/admin/add-brand',[BrandController::class, 'addBrand']);
+	Route::match(['get','post'],'/admin/edit-brand/{id}',[BrandController::class, 'editBrand']);
+	Route::match(['get','post'],'/admin/delete-brand/{id}',[BrandController::class, 'deleteBrand']);
+	Route::get('/admin/view-brands',[BrandController::class, 'viewBrands']);
+	
 	// Products Routes (Admin)
 	Route::match(['get','post'],'/admin/add-product',[ProductsController::class, 'addProduct']);
 	Route::match(['get','post'],'/admin/delete-product-image/{id}',[ProductsController::class, 'deleteProductImage']);
@@ -222,9 +242,24 @@ Route::group(['middleware' => ['adminlogin']],function(){
 	// export products
 	Route::get('/admin/export-products/','ProductsController@exportProducts');
 
+	//subproduct
+	Route::match(['get','post'],'/admin/add-sub-product',[ProductsController::class, 'addsubProduct']);
+	Route::get('/admin/view-all-sub-products',[ProductsController::class, 'viewSubProducts']);
+	Route::match(['get','post'],'admin/subproduct-approved/{id}',[ProductsController::class, 'subproductApproved']);
+	Route::get('/admin/delete-subproduct/{pid}',[ProductsController::class, 'deletesubproduct']);
+
+	// trending
+	// Route::match(['get','post'],'/admin/add-trending-product',[ProductsController::class, 'addtrendingProduct']);
+	// Route::get('/admin/view-trending-products',[ProductsController::class, 'viewtrendingProducts']);
+	Route::match(['get','post'], '/admin/add-trending-product',[ProductsController::class, 'addtrendingImages']);
+	// Route::match(['get','post'],'/admin/delete-trending-product',[ProductsController::class, 'deletetrendingImage']);
+	Route::match(['get','post'],'admin/trending-product-approved/{id}',[ProductsController::class, 'trendingproductApproved']);
+	Route::match(['get','post'],'/admin/delete-trending-image/{id}',[ProductsController::class, 'deletetrendingImage']);
+	
+
 	// Products Attributes and images (Admin)
-	Route::match(['get','post'],'admin/add-attributes/{pid}','ProductsController@addAttributes');
-	Route::match(['get','post'],'admin/edit-attributes/{pid}','ProductsController@editAttributes');
+	Route::match(['get','post'],'admin/add-attributes/{pid}',[ProductsController::class, 'addAttributes']);
+	Route::match(['get','post'],'admin/edit-attributes/{pid}',[ProductsController::class, 'editAttributes']);
 	Route::match(['get','post'], '/admin/add-images/{pid}',[ProductsController::class, 'addImages']);
 	Route::match(['get','post'],'/admin/delete-alt-image/{id}',[ProductsController::class, 'deleteAltImage']);
 	Route::match(['get','post'],'/admin/delete-attributes/{id}',[ProductsController::class, 'deleteAttribute']);
@@ -330,6 +365,10 @@ Route::group(['middleware' => ['adminlogin']],function(){
 	Route::match(['get','post'],'admin/chart','ProductsController@charts');
 	Route::match(['get','post'],'admin/contact-details/',[CmsController::class, 'contactDetails']);
 	Route::match(['get','post'],'admin/edit-contact-details/{id}',[CmsController::class, 'editcontactDetails']);
+
+	// menu
+	Route::match(['get','post'],'admin/menu/',[CmsController::class, 'menu']);
+	Route::match(['get','post'],'admin/edit-menu/{id}',[CmsController::class, 'editmenu']);
 });
 
 Route::get('/logout','AdminController@logout');

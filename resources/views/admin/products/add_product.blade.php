@@ -48,12 +48,12 @@
                   <input type="text" name="product_code" id="product_code" class="span7">
                 </div>
               </div>
-              <div class="control-group">
+              <!-- <div class="control-group">
                 <label class="control-label">Product Brand : </label>
                 <div class="controls">
                   <input type="text" name="product_brand" id="product_brand" class="span7">
                 </div>
-              </div>
+              </div> -->
               <div class="control-group">
                 <label class="control-label">Description : </label>
                 <div class="controls">
@@ -91,13 +91,13 @@
                   <input type="file" name="image" id="image">
                 </div>
               </div>
-              <div class="control-group">
+              <!-- <div class="control-group">
                 <label class="control-label">Seasonal Product : </label>
                 <div class="controls">
                   <input type="checkbox" name="featured" id="featured" value="1">
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="alert alert-info">Mark this product as seasonal product.</span>
                 </div>
-              </div>
+              </div> -->
               <div class="control-group">
                 <label class="control-label">Publish / Enable : </label>
                 <div class="controls">

@@ -8,7 +8,7 @@
 	<div class="container">
 		<table>
 			<tr><td>&nbsp;</td></tr>
-			<tr><td>Hello Admin!</td></tr>
+			<tr><td>Hello {{ $name }}!</td></tr>
 			<tr><td>&nbsp;</td></tr>
 			<tr><td>Customer Enquiry Details are as below :</td></tr>
 			<tr><td>&nbsp;</td></tr>
@@ -24,14 +24,6 @@
 		    <tr>
 		      <th scope="row">Email -</th>
 		      <td>{{ $email }}</td>
-		    </tr>
-		    <tr>
-		      <th scope="row">Phone No. -</th>
-		      <td>{{ $mobile }}</td>
-		    </tr>
-		    <tr>
-		      <th scope="row">Subject -</th>
-		      <td>{{ $subject }}</td>
 		    </tr>
 		    <tr>
 		      <th scope="row">Message -</th>

@@ -8,6 +8,7 @@ use Session;
 use App\Models\CmsPage;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Contact;
+use App\Models\Blog;
 use App\Models\ContactDetail;
 use App\Models\Category;
 
@@ -97,5 +98,16 @@ class CmsController extends Controller
             return redirect()->back()->with('flash_message_success','Contact Details Updated.');
         }
     }
-
+    public function menu(Request $request){
+        $menu = Blog::where('name',"menu")->first();
+        return view('admin.menu')->with(compact('menu'));
+    }
+    public function editmenu(Request $request, $id){
+        if($request->isMethod('post')){
+            $data = $request->all();
+            
+            Blog::where('id',$id)->update(['name'=>"menu",'content'=>$data['menu_name']]);
+            return redirect()->back()->with('flash_message_success','Menu Updated Successfully.');
+        }
+    }
 }

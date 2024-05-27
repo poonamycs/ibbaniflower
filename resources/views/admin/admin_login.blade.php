@@ -2,7 +2,7 @@
 <html lang="en">
     
 <head>
-    <title>Admin Panel - Grocery Shop </title><meta charset="UTF-8" />
+    <title>Admin Panel - Flower Shop </title><meta charset="UTF-8" />
     <link rel="shortcut icon" type="image/png" href="{{ asset('images/frontend_images/favicon.png') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="{{asset('css/backend_css/bootstrap.min.css')}}" />

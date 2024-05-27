@@ -473,6 +473,23 @@ $(document).ready(function(){
         });
     });
 
+	// delete Brand sweetalert
+	$(document).on('click','.deleteBrand',function(e){
+        var id = $(this).attr('rel');
+        var deleteFunction = $(this).attr('rel1');
+        swal({
+          title: "Are you sure?",
+          text: "Want to delete this brand",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-danger",
+          confirmButtonText: "Yes, Delete it!",
+        },
+        function(){
+            window.location.href="/admin/"+deleteFunction+"/"+id;
+        });
+    });
+
 	// delete stock category sweetalert
 	$(document).on('click','.deleteStockCategory',function(e){
         var id = $(this).attr('rel');
@@ -492,6 +509,23 @@ $(document).ready(function(){
 
 	// delete product sweetalert
 	$(document).on('click','.deleteProduct',function(e){
+        var id = $(this).attr('rel');
+        var deleteFunction = $(this).attr('rel1');
+        swal({
+          title: "Are you sure?",
+          text: "You will not be able to recover this record again!",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-danger",
+          confirmButtonText: "Yes, Delete it!",
+        },
+        function(){
+            window.location.href="/admin/"+deleteFunction+"/"+id;
+        });
+    });
+
+	// delete subproduct sweetalert
+	$(document).on('click','.deletesubproduct',function(e){
         var id = $(this).attr('rel');
         var deleteFunction = $(this).attr('rel1');
         swal({

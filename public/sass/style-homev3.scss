@@ -122,7 +122,7 @@ header{
 	top: 30px;color: white;}
 	li{
 	.fa-user{font-size:22px;padding-right:30px;color:black;}
-	img{padding-right:15px;&#search-img{}}
+	img{padding-right:15px;}
 	a{&:hover{background-color:unset;}&:focus{background-color:unset;}}
 	&#input-search{
 		position:relative;
@@ -212,7 +212,7 @@ header{
 	}
 }
 .show-img{padding-bottom: 70px;
-	img{&:hover{;}transition:all .35s ease;}
+	img{transition:all .35s ease;}
 	.show-item{position:relative;padding-bottom: 30px;display: inline-block;
 		.show-title-1{position: absolute;right: 65px;top: 96px;text-align: left;
 			h1{@include font-face(Abril Fatface,55px,400);}
@@ -452,7 +452,7 @@ header{
 	}
 }
 footer{background: #f4f4f4;padding-bottom: 22px;
-	.logo-bot{display:inline-block;@include background-image("/images/frontend_images/logo.webp",0 -46px,33px);width:104px;margin-top: 40px;}
+	.logo-bot{display:inline-block;@include background-image("img/logo.png",0 -46px,33px);width:104px;margin-top: 40px;}
 	span{
 	display:inline-block;@include font-face(Poppins,14px,300);padding-top:40px;&#gmail-footer{a{font-weight:400;font-size:13px;color:black;&:hover{text-decoration:none;color:pink;}}
 	padding-top:45px;}}

@@ -1,4 +1,4 @@
-@extends('front.layouts.design')
+@extends('layouts.frontLayout.design')
 @section('content')
 <main>
 	<div class="content-search">
@@ -16,7 +16,7 @@
 </div>
 	<div class="banner">
 		<div class="container">
-			<figure id="banner-about"><a href="#"><img src="{{ asset('/images/frontend_images/1350x500.png') }}" class="img-responsive" alt="img-holiwood"></a></figure>
+			<figure id="banner-about"><a href="#"><img src="img/1350x500.png" class="img-responsive" alt="img-holiwood"></a></figure>
 		<div class="title-banner">
 			<h1>Checkout</h1>
 			<p><a href="#" title="Home">Home</a><i class="fa fa-caret-right"></i>Checkout</p>
@@ -192,7 +192,4 @@
                 <!-- End container -->
             </div>
             <!-- End cat-box-container -->
-
-            <link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-checkout.css') }}">
-
 @endsection

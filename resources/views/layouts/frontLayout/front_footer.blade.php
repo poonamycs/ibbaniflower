@@ -1,64 +1,60 @@
+<style>
+	footer{
+		background-position: -288px -410px;
+		height: 310px;
+	}
+</style>
 <footer>
 <div class="container">
 	<div class="row">
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 info-footer">
-			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 info-footer" style="padding-top:50px">
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
 				<h3>About</h3>
 				<ul>
-					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">News & Stories</a></li>
-					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">History</a> </li>
-					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">Our Studio</a></li>
-					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">Shop</a></li>
-					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">Stockists</a></li>
-				</ul>
-			</div>
-			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-				<h3>Customer sevices</h3>
-				<ul>
-					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">Contact Us</a></li>
-					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">Trade Services</a></li>
-					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">Login/Register</a></li>
-					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">Delivery & Returns</a></li>
-					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">FAQs</a></li>
-				</ul>
-			</div>
-			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-				<h3>Store</h3>
-				<ul>
-					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">Shop</a></li>
-					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">Wedding</a></li>
-					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">Holiday</a></li>
+					<li><i class="fas fa-long-arrow-alt-right"></i><a href="{{ url('/about') }}">About</a></li>
+					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">Privacy Policy</a></li>
+					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">Terms & Conditions</a></li>
 					
 				</ul>
 			</div>
-			<div class="social-text"><span id="text-connect">CONNECT WITH US:</span>
-				<span class="social"><a href="#" id="instar"></a><a href="#" id="fb"></a><a href="#" id="tw"></a><a href="#" id="sky"></a></span>
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+				<h3>Store</h3>
+				<ul>
+					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">Wedding</a></li>
+					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">Decoration Services</a></li>
+					
+				</ul>
 			</div>
-		</div>
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 new-letter">
-			<div class="form-new">
-				<h1>Newsletter</h1>
-			<p>Sign up for our mailing list to get lastest updates and offers</p>
-			<form class="form-group">
-				<input type="text" name="input-mail" placeholder="Your mail here" class="form-control input-lg">
-				<button type="submit">Subscribe</button>
-			</form>
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+				<h3>Customer sevices</h3>
+				<ul>
+					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">Contact Us</a></li>
+					<li><i class="fas fa-long-arrow-alt-right"></i><a href="#">Login/Register</a></li>
+				</ul>
 			</div>
-			
+			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+			<div class="social-text"><h3>Connect With Us:</h3>
+				<ul>
+					<li><a href="#">ibbaniflowers@gmail.com</a></li>
+					<li><a href="#">+91 9980567415</a></li>
+					<li>
+						<span class="social" style="padding-top:0px"><a href="https://instagram.com/ibbaniflowers" id="instar"></a><a href=" https://www.facebook.com/ibbaniflowers" id="fb"></a>
+					</li>
+				</ul>
+				
+			</div></div>
 		</div>
 	</div>
 </div>
 <div class="footer-logo">
 	<div class="row footer-row">
-		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-			<a href="#"><img src="{{ asset('/images/frontend_images/logo.png') }}" style="height:100px;width:100px;padding-top:10px"/></a>
+		
+		<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 cop" style="text-align: center;margin-left: 26px;">
+			<span>Copyright</span>&nbsp;<i class="far fa-copyright"></i>&nbsp;<span>2024 All rights reserved by IBBANI FLOWERS, Design and Developed by <a href="https://ycstech.in/">YCS Techsoft Pvt. Ltd.</span>
 		</div>
-		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 cop">
-			<span>Copyright</span><i class="far fa-copyright"></i><span>2018 by EngoTheme</span>
-		</div>
-		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+		<!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 			<span id="gmail-footer"><a href="#">ibbaniflowers@gmail.com</a></span>
-		</div>
+		</div> -->
 	</div>
 </div>
 <div class="hidden-lg hidden-md back-to-top fade"><i class="fas fa-caret-up"></i></div>

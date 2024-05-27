@@ -45,10 +45,11 @@
 }
 .justify-content-lg-center {
     justify-content: center !important;
-	.container{
+	/* .container{
 		max-width: 1320px;
-	}
+	} */
 }
+
 .position-relative {
     position: relative !important;
 }
@@ -116,6 +117,38 @@
 	{
 		border: 2px solid #7bb8e5;
 	}
+@media (max-width: 625px) {
+	.mobile-screen {
+    flex-direction: column;
+    align-items: center;
+}
+.rosetd-div {
+	display: none;
+	/* bottom: 0px; */
+	/* top: 0px !important; */
+	/* margin-top: 12px; */
+	bottom: unset;
+        /* top: 35px; */
+        margin-top: 16px;
+        margin-left: 90px;
+}
+.leftd-div {
+	display: none;
+	
+}
+.who .h2 {
+        top: 100px;
+    }
+.who p {
+top: 155px;
+}
+.brand_container{
+    display:none;
+}
+.count{
+    display:none;
+}
+}
 </style>
 <main>
 <div class="content-search">
@@ -139,7 +172,6 @@
 <li data-target="#myCarousel" data-slide-to="2"></li>
 </ol>
 
-
 <div class="carousel-inner">
 @foreach($banners as $key => $banner)
 <div class="item {{$key == 0 ? 'active' : '' }} slide-1">
@@ -147,8 +179,8 @@
 	<div class="carousel-caption">
       <h3>EXPLORE THE</h3>
       <h1>New Arrivals</h1>
-      <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p>
-      <a href="#">Shop now</a>
+      <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout</p><br/>
+      <a href="#" class="a-mannul">Shop now</a>
     </div>
 </div>
 
@@ -182,25 +214,27 @@
 </div>
 </div>
 
-	<section class="sections-shpping01 d-inline-block w-100">
+	<!-- <section class="sections-shpping01 d-inline-block w-100 hidden-sm hidden-xs"> -->
+	<section class="sections-shpping01 w-100 d-inline-block hidden-sm hidden-xs">
        <div class="container position-relative">
+          <!-- <div class="inside-flowers d-inline-block w-100"> -->
           <div class="inside-flowers d-inline-block w-100">
-              <div class="row row-cols-1 row-cols-md-3 gy-5 g-lg-5">
+              <div class="row row-cols-1 row-cols-md-3 gy-5 g-lg-5 mobile-screen">
                 <div class="col position-relative d-grid justify-content-lg-center">
                     <div class="comon-sert d-flex align-items-center w-100">
                         <div class="c-icon">
-                           <img class="img1" alt="ser" src="{{ asset('/images/frontend_images/2058414.png') }}">
+                           <img class="img1" alt="ser" src="{{ asset('/images/frontend_images/shipping.png') }}">
                         </div>
                         <div class="cd-text-div">
                            <h5> Free shipping </h5>
-                           <p> There are many variations $30</p>
+                           <p> There are many variations &#8377;30</p>
                         </div>
                     </div>
                 </div>
                 <div class="col position-relative d-grid justify-content-lg-center">
                   <div class="comon-sert d-flex align-items-center w-100">
                       <div class="c-icon">
-                         <img class="img1" alt="ser" src="{{ asset('/images/frontend_images/1261038.png') }}">
+                         <img class="img1" alt="ser" src="{{ asset('/images/frontend_images/ecofriendly.png') }}">
                       </div>
                       <div class="cd-text-div">
                          <h5> Secure checkout </h5>
@@ -235,8 +269,8 @@
 <div class="gallery clearfix">
 	<figure>
 <img src="{{ asset('/images/frontend_images/second_banner.png') }}" alt="img-holiwood">
-<h1>who we are ?</h1>
-<h1 class="h2">who we are ?</h1>
+<h1>Who we are ?</h1>
+<h1 class="h2">Who we are ?</h1>
   
 
 <p>IBBANI FLOWERS, located in the bustling neighborhood of Bellandur, Bangalore, stands as a beacon of sustainability in floral retail.<br class="hidden-md hidden-sm hidden-xs">
@@ -259,9 +293,9 @@ making it a cornerstone for environmental stewardship in the region.</p>
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 banner-collec">
 
 		<img src="{{ asset('/images/frontend_images/third_banner.png') }}" class="img-responsive" alt="img-holiwood">
-		<h3>HELLO SUMMER</h3>
+		<h3>Hello Summer</h3>
 		<h1>Sale 10%</h1>
-		<a href="#">Shop now</a>
+		<a href="#" class="a-mannul" style="background-color: transparent;">Shop now</a>
 	</div>
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 		@foreach($categories as $category)
@@ -276,7 +310,7 @@ making it a cornerstone for environmental stewardship in the region.</p>
 			</div>
 			<div class="product-title-collec">
 				<h5><a href="#"> {{ $category->name }}</a></h5>
-				<div class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
+				<!-- <div class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div> -->
 				<!-- <div class="prince">Rs{{ $category->price }}</div> -->
 			</div>
 		</div>
@@ -345,7 +379,9 @@ making it a cornerstone for environmental stewardship in the region.</p>
 			@foreach($products as $product)
 				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 product-wedding">
 					<div class="product-image-wedding">
-						<figure class="sale"><a href="#"><img src="{{ url('/images/backend_images/products/medium/'.$product->image) }}" class="img-responsive" alt="img-holiwood"></a></figure>
+						<!-- <figure class="sale"> -->
+							<a href="#"><img src="{{ url('/images/backend_images/products/medium/'.$product->image) }}" class="img-responsive" alt="img-holiwood"></a>
+						<!-- </figure> -->
 							<div class="product-icon-wedding">
 								<a href="#"><i class="far fa-eye"></i></a>
 								<a href="#"><i class="fas fa-shopping-basket"></i></a>
@@ -354,7 +390,7 @@ making it a cornerstone for environmental stewardship in the region.</p>
 					</div>
 					<div class="product-title-wedding">
 							<h5><a href="#">{{$product->product_name}}</a></h5>
-							<div class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+							<!-- <div class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div> -->
 							<div class="prince">&#8377;&nbsp;{{$product->price}}<s class="strike">&#8377;{{$product->discount}}</s></div>
 					</div>
 				</div>
@@ -433,7 +469,7 @@ making it a cornerstone for environmental stewardship in the region.</p>
 				</div>
 				<div class="product-title-holiday">
 						<h5><a href="#">{{ $product->product_name }}</a></h5>
-						<div class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
+						<!-- <div class="star"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div> -->
 						<div class="prince">&#8377;&nbsp;{{$product->price}}</div>
 				</div>
 			</div>
@@ -492,7 +528,7 @@ making it a cornerstone for environmental stewardship in the region.</p>
 		<div class="title-holiday">
 			<h1>Nature's Essence</h1>
 			<p>Indulge in a floral delight that whispers elegance and captures nature's beauty in every petal.</p>
-			<span id="sale30">-30</span><span id="pt">%</span><br><span id="off">OFF</span>
+			<!-- <span id="sale30">-30</span><span id="pt">%</span><br><span id="off">OFF</span> -->
 		</div>
 		
 	</div>
@@ -502,7 +538,7 @@ making it a cornerstone for environmental stewardship in the region.</p>
 
 </div>
 </div>
-<div class="count">
+<!-- <div class="count">
 <div class="img-count">
 	<img src="{{ asset('/images/frontend_images/counter.png') }}" alt="img-holiwood">
 </div>
@@ -522,8 +558,8 @@ making it a cornerstone for environmental stewardship in the region.</p>
 </div>
 
 
-</div>
-<div class="brand container">
+</div> -->
+<!-- <div class="brand container brand_container">
 <div class="row">
 	<div class="brand-1 col-lg-2 col-md-2 col-sm-2 col-xs-4"></div>
 	<div class="brand-2 col-lg-2 col-md-2 col-sm-2 col-xs-4"></div>
@@ -533,7 +569,7 @@ making it a cornerstone for environmental stewardship in the region.</p>
 	<div class="brand-6 col-lg-2 col-md-2 col-sm-2 col-xs-4"></div>
 </div>
 
-</div>
+</div> -->
 <div class="container blog">
 <h1>Latest Blogs</h1>
 <p>- Discovere the wide range of topics<span class="hidden-xs"> and blogs</span> here -</p>

@@ -1,7 +1,9 @@
 <?php
     use App\Models\User;
     use App\Models\Product;
+    use App\Models\Subproduct;
     use App\Models\Order;
+    use App\Models\Brand;
     use App\Models\Banner;
     use App\Models\OfferBanner;
     use App\Models\Category;
@@ -17,6 +19,7 @@
 
     $users = User::count();
     $products = Product::count();
+    $subproducts = Subproduct::count();
     $blog = Blog::count();
 
     $items = StockItem::count();
@@ -32,6 +35,7 @@
     $banners = Banner::count();
     $offerBanners = OfferBanner::count();
     $categories = Category::count();
+    $brands = Brand::count();
     $contacts = Contact::count();
     $cmspages = CmsPage::count();
     $vendors = Admin::where('vname','<>','Superadmin')->count();
@@ -53,12 +57,14 @@
                 <!-- <li <?php if(preg_match("/add-banner/i", $url)){ ?> class="active" <?php } ?>><a href="{{url('/admin/add-banner')}}"><i class="fa fa-arrow-right"></i> Add Banner</a></li> -->
                 <li <?php if(preg_match("/view-banners/i", $url)){ ?> class="active" <?php } ?>><a href="{{url('/admin/view-banners')}}"><i class="fa fa-arrow-right"></i> View Banners <span class="count label label-important"> {{ $banners }} </span></a> </li>
                 <!-- <li <?php if(preg_match("/add-offer-banner/i", $url)){ ?> class="active" <?php } ?>><a href="{{url('/admin/add-offer-banner')}}"><i class="fa fa-arrow-right"></i> Add Offer Banner</a></li> -->
-                <li <?php if(preg_match("/view-offer-banners/i", $url)){ ?> class="active" <?php } ?>><a href="{{url('/admin/view-offer-banners')}}"><i class="fa fa-arrow-right"></i> Weekly Basket Banners <span class="count label label-important"> {{ $offerBanners }} </span></a></li>
+                <!-- <li <?php if(preg_match("/view-offer-banners/i", $url)){ ?> class="active" <?php } ?>><a href="{{url('/admin/view-offer-banners')}}"><i class="fa fa-arrow-right"></i> Weekly Basket Banners <span class="count label label-important"> {{ $offerBanners }} </span></a></li> -->
                 <!-- <li <?php if(preg_match("/offer-popup-banner/i", $url)){ ?> class="active" <?php } ?>><a href="{{url('/admin/offer-popup-banner')}}"><i class="fa fa-arrow-right"></i> Offer popup Banner</a></li> -->
             </ul>
         </li>
         @endif
-
+        @if($auth->vname == 'Superadmin')
+        <li <?php if(preg_match("/menu/i", $url)){ ?> class="active" <?php } ?>> <a href="{{ url('admin/menu/') }}"><i class="fa fa-address-card"></i> <span>Menu</span> </a></li>
+        @endif
         @if($auth->vname == 'Superadmin')
         <li class="submenu"> <a href="#"><i class="fa fa-filter"></i> <span>Categories</span> <span class="label label-important"> {{ $categories }} </span></a>
             <ul <?php if(preg_match("/category/i", $url)){ ?> style="display: block;" <?php } ?>>
@@ -78,7 +84,22 @@
             </ul>
         </li>
         @endif
-
+        @if($auth->vname == 'Superadmin')
+        <li class="submenu"> <a href="#"><i class="fa fa-list-alt"></i> <span>Sub Products</span> <span class="label label-important"> {{ $subproducts }} </span></a>
+            <ul <?php if(preg_match("/subproduct/i", $url)){ ?> style="display: block;" <?php } ?>>
+                <li <?php if(preg_match("/add-sub-product/i", $url)){ ?> class="active" <?php } ?>><a href="{{url('/admin/add-sub-product')}}"><i class="fa fa-arrow-right"></i> Add Sub Product</a></li>
+               <li <?php if(preg_match("/view-all-sub-products/i", $url)){ ?> class="active" <?php } ?>><a href="{{url('/admin/view-all-sub-products')}}"><i class="fa fa-arrow-right"></i> View All Products</a></li>
+            </ul>
+        </li>
+        @endif
+        @if($auth->vname == 'Superadmin')
+        <li class="submenu"> <a href="#"><i class="fa fa-list-alt"></i> <span>Trending</span></a>
+            <ul <?php if(preg_match("/trending/i", $url)){ ?> style="display: block;" <?php } ?>>
+                <li <?php if(preg_match("/add-trending-product/i", $url)){ ?> class="active" <?php } ?>><a href="{{url('/admin/add-trending-product')}}"><i class="fa fa-arrow-right"></i> Add Trending Product</a></li>
+                <!-- <li <?php if(preg_match("/view-trending-products/i", $url)){ ?> class="active" <?php } ?>><a href="{{url('/admin/view-trending-products')}}"><i class="fa fa-arrow-right"></i> View Trending Products</a></li> -->
+            </ul>
+        </li>
+        @endif
         @if($auth->vname == 'Superadmin')
         <li class="submenu"><a href="#"><i class="fa fa-bell"></i> <span>Orders</span><span class="label label-important"> <?php echo $all_orders ?> </span> </a>
             <ul <?php if(preg_match("/orders/i", $url)){ ?> style="display: block;" <?php } ?>>
@@ -109,7 +130,30 @@
             </ul>
         </li>
         @endif
-
+        @if($auth->vname == 'Superadmin')
+        <li class="submenu"> <a href="#"><i class="fa fa-filter"></i> <span>Gallery</span></a>
+            <ul <?php if(preg_match("/gallery/i", $url)){ ?> style="display: block;" <?php } ?>>
+                <li <?php if(preg_match("/album-type/i", $url)){ ?> class="active" <?php } ?>><a href="{{url('/admin/album-type')}}"><i class="fa fa-arrow-right"></i> View Albums Type</a></li>
+                <li <?php if(preg_match("/add-gallery-images/i", $url)){ ?> class="active" <?php } ?>><a href="{{url('/admin/add-gallery-images')}}"><i class="fa fa-arrow-right"></i> View Albums</a></li>
+            </ul>
+        </li>
+        @endif
+        @if($auth->vname == 'Superadmin')
+        <li class="submenu"> <a href="#"><i class="fa fa-filter"></i> <span>Corporate</span></a>
+            <ul <?php if(preg_match("/corporate/i", $url)){ ?> style="display: block;" <?php } ?>>
+                <li <?php if(preg_match("/corporate-category/i", $url)){ ?> class="active" <?php } ?>><a href="{{url('/admin/corporate-category')}}"><i class="fa fa-arrow-right"></i> View Corporate Category</a></li>
+                <li <?php if(preg_match("/add-corporate-images/i", $url)){ ?> class="active" <?php } ?>><a href="{{url('/admin/add-corporate-images')}}"><i class="fa fa-arrow-right"></i> View Corporate Gallery</a></li>
+            </ul>
+        </li>
+        @endif
+        @if($auth->vname == 'Superadmin')
+        <li class="submenu"> <a href="#"><i class="fa fa-filter"></i> <span>Brands</span> <span class="label label-important"> {{ $brands }} </span></a>
+            <ul <?php if(preg_match("/brand/i", $url)){ ?> style="display: block;" <?php } ?>>
+                <li <?php if(preg_match("/add-brand/i", $url)){ ?> class="active" <?php } ?>><a href="{{url('/admin/add-brand')}}"><i class="fa fa-arrow-right"></i> Add Brand</a></li>
+                <li <?php if(preg_match("/view-brands/i", $url)){ ?> class="active" <?php } ?>><a href="{{url('/admin/view-brands')}}"><i class="fa fa-arrow-right"></i> View Brands</a></li>
+            </ul>
+        </li>
+        @endif
         <!-- vendor -->
 
         @if($auth->vname == 'Superadmin')

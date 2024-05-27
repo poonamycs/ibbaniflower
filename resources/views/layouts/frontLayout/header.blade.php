@@ -1,6 +1,31 @@
+@php 
+	$categories = App\Models\Category::where(['parent_id'=>0])->where('status',1)->get();
+@endphp
+<style>
+	@media (min-width: 1400px) {
+    .container {
+        width: 1400px;
+    }
+}
+.carousel-inner .item img {
+    width: unset;
+}
+.container{
+	margin-top: -30px;
+}
+header .menu-main {
+    padding-top: 0px;
+	li{
+	padding-right: 0px;
+	}
+}
+.navbar-right {
+	padding-top:65px
+}
+</style>
 <header class="container" id="header-v3">
 		<div class="row">
-			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 logo"><a href="{{ url('/') }}"><img src="{{ asset('images/frontend_images/logo.png') }}" alt="img-holiwood" style="height: 121px;width: 140px;"></a></div>
+			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 logo"><a href="{{ url('/') }}"><img src="{{ asset('images/frontend_images/logo.png') }}" alt="img-holiwood" style="width: 100px;"></a></div>
 			<div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 menu-mobile">
 				<div class=" collapse navbar-collapse" id="myNavbar">
 					
@@ -13,46 +38,28 @@
 					<li class="li-home">
 						<a href="{{ url('/') }}">Home</a><figure id="home-1"></figure>
 					</li>
+					<li class="li-home">
+						<a href="{{ url('/trending') }}">Trending</a><figure id="home-1"></figure>
+					</li>
 					<li class="shop-menu dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Flowers</a><figure id="shop-1" class=" hidden-sm hidden-md hidden-xs"></figure>
 						<div class="dropdown-menu">
 					<div class="container container-menu">
 						<ul class="row">
 					<li class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
 						<ul>
-							<li class="col-lg-4 col-md-4 col-sm-12 col-xs-12 menu-home-lv2">
-								<ul>
-									<li><a href="#">By Occaions</a> </li>
-									<li class="li-home li-one"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Birthday</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Anniversary</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Wedding</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Love n Romance</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Congratulations</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Sympathy n Funeral</a></li>
-									
-								</ul>
-							</li>
-							<li class="col-lg-4 col-md-4 col-sm-12 col-xs-12 menu-home-lv2">
-								<ul>
-									<li><a href="#">By type</a></li> 
-									<li class="li-home li-one"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Roses</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Carnations</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Orchids</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Gerberas</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Lilies</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Mixed Flowers</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Exotic Flowers</a></li>
-								</ul>
-							</li>
-							<li class="col-lg-4 col-md-4 col-sm-12 col-xs-12 menu-home-lv2">
-								<ul>
-									<li><a href="#">By collection</a></li>
-									<li class="li-home li-one"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Flower Subscription</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Flower Boquets</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Flower Arrangment</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Tracking</a></li>
-									<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/product-list') }}" style="color: black;">Flagship Collection</a></li>
-								</ul>
-							</li>
+							@foreach($categories as $category)
+							<?php $subcategories = App\Models\Category::where('status',1)->where('parent_id',$category->id)->get();?>
+								<li class="col-lg-4 col-md-4 col-sm-12 col-xs-12 menu-home-lv2">
+									<ul>
+										<li><a href="{{ url('/category/'.base64_encode($category->id) ) }}">{{ $category->name }}</a> </li>
+										@if($subcategories)
+										@foreach($subcategories as $subcategory)
+											<li class="li-home li-one"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/category/'.base64_encode($category->id)) }}" style="color: black;">{{ $subcategory->name }}</a></li>
+										@endforeach
+										@endif
+									</ul>
+								</li>
+							@endforeach
 							
 						</ul>
 					</li>
@@ -64,30 +71,22 @@
 					</div>
 				</div>
 					</li>
-					<li class="wedding-menu"><a href="{{ url('/about') }}">About Us</a><figure id="wedding-1" class=" hidden-sm hidden-md hidden-xs"></figure></li>
 					<li class="blog-menu dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Corporate</a><figure id="blog-1" class=" hidden-sm hidden-md hidden-xs"></figure>
+						<a href="{{ url('/corporate/decoration') }}" class="dropdown-toggle" data-toggle="dropdown">Corporate</a><figure id="blog-1" class=" hidden-sm hidden-md hidden-xs"></figure>
 						<ul class="menu-home-lv2 dropdown-menu">
-							<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="blog.html" style="color: black;">Occaions Details</a></li>
-							<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="blog-left-sidebar.html" style="color: black;">Decoration</a></li>
+							<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/corporate/decoration') }}" style="color: black;">Occaions Details</a></li>
+							<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/corporate/decoration') }}" style="color: black;">Decoration</a></li>
 						</ul>
 					</li>
-					<li class="blog-menu dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Media</a><figure id="blog-1" class=" hidden-sm hidden-md hidden-xs"></figure>
-						<ul class="menu-home-lv2 dropdown-menu">
-							<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="blog.html" style="color: black;">Gallery</a></li>
-							<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/blog') }}" style="color: black;">Blog</a></li>
-						</ul>
-					</li>
+					<li class="wedding-menu menu-item"><a href="{{ url('/gallery') }}" id="about-menu" style="font-weight:normal">Bloom Studio</a><figure id="contact-1" class=" hidden-sm hidden-md hidden-xs"></figure></li>
 					<li class="wedding-menu menu-item"><a href="{{ url('/contact') }}" id="about-menu" style="font-weight:normal">Contact</a><figure id="contact-1" class=" hidden-sm hidden-md hidden-xs"></figure></li>
 					<li class="hidden-lg hidden-md"><a href="{{ url('user-login') }}"><i class="far fa-user"></i> My Account</a></li>
 					<li><figure id="btn-close-menu" class="hidden-lg hidden-md"><i class="far fa-times-circle"></i></figure></li>
 				</ul>
 				</div>
 			</div>
-			<div class="col-lg-3 col-md-3 col-sm-10 col-xs-9">
+			<div class="col-lg-3 col-md-3 col-sm-10 col-xs-9 icon-nav">
 				<ul class="nav navbar-nav navbar-right">
-					
 					
 					<li id="input-search" class="hidden-sm hidden-xs">
 						<a href="#"><img id="search-img" src="{{ asset('/images/frontend_images/Search.png') }}" alt="img-holiwood"></a>
@@ -147,6 +146,7 @@
 					</div>
 				</div>
 			</li>
+			<li class="icon-user hidden-sm hidden-xs"><a href="#"><img src="{{ asset('/images/frontend_images/wishlist.png') }}" alt="img-holiwood" style="width: 25px;"></a></li>
 				</ul>
 			</div>
 			<div class="navbar-header mobile-menu">

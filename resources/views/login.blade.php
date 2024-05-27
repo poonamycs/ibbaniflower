@@ -1,4 +1,4 @@
-@extends('front.layouts.design')
+@extends('layouts.frontLayout.design')
 @section('content')
 
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-faq.css') }}">

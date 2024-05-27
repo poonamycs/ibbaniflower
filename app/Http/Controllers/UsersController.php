@@ -24,15 +24,9 @@ class UsersController extends Controller
     public function login(Request $request){
         if($request->isMethod('post')){
             $data = $request->all();
-            // echo "<pre>"; print_r($data); die;
             if(Auth::attempt(['email'=>$data['email'],'password'=>$data['password']])){
-
                 $userStatus = User::where('email',$data['email'])->first();
-                // if($userStatus->status == 0){
-                //     return redirect()->back()->with('flash_message_error','Your account is disabled, To activate please verify your email.');
-                // }
                 Session::put('frontSession',$data['email']);
-
                 if(!empty(Session::get('session_id'))){
                     $session_id = Session::get('session_id');
                     DB::table('cart')->where('session_id',$session_id)->update(['user_email'=>$data['email']]);
@@ -43,7 +37,7 @@ class UsersController extends Controller
             }
         }
         if($request->isMethod('get')){
-            return view('front.login');
+            return view('login');
         }
     }
     public function register(Request $request){
@@ -92,7 +86,7 @@ class UsersController extends Controller
             }
     	}
         if($request->isMethod('get')){
-            return view('front.register');
+            return view('register');
         }
     }
 

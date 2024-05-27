@@ -54,8 +54,7 @@
 			                     	<td class="cart_product"><a href="{{ url('product/'.$cart->product_id) }}"><img class="img-fluid" src="{{ asset('images/backend_images/products/small/'.$cart->image) }}" title="{{ $cart->product_name }}"></a></td>
 			                     	<td class="cart_description">
 			                        	<h5 class="product-name"><a href="{{ url('product/'.$cart->product_id) }}">{{ $cart->product_name }} </a></h5>
-			                        	<h6><strong><span class="mdi mdi-approval"></span> {{ $cart->product_brand }}</strong></h6>
-			                     	</td>
+									</td>
 			                     	<td class="availability in-stock">{{ $cart->size }}</td>
 			                     	<td class="price"><span>₹ {{ $cart->price }}</span></td>
 			                     	<td class="qty">

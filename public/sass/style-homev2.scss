@@ -236,7 +236,7 @@ main{
     				&:hover{color:black;}
     			}
 		}
-	.carousel{position: relative;display: flex;height: 1080px;
+	.carousel{position: relative;display: flex;height: 625px;
 	.carousel-inner{
 		text-align: left;
 		.item{
@@ -254,7 +254,7 @@ main{
 		
 	}
 	.carousel-control{
-	width:unset;background:unset;opacity:.5;top:80%;right:unset;
+	width:unset;background:unset;opacity:.5;top:57%;right:unset;
 	&.right{background-image:unset;left:210px;}
 	&.left{background-image:unset;left:150px;img{transform: rotateY(180deg);}}
 	&:focus{opacity:1;}&:active{opacity:1;}

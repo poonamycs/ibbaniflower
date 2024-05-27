@@ -21,31 +21,31 @@ if ($('.quantity').length) {
             var item_price = item_cart.children('.produc-price').children('input');
             var result =  item_cart.children('.total-price');
             result.html(function(){
-                return '$'+(item_number.val() * item_price.val().replace('$', '')).toFixed(2);
+                return '₹'+(item_number.val() * item_price.val().replace('₹', '')).toFixed(2);
             });
 
         });
         plus.on('click', function() {
             var qty = $(this).parent().find('.qty');
             qty.val((parseInt(qty.val(), 10) + 1));
-
+            
             var item_cart = $(this).parents('.item_cart');
             var item_number = item_cart.children('.product-quantity').find('input');
             var item_price = item_cart.children('.produc-price').children('input');
             var result =  item_cart.children('.total-price');
             result.html(function(){
-                return '$'+(item_number.val() * item_price.val().replace('$', '')).toFixed(2);
+                return '₹'+(item_number.val() * item_price.val().replace('₹', '')).toFixed(2);
             });
         });
         $('.item_cart').each(function() {
         var answer = (parseInt($(this).children('.product-quantity').find('input').val(), 10) * $(this).children('.produc-price').find('input').val().replace('$', '')).toFixed(2);
-        $(this).children('.total-price').html('$' + answer);
+        $(this).children('.total-price').html('₹' + answer);
         });
 
         $('.item_cart').each(function() {
         $(this).children('.product-quantity').find('input').change(function() {
           var answer = (parseInt($(this).val(), 10) * $(this).parents('.item_cart').children('.produc-price').find('input').val().replace('$', '')).toFixed(2);
-          $(this).parents('.item_cart').children('.total-price').html('$' + answer);
+          $(this).parents('.item_cart').children('.total-price').html('₹' + answer);
         });
         });
     }

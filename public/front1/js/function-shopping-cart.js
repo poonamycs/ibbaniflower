@@ -26,9 +26,10 @@ if ($('.quantity').length) {
 
         });
         plus.on('click', function() {
+            
             var qty = $(this).parent().find('.qty');
             qty.val((parseInt(qty.val(), 10) + 1));
-
+            
             var item_cart = $(this).parents('.item_cart');
             var item_number = item_cart.children('.product-quantity').find('input');
             var item_price = item_cart.children('.produc-price').children('input');

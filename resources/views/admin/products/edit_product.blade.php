@@ -50,12 +50,12 @@
                   <input type="text" name="product_code" id="product_code" value="{{ $productDetails->product_code }}" style="width: 65%">
                 </div>
               </div>
-              <div class="control-group">
+              <!-- <div class="control-group">
                 <label class="control-label">Product Brand : </label>
                 <div class="controls">
                   <input type="text" name="product_brand" id="product_brand" value="{{ $productDetails->product_brand }}" style="width: 65%">
                 </div>
-              </div>
+              </div> -->
               <div class="control-group">
                 <label class="control-label">Description : </label>
                 <div class="controls">
@@ -101,14 +101,14 @@
                   @endif
                 </div>
               </div>
-
+<!-- 
               <div class="control-group">
                 <label class="control-label">Seasonal Product: </label>
                 <div class="controls">
                   <input type="checkbox" name="featured" id="featured" @if($productDetails->featured=="1") checked @endif value="1">
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="alert alert-info">Mark this product as Seasonal product.</span>
                 </div>
-              </div>
+              </div> -->
 
               <div class="control-group">
                 <label class="control-label">Publish / Enable : </label>

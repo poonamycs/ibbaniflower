@@ -1,6 +1,9 @@
-@extends('front.layouts.design')
-@section('content')
+@extends('layouts.frontLayout.design')
+<!-- cart -->
+<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-faq.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-shopping.css') }}">
 
+@section('content')
 <main>
 	<div class="content-search">
 
@@ -17,7 +20,7 @@
 </div>
 	<div class="banner">
 		<div class="container">
-			<figure id="banner-about"><a href="#"><img src="{{ asset('/images/frontend_images/1350x500.png') }}" class="img-responsive" alt="img-holiwood"></a></figure>
+			<figure id="banner-about"><a href="#"><img src="{{ asset('/images/frontend_images/cartbanner.jpg') }}" class="img-responsive" alt="img-holiwood"></a></figure>
 		<div class="title-banner">
 			<h1>Shopping Cart</h1>
 			<p><a href="#" title="Home">Home</a><i class="fa fa-caret-right"></i>Shopping Cart</p>
@@ -53,6 +56,7 @@
                     </div>
                 </div>
                 <!-- End container -->
+                @if(count($userCart)>0)
                 <div class="container container-ver2">
                     <div class="box cart-container">
                         <table class="table cart-table space-30">
@@ -67,25 +71,31 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="item_cart">
-                                    <td class="product-photo"><img src="{{ asset('/images/frontend_images/340x420.png') }}" alt="Futurelife"></td>
-                                    <td class="produc-name"><a href="#" title="">Eleganr by BloomNation</a></td>
-                                    <td class="produc-price"><input value="$69.90" size="4" type="text"></td>
-                                    <td class="product-quantity">
-                                        <form enctype="multipart/form-data">
-                                        <div class="product-signle-options product_15 clearfix">
-                                            <div class="selector-wrapper size">
-                                                <div class="quantity">
-                                                    <input data-step="1" value="1" title="Qty" class="qty" size="4" type="text">
+                            <?php $total_amount=0; ?>
+		               			@if(count($userCart)>0)
+		               			@foreach($userCart as $cart)
+                                    <tr class="item_cart">
+                                        <td class="product-photo"><img src="{{ asset('images/backend_images/products/small/'.$cart->image) }}" alt="{{ $cart->product_name }}"></td>
+                                        <td class="produc-name"><a href="{{ url('product/'.$cart->product_id) }}" title="">{{ $cart->product_name }}</a></td>
+                                        <td class="produc-price"><input value="{{ $cart->price }}" size="4" type="text"></td>
+                                        <td class="product-quantity">
+                                            <form enctype="multipart/form-data">
+                                                <div class="product-signle-options product_15 clearfix">
+                                                    <div class="selector-wrapper size">
+                                                        <div class="quantity">
+                                                            <input data-step="1" value="1" title="Qty" class="qty" size="4" type="text">
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    </td>
-                                    <td class="total-price"></td>
-                                    <td class="product-remove"><a class="remove" href="#" title="close"><img src="img/icon-delete-cart.png" alt="close"></a></td>
-                                </tr>
-                                <tr class="item_cart">
+                                            </form>
+                                        </td>
+                                        <td class="total-price">₹ {{ $cart->price * $cart->quantity }}</td>
+                                        <td class="product-remove"><a class="remove" href="#" title="close"><img src="{{ asset('images/frontend_images/icon-delete-cart.png') }}" alt="close"></a></td>
+                                    </tr>
+                                <?php $total_amount = $total_amount + ($cart->price*$cart->quantity); ?>
+			                  	@endforeach
+								@endif	
+                                <!-- <tr class="item_cart">
                                     <td class="product-photo"><img src="{{ asset('/images/frontend_images/340x420.png') }}" alt="Futurelife"></td>
                                     <td class="produc-name"><a href="#" title="">Pink roses</a></td>
                                     <td class="produc-price"><input value="$51.59" size="4" type="text"></td>
@@ -102,61 +112,8 @@
                                     </td>
                                     <td class="total-price"></td>
                                     <td class="product-remove"><a class="remove" href="#" title="close"><img src="{{ asset('/images/frontend_images/icon-delete-cart.png') }}" alt="close"></a></td>
-                                </tr>
-                                <tr class="item_cart">
-                                    <td class="product-photo"><img src="{{ asset('/images/frontend_images/340x420.png') }}" alt="Futurelife"></td>
-                                    <td class="produc-name"><a href="#" title="">Fun & Flirty By BloomNation</a></td>
-                                    <td class="produc-price"><input value="$51.59" size="4" type="text"></td>
-                                    <td class="product-quantity">
-                                        <form enctype="multipart/form-data">
-                                            <div class="product-signle-options product_15 clearfix">
-                                                <div class="selector-wrapper size">
-                                                    <div class="quantity">
-                                                        <input data-step="1" value="2" title="Qty" class="qty" size="4" type="text">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td class="total-price"></td>
-                                    <td class="product-remove"><a class="remove" href="#" title="close"><img src="{{ asset('/images/frontend_images/icon-delete-cart.png') }}" alt="close"></a></td>
-                                </tr>
-                                <tr class="item_cart">
-                                    <td class="product-photo"><img src="{{ asset('/images/frontend_images/340x420.png') }}" alt="Futurelife"></td>
-                                    <td class="produc-name"><a href="#" title="">Queen Rose - Pink</a></td>
-                                    <td class="produc-price"><input value="$51.59" size="4" type="text"></td>
-                                    <td class="product-quantity">
-                                        <form enctype="multipart/form-data">
-                                            <div class="product-signle-options product_15 clearfix">
-                                                <div class="selector-wrapper size">
-                                                    <div class="quantity">
-                                                        <input data-step="1" value="2" title="Qty" class="qty" size="4" type="text">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td class="total-price"></td>
-                                    <td class="product-remove"><a class="remove" href="#" title="close"><img src="{{ asset('/images/frontend_images/icon-delete-cart.png') }}" alt="close"></a></td>
-                                </tr>
-                                <tr class="item_cart">
-                                    <td class="product-photo"><img src="{{ asset('/images/frontend_images/340x420.png') }}" alt="Futurelife"></td>
-                                    <td class="produc-name"><a href="#" title="">Winter White Bouquet</a></td>
-                                    <td class="produc-price"><input value="$51.59" size="4" type="text"></td>
-                                    <td class="product-quantity">
-                                        <form enctype="multipart/form-data">
-                                            <div class="product-signle-options product_15 clearfix">
-                                                <div class="selector-wrapper size">
-                                                    <div class="quantity">
-                                                        <input data-step="1" value="2" title="Qty" class="qty" size="4" type="text">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td class="total-price"></td>
-                                    <td class="product-remove"><a class="remove" href="#" title="close"><img src="{{ asset('/images/frontend_images/icon-delete-cart.png') }}" alt="close"></a></td>
-                                </tr>
+                                </tr> -->
+                                
                             </tbody>
                         </table>
                         <div class="row-total">
@@ -165,7 +122,7 @@
                             </div>
                             <!--End align-left-->
                             <div class="float-right">
-                                <p>$1,156.00</p>
+                                <p>₹ {{ $total_amount }}</p>
                             </div>
                             <!--End align-right-->
                         </div>
@@ -232,6 +189,7 @@
                 </div>
                 <!-- End container -->
             </div>
+            @endif
             <!-- End cat-box-container -->
         </div>
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/frontend_css/style-faq.css') }}">
