@@ -704,7 +704,6 @@ class ProductsController extends Controller
     }
 
     public function addtocart(Request $request){
-        dd($request->all());
         $data = $request->all();
         // dd($data);
 

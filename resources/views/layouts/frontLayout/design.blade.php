@@ -85,7 +85,7 @@
 	<!-- listing -->
 	<script src="{{ asset('js/frontend_js/function-show-sidebar.js') }}"></script>
 	<script src="{{ asset('js/frontend_js/function-shop.js') }}"></script>
-	<!-- <script src="{{ asset('js/frontend_js/function-range.js') }}"></script> -->
+	<script src="{{ asset('js/frontend_js/function-range.js') }}"></script>
 	<script src="{{ asset('js/frontend_js/main.js') }}"></script>
 	
 	<!-- modal -->

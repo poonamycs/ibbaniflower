@@ -26,9 +26,8 @@
 	.menu-main{
 	    padding-top:50px;
 	}
-	.mobile-header{
-			
-			padding-left: 40px;
+	.mobile-header{	
+			padding-left: 60px;
 		}
 	@media (min-width: 800px) and (max-width:1400px) 
 	{

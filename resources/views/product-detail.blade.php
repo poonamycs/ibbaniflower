@@ -423,16 +423,11 @@
 
 @section('script')
 
-
-	<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> -->
-
-<!-- <script src='https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js'></script>
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> -->
+<script src='https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.11/flatpickr.min.js"></script>
-<script type="text/javascript" src="{{ asset('scrolling/TweenMax.min.js') }}"></script>
-<script src="{{ asset('scrolling/jquery.superscrollorama.js') }}"></script>
-<script src="{{ asset('js/frontend_js/function-scroll.js') }}"></script> -->
 
-<script src="{{ asset('js/frontend_js/jquery.min_af.js') }}"></script>
+<!-- <script src="{{ asset('js/frontend_js/jquery.min_af.js') }}"></script>
 <script src="{{ asset('js/frontend_js/bootstrap.min_0028.js') }}"></script>
 <script src="{{ asset('slick/slick.js') }}"></script>
 <script src="{{ asset('js/frontend_js/function-slick.js') }}"></script>
@@ -445,7 +440,7 @@
 <script src="{{ asset('js/frontend_js/function-search-v2.js') }}"></script>
 <script src="{{ asset('scrolling/jquery.superscrollorama.js') }}"></script>
 <script type="text/javascript" src="{{ asset('scrolling/TweenMax.min.js') }}"></script>
-<script src="{{ asset('js/frontend_js/function-scroll.js') }}"></script>
+<script src="{{ asset('js/frontend_js/function-scroll.js') }}"></script> -->
 <script>
 $(document).ready(function(){
 	
@@ -459,15 +454,13 @@ $(document).ready(function(){
   $("#cartBtn").click(function(){
 	alert("hello");
 	var form= $("#addtocartForm");
-	
-	alert(form);
 	$.ajax({
 		headers: {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		},
 		url: "{{url('/add-cart')}}",
 		type: 'POST',
-		data: form.serialize()
+		data: form.serialize(),
 		success: function (response) {
 			console.log(response);
 			
