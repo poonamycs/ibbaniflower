@@ -54,6 +54,9 @@
 		.alert {
     		margin-bottom: 45px !important;
 		}
+		.subprice {
+			display:flex;
+		}
 </style>
 @endsection('style')
 </head>
@@ -120,7 +123,7 @@
       						<div class="col-lg-7 col-md-6 col-sm-12 col-xs-12 detail">
       							<h1>{{$product->product_name}}</h1>
 								
-								<div class="prince"><span class="getPrice">&#8377;&nbsp;{{$product->price}}</span><s class="strike">&#8377;{{$product->discount}}</s></div>
+								<div class="prince">&#8377;&nbsp;<span class="getPrice">{{$product->price}}</span><s class="strike">&#8377;{{$product->discount}}</s></div>
 								
 									<div class="Quality">
 										
@@ -156,17 +159,18 @@
 									<div class="size col-lg-6 col-md-6 col-sm-6 col-xs-12">
 									<h6><i class="fa fa-shopping-bag"></i> Check product availability in your area</h6>
 										<div class="form-inline pincode-search" style="display:flex">
-											<input type="number" name="pincode"  class="form-control chkPincode{{$product->id}}" name="product" placeholder="Enter your pincode">
+											<input type="number" name="pincode"  class="form-control pincode chkPincode{{$product->id}}" name="product" placeholder="Enter your pincode">
 											<button type="button" data-id="{{$product->id}}" class="pl-2 pr-2 btn btn-secondary btn-lg checkpin" style="padding: 7px; margin: 15px 5px;margin-top: -2px;"><i class="fa fa-search"></i>
 											</button>
-													<div class="form-inline" id="datePopup{{$product->id}}" style="display:none">
-														<input type="date" data-id="{{$product->id}}" class="selectedDate">
-													</div>
+											<div class="form-inline" id="datePopup{{$product->id}}" style="display:none">
+												<input type="date" data-id="{{$product->id}}" class="selectedDate">
+											</div>
 											</div>
 										</div>	
 									</div>
 										<span class="pincodeResponse"></span>
-										
+										<span class="confirmslottext"></span>
+										<input type="hidden" class="confirmslot" readonly>
 										<hr>
 										<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 									<div class="add-cart">
@@ -191,7 +195,7 @@
       						</div>
       						<div class="col-lg-7 col-md-6 col-sm-12 col-xs-12 detail">
       							<h1>{{ $product->product_name }}</h1>
-								<div class="prince"><span class="getPrice">&#8377;&nbsp;{{ $product->price }}</span><s class="strike">&#8377;{{$product->discount}}</s></div>
+								<div class="prince">&#8377;&nbsp;<span class="getPrice">{{ $product->price }}</span><s class="strike">&#8377;{{$product->discount}}</s></div>
 									<div class="Quality">
 										
 										<div class="input-group input-number-group">
@@ -257,19 +261,11 @@
 					@endforeach
 				</div>
   				@endif
-				<div class="col-lg-7 connect-us col-md-6 col-sm-12 col-xs-12">
-					<!-- <a href="#" id="like-fb"></a> -->
-					<!-- <a href="#" id="like-tw"></a> -->
-					<!-- <a href="#" id="like-gg"></a> -->
-					<!-- <a href="#" id="like-share"></a> -->
-				</div>
-			
-				
 			</div>
-		
 	</div>
 	<input type="hidden" id="confirm_date" value="">
 	<input type="hidden" id="confirm_slot" value="">
+	<input type="hidden" id="confirm_price" value="">
 	<input type="hidden" id="confirm_time" value="">
 	<div class="product-text">
 		<div class="container">
@@ -409,12 +405,49 @@
 						<div class="product-title-category">
 							<h5><a href="#">{{ $product->name }}</a></h5>
 							<div class="prince text-center">₹ {{ $product->price }}
-								<input type="checkbox" name="subproduct">
+								<input class="subproduct" type="checkbox" name="subproduct" value="{{$product->price}}">
 							</div>
 						</div>
 					</div>
 				@endforeach
+			</div><hr/>
+			<form id="subproductform" action="{{ url('add-subproduct-cart') }}" method="post">
+			{{ csrf_field() }}
+			<input type="hidden" name="mainproductprice">
+			<input type="hidden" name="subproductprice">
+			<input type="hidden" name="totalprice">
+			<input type="hidden" name="shippingprice">
+			<div class="row">
+				<div class="col-lg-2 col-md-2">
+					Price Details
+				</div>
+				<div class="col-lg-2 col-md-2 subprice">
+					<p>Base item</p>
+					&#8377;<p id="mainprs">1000</p>
+					<p style="padding-left:20px">+</p>
+				</div>
+				
+				<div class="col-lg-2 col-md-2 subprice">
+					<p>Add-ons</p>
+					&#8377;<p id="subprs">500</p>
+					<p style="padding-left:20px">+</p>
+				</div>
+				
+				<div class="col-lg-2 col-md-2 subprice">
+					<p>Shipping</p>
+					&#8377;<p id="shippingrs">19</p>
+					<p style="padding-left:20px">=</p>
+				</div>
+				
+				<div class="col-lg-2 col-md-2 subprice">
+					<p>Total</p>
+					<p id="totalrs">&#8377;1318</p>
+				</div>
+				<div class="col-lg-2 col-md-2">
+					<button type="submit" id="continue_btn">Continue without ads</button>
+				</div>
 			</div>
+			</form>	
 		</div>
 </div>
 
@@ -426,24 +459,9 @@
 <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> -->
 <script src='https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.11/flatpickr.min.js"></script>
-
-<!-- <script src="{{ asset('js/frontend_js/jquery.min_af.js') }}"></script>
-<script src="{{ asset('js/frontend_js/bootstrap.min_0028.js') }}"></script>
-<script src="{{ asset('slick/slick.js') }}"></script>
-<script src="{{ asset('js/frontend_js/function-slick.js') }}"></script>
-<script src="{{ asset('js/frontend_js/function-flower.js') }}"></script>
-<script src="{{ asset('js/frontend_js/function-input-number.js') }}"></script>
-<script src="{{ asset('js/frontend_js/function-select-custom.js') }}"></script>
-<script src="{{ asset('js/frontend_js/function-back-top.js') }}"></script>
-<script src="{{ asset('js/frontend_js/funtion-header-v3.js') }}"></script>
-<script src="{{ asset('js/frontend_js/function-sidebar.js') }}"></script>
-<script src="{{ asset('js/frontend_js/function-search-v2.js') }}"></script>
-<script src="{{ asset('scrolling/jquery.superscrollorama.js') }}"></script>
-<script type="text/javascript" src="{{ asset('scrolling/TweenMax.min.js') }}"></script>
-<script src="{{ asset('js/frontend_js/function-scroll.js') }}"></script> -->
 <script>
+var totalsub = 0;
 $(document).ready(function(){
-	
 	const flatpickr_time = $('#flatpickr_time').flatpickr({
     //static: position the calendar inside the wrapper and next to the input element*.
     static: true,
@@ -453,22 +471,77 @@ $(document).ready(function(){
 
   $("#cartBtn").click(function(){
 	alert("hello");
-	var form= $("#addtocartForm");
-	$.ajax({
-		headers: {
-			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		},
-		url: "{{url('/add-cart')}}",
-		type: 'POST',
-		data: form.serialize(),
-		success: function (response) {
-			console.log(response);
-			
-		}
-	});
-	// $("#subproductModal").modal('show');
-  });
+	var pincode = $(".pincode").val();
+	alert(pincode);
+	var confirmslot = $(".confirmslot").val();
+	alert(confirmslot);
+	if(pincode == '')
+	{
+		$(".pincodeResponse").html("<font color='red' style='font-size: 13px; font-weight: bold'><i class='fa fa-ban'></i> Please Check pincode first for delivery.</font>");
+	}
+	
+	else{
+		if(confirmslot == '')
+		{
+			$(".confirmslottext").html("<font color='red' style='font-size: 13px; font-weight: bold'><i class='fa fa-ban'></i> Please Select Slot First.</font>");
 
+		}
+		else{
+			var form= $("#addtocartForm");
+			$.ajax({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				},
+				url: "{{url('/add-cart')}}",
+				type: 'POST',
+				data: form.serialize(),
+				success: function (response) {
+					console.log(response);
+					console.log("hello");
+					var mainprice = $(".getPrice").html();
+					var shippingrs = $("#confirm_price").val();
+					$("#mainprs").text(mainprice);
+					$("#shippingrs").text(shippingrs);
+					$("#subproductModal").modal('show');
+					
+					
+				}
+			});
+		}
+	}
+  });
+  $(".subproduct").click(function(){
+	if(this.checked)
+	{
+		var price = $(this).val();
+		totalsub = parseInt(totalsub) + parseInt(price);
+		const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+		const checkedOne = Array.from(checkboxes).some(x => x.checked);
+		if(checkedOne == true)
+		{
+			$("#continue_btn").text("Continue With Add Ones");
+		}
+	}
+	else{
+		var price = $(this).val();
+		totalsub = parseInt(totalsub) - parseInt(price);
+
+		const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+		const checkedOne = Array.from(checkboxes).some(x => x.checked);
+		if(checkedOne == false)
+		{
+			$("#continue_btn").text("Continue Without Add Ones");
+		}
+	}
+	var mainprs = $("#mainprs").text();
+	$("#subprs").text(totalsub);
+	var subprs = totalsub;
+	var shippingrs = $("#shippingrs").text();
+	var total = parseInt(mainprs) + totalsub + parseInt(shippingrs);
+	$("#totalrs").text(total);
+
+
+  });
 //change price and stock with size
 $(".selSize").change(function(){
 	// $(document).on('click',".selSize", function(){
@@ -506,8 +579,10 @@ $(".selSize").change(function(){
 	$(document).on('click',".shipping_radio", function(){
 		// $('input[type=radio][name=shipping_method]').change(function() {
 		var slottext = $('input[name="shipping_method"]:checked').val();
+		var slotprice = $(this).attr("data-attr-price");
 		$("#myModal").modal('hide');
 		$("#confirm_slot").val(slottext);
+		$("#confirm_price").val(slotprice);
 		$.ajax({
 				type:'post',
 				data:{slottext:slottext},
@@ -537,7 +612,8 @@ $(".selSize").change(function(){
             var slot = $("#confirm_slot").val();
             var time = $("#confirm_time").val();
             var confirm = `Order will be delivered between - ${date}, Slot - ${slot}, Time - ${time}`;
-           alert(confirm);
+			$(".confirmslot").val(confirm);
+			$(".confirmslottext").text(confirm);
 	});
 		$(".checkpin").click(function() {
 		var pincode = $(this).prev().val();
@@ -566,6 +642,7 @@ $(".selSize").change(function(){
 
 				$(".selectedDate").change(function() {
 					$(".pincodeResponse").hide();
+					$(".confirmslottext").hide();
 					var shipping_date= $(this).val();
 					var data_id = $(this).attr("data-id");
 				if(shipping_date.length > 0)
@@ -579,11 +656,12 @@ $(".selSize").change(function(){
 							console.log(resp);
 							var shippingslot = '';
 							for (i = 0; i < resp.length; ++i) {
-								shippingslot += '<div style="border: 1px solid black;height: 72px;width:600px"><input class="shipping_radio" type="radio" value="' + resp[i]['slot'] + '" name="shipping_method" style="margin-bottom: -78px;margin-left: 10px;"/><h4 style="margin-left:40px;display: inline-block;">' + resp[i]['slot'] + '</h4><h5 style="margin-left:40px;display: block;">Choose from any 5 hour slot during the day</h5><div class="add-cart" style="margin-top: -70px;margin-left: 420px;"><a href="#" class="btn-add-cart" style="background:#7d8035;width: 140px;">Rs.' + resp[i]['price'] + '</a></div></div><br/>	'
+								shippingslot += '<div style="border: 1px solid black;height: 72px;width:600px"><input data-attr-price="'+resp[i]['price']+'" class="shipping_radio" type="radio" value="' + resp[i]['slot'] + '" name="shipping_method" style="margin-bottom: -78px;margin-left: 10px;"/><h4 style="margin-left:40px;display: inline-block;">' + resp[i]['slot'] + '</h4><h5 style="margin-left:40px;display: block;">Choose from any 5 hour slot during the day</h5><div class="add-cart" style="margin-top: -70px;margin-left: 420px;"><a href="#" class="btn-add-cart" style="background:#7d8035;width: 140px;">Rs.' + resp[i]['price'] + '</a></div></div><br/>	'
 									console.log(resp[i]['slot']);
 								}
 								$("#shippingslot").html(shippingslot);
 								$("#confirm_date").val(shipping_date);
+								
 								$("#myModal").modal('show');
 								
 						}	

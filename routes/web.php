@@ -180,6 +180,7 @@ Route::match(['get','post'],'/admin',[AdminController::class, 'login']);
 
 //Add to cart
 Route::match(['get','post'],'/add-cart/',[ProductsController::class, 'addtocart']);
+Route::match(['get','post'],'/add-subproduct-cart/',[ProductsController::class, 'addsubproductcart']);
 
 // Check Pincode
 Route::post('/check-pincode/',[ProductsController::class, 'checkPincode']);

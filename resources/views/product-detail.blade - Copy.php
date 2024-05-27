@@ -1,27 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Product Detail</title>
-	<meta charset="utf-8">
-	<!-- bootstrap vs fontawesome-->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<link rel="icon" href="img/favicon.png" type="image/x-icon"/>
+@extends('layouts.frontLayout.design')
+@section('content')
+@section('style')
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-product-detail.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-res-product-detail.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-fix-nav.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-form-search-mobile.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('slick/slick.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('slick/slick-theme.css') }}">
-
-	<!-- modal -->
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-homev1.css') }}">
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-res-v1.css') }}">
-
-	<!-- GG FONT -->
-	<link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700" rel="stylesheet">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.11/flatpickr.min.css" rel="stylesheet" />
 	<style>
 	.select{
 		width:215px;
@@ -68,11 +51,17 @@
 		.size {
 			margin-left:20px
 		}
+		.alert {
+    		margin-bottom: 45px !important;
+		}
+		.subprice {
+			display:flex;
+		}
 </style>
+@endsection('style')
 </head>
 <body>
 <meta name="csrf-token" content="{{ csrf_token() }}" />
-@include('layouts.frontLayout.header')
 <main>
 	<div class="content-search">
 
@@ -96,6 +85,23 @@
 				</ul>
 		</div>
 	</div>
+	@if(Session::has('flash_message_error'))	
+			
+		<div class="alert alert-danger" role="alert">
+		  <strong style="padding-left:105px">{!! session('flash_message_error') !!}</strong>
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		    <span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		@endif  			
+		@if(Session::has('flash_message_success'))			
+		<div class="alert alert-success" role="alert">
+		  <strong style="padding-left:105px">{!! session('flash_message_success') !!}</strong>
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		    <span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		@endif
 <div class="product-detail">
 	
 
@@ -116,31 +122,9 @@
 							<input type="hidden" name="image" value="{{ $product->image }}">
       						<div class="col-lg-7 col-md-6 col-sm-12 col-xs-12 detail">
       							<h1>{{$product->product_name}}</h1>
-								<!-- <p class="p1">{{ Str::limit(strip_tags($product->description), 50) }}</p> -->
-								<!-- <div class="star">
-									<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-									<span>10 Rating(s) | Add Your Rating</span>
-								</div> -->
-								<div class="prince"><span class="getPrice">&#8377;&nbsp;{{$product->price}}</span><s class="strike">&#8377;{{$product->discount}}</s></div>
-								<!-- <figure class="fi-option"><p class="option">Option</p></figure> -->
-								<!-- <div class="size col-lg-4 col-md-6 col-sm-6 col-xs-12">
-									<span class="lb-size">Size <span class="sta-red">*</span></span>
-								<div class="select-custom">
-									<select>
-										<option>S</option>
-										<option>M</option>
-										<option>L</option>
-										<option>XL</option>
-									</select>
-								</div>
-								</div> -->
-								<!-- <div class="color col-lg-8 col-md-6 col-sm-6 col-xs-12">
-									<div class="div-color"><span class="lb-color">Color <span class="sta-red">*</span></span></div>
-									<a href="#"><span class="color-1"></span></a> <a href="#"><span class="color-2"></span></a> <a href="#"><span class="color-3"></span></a>
-									 <a href="#"><span class="color-4"></span></a> <a href="#"><span class="color-5"></span></a>
-								</div>
-									
-									<p class="require">Required Fields <span>*</span></p> -->
+								
+								<div class="prince">&#8377;&nbsp;<span class="getPrice">{{$product->price}}</span><s class="strike">&#8377;{{$product->discount}}</s></div>
+								
 									<div class="Quality">
 										
 										<div class="input-group input-number-group">
@@ -158,13 +142,12 @@
 										
 									</div>
 									<br>
-									<!-- <figure class="fi-option"><p class="option">Option</p></figure> -->
 									<div class="row">
-										<div class="size col-lg-4 col-md-6 col-sm-6 col-xs-12">
-											<span class="lb-size">Size <span class="sta-red">*</span></span>
+										<div class="size col-lg-8 col-md-6 col-sm-6 col-xs-12" style="display:flex;align-item:center">
+											<span class="lb-size">Size: <span class="sta-red">*</span></span>
 												<div class="select-custom">
-													<select class="selSize" name="size"  required>
-														<option value="">-- Select option below --</option>
+													<select class="selSize" name="size">
+														<option value="0">-- Select option --</option>
 														@foreach($product->attributes as $sizes)
 														<option value="{{ $product->id }}-{{ $sizes->size }}"> {{ $sizes->size }}</option>
 														@endforeach
@@ -173,28 +156,26 @@
 										</div>
 									<br/>
 									<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-									<div class="size col-lg-4 col-md-6 col-sm-6 col-xs-12">
+									<div class="size col-lg-6 col-md-6 col-sm-6 col-xs-12">
 									<h6><i class="fa fa-shopping-bag"></i> Check product availability in your area</h6>
-										<div class="form-inline pincode-search">
-											<input type="number" name="pincode"  class="form-control chkPincode{{$product->id}}" name="product" placeholder="Enter your pincode">
-											<button type="button" data-id="{{$product->id}}" class="pl-2 pr-2 btn btn-secondary btn-lg checkpin" style="padding: 7px; margin: 15px 5px"><i class="fa fa-search"></i>
+										<div class="form-inline pincode-search" style="display:flex">
+											<input type="number" name="pincode"  class="form-control pincode chkPincode{{$product->id}}" name="product" placeholder="Enter your pincode">
+											<button type="button" data-id="{{$product->id}}" class="pl-2 pr-2 btn btn-secondary btn-lg checkpin" style="padding: 7px; margin: 15px 5px;margin-top: -2px;"><i class="fa fa-search"></i>
 											</button>
-													<div class="form-inline" id="datePopup{{$product->id}}" style="display:none">
-														<input type="date" data-id="{{$product->id}}" class="selectedDate">
-													</div>
+											<div class="form-inline" id="datePopup{{$product->id}}" style="display:none">
+												<input type="date" data-id="{{$product->id}}" class="selectedDate">
+											</div>
 											</div>
 										</div>	
 									</div>
 										<span class="pincodeResponse"></span>
-										
+										<span class="confirmslottext"></span>
+										<input type="hidden" class="confirmslot" readonly>
 										<hr>
 										<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 									<div class="add-cart">
-									<button type="submit" class="btn-add-cart" id="cartButton" name="cartButton" value="Shopping Cart" title="Add this Product to cart"><i class="mdi mdi-cart-outline"></i> Add To Cart</button>
-										<!-- <a href="#" class="btn-add-cart" id="cartButton" name="cartButton">Add to cart</a> -->
-										<!-- <a href="#" class="list-icon icon-1"><i class="far fa-eye"></i></a>
-										<a href="#" class="list-icon icon-2"><i class="far fa-heart"></i></a> -->
-									</div>
+									<button type="button" class="btn-add-cart" id="cartBtn" name="cartButton" value="Shopping Cart" title="Add this Product to cart"><i class="mdi mdi-cart-outline"></i> Add To Cart</button>
+								</div>
 								
       						</div>
 							  </form>
@@ -214,7 +195,7 @@
       						</div>
       						<div class="col-lg-7 col-md-6 col-sm-12 col-xs-12 detail">
       							<h1>{{ $product->product_name }}</h1>
-								<div class="prince"><span class="getPrice">&#8377;&nbsp;{{ $product->price }}</span><s class="strike">&#8377;{{$product->discount}}</s></div>
+								<div class="prince">&#8377;&nbsp;<span class="getPrice">{{ $product->price }}</span><s class="strike">&#8377;{{$product->discount}}</s></div>
 									<div class="Quality">
 										
 										<div class="input-group input-number-group">
@@ -246,9 +227,9 @@
 									<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 									<div class="size col-lg-4 col-md-6 col-sm-6 col-xs-12">
 									<h6><i class="fa fa-shopping-bag"></i> Check product availability in your area</h6>
-										<div class="form-inline pincode-search">
+										<div class="form-inline pincode-search" style="display:flex">
 											<input type="number" name="pincode"  class="form-control chkPincode{{$product->id}}" name="product" placeholder="Enter your pincode">
-											<button type="button" data-id="{{$product->id}}" class="pl-2 pr-2 btn btn-secondary btn-lg checkpin" style="padding: 7px; margin: 15px 5px"><i class="fa fa-search"></i>
+											<button type="button" data-id="{{$product->id}}" class="pl-2 pr-2 btn btn-secondary btn-lg checkpin" style="padding: 7px; margin: 15px 5px;margin-top: -2px;"><i class="fa fa-search"></i>
 											</button>
 													<div class="form-inline" id="datePopup{{$product->id}}" style="display:none">
 														<input type="date" data-id="{{$product->id}}" class="selectedDate">
@@ -265,7 +246,6 @@
 									@else
 										<button type="submit" class="btn-add-cart" id="cartButton"  title="Add this Product to cart"><i class="mdi mdi-cart-outline"></i> Add To Cart</button>
 									@endif
-										<!-- <a href="#" class="btn-add-cart" id="cartButton" name="cartButton">Add to cart</a> -->
 									</div>
       						</div>
 						</form>
@@ -273,28 +253,19 @@
 					@endforeach
 					<!-- ------ end content 2----- -->
 				</div>
+				@if(count($product_imgs) > 1)
 				<div class="slider-nav col-lg-5 col-md-6 col-sm-12 col-xs-12">
 					<div><img src="{{ url('/images/backend_images/products/medium/'.$product->image) }}" class="img-responsive" alt="img-holiwood"></div>
 					@foreach($product_imgs as $product_img)
 						<div><img src="{{ url('/images/backend_images/products/medium/'.$product_img->image) }}" class="img-responsive" alt="img-holiwood"></div>
 					@endforeach
-					<!-- <div><img src="img/340x420.png" class="img-responsive" alt="img-holiwood"></div>
-					<div><img src="img/340x420.png" class="img-responsive" alt="img-holiwood"></div> -->
 				</div>
-  				
-				<div class="col-lg-7 connect-us col-md-6 col-sm-12 col-xs-12">
-					<!-- <a href="#" id="like-fb"></a> -->
-					<!-- <a href="#" id="like-tw"></a> -->
-					<!-- <a href="#" id="like-gg"></a> -->
-					<!-- <a href="#" id="like-share"></a> -->
-				</div>
-			
-				
+  				@endif
 			</div>
-		
 	</div>
 	<input type="hidden" id="confirm_date" value="">
 	<input type="hidden" id="confirm_slot" value="">
+	<input type="hidden" id="confirm_price" value="">
 	<input type="hidden" id="confirm_time" value="">
 	<div class="product-text">
 		<div class="container">
@@ -354,6 +325,7 @@
 		</div>
 	</div>
 </div>
+
 <div id="myModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 
@@ -399,34 +371,177 @@
 		</div>
 	</div>
 </div>
-@include('layouts.frontLayout.footer')
-	<!-- boostrap & jquery -->
-	<script src="{{ asset('js/frontend_js/jquery.min_af.js') }}"></script>
-	<script src="{{ asset('js/frontend_js/bootstrap.min_0028.js') }}"></script>
-	<script src="{{ asset('slick/slick.js') }}"></script>
-	<!-- js file -->
-	<script src="{{ asset('js/frontend_js/function-slick.js') }}"></script>
-	<script src="{{ asset('js/frontend_js/function-flower.js') }}"></script>
-	<script src="{{ asset('js/frontend_js/function-input-number.js') }}"></script>
-	<!-- <script src="{{ asset('js/frontend_js/function-select-custom.js') }}"></script> -->
-	<script src="{{ asset('js/frontend_js/function-back-top.js') }}"></script>
-	<script src="{{ asset('js/frontend_js/function-sidebar.js') }}"></script>
-	<script src="{{ asset('js/frontend_js/funtion-header-v3.js') }}"></script>
-	<script src="{{ asset('js/frontend_js/function-search-v2.js') }}"></script>
-	<!-- <script src="{{ asset('js/frontend_js/main.js') }}"></script> -->
+<div id="calendarModal" class="modal" role="dialog">
+<div class="modal-dialog"  style="width:360px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="height:370px;left:24px">
+        <label id="flatpickr_time" style="width:200px;padding-left:65px;">Select Delivery Date</label>
+      </div>
+    </div>
+  </div>
+</div>
 
-	<!-- modal -->
-	<!-- <script src="{{ asset('js/frontend_js/function-homev1.js') }}"></script> -->
-	<script type="text/javascript" src="{{ asset('scrolling/TweenMax.min.js') }}"></script>
-	<script src="{{ asset('scrolling/jquery.superscrollorama.js') }}"></script>
-	<script src="{{ asset('js/frontend_js/function-scroll.js') }}"></script>
+<div id="subproductModal" class="modal fade" role="dialog">
+<div class="modal-dialog">
 
-<!-- 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> -->
+<!-- Modal content-->
+<div class="modal-content modal-footer">
+ 
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+   
+	<!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 detail"> -->
+			<h1 style="text-align:center">Add on somthing to make it extra special!</h1><hr/>
+		<!-- </div> -->
+		<div>
+			<div class="row container-fluid">
+				@foreach($subproduct as $product)
+					<div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 product-category">
+						<div class="product-image-category">
+								<img src="{{ asset('/images/backend_images/subproducts/large/'.$product->image) }}" class="img-responsive" alt="img-holiwood">
+						</div>
+						<div class="product-title-category">
+							<h5><a href="#">{{ $product->name }}</a></h5>
+							<div class="prince text-center">₹ {{ $product->price }}
+								<input class="subproduct" type="checkbox" name="subproduct" value="{{$product->price}}">
+							</div>
+						</div>
+					</div>
+				@endforeach
+			</div><hr/>
+			<form id="subproductform" action="{{ url('add-subproduct-cart') }}" method="post">
+			{{ csrf_field() }}
+			<input type="hidden" name="mainproductprice">
+			<input type="hidden" name="subproductprice">
+			<input type="hidden" name="totalprice">
+			<input type="hidden" name="shippingprice">
+			<div class="row">
+				<div class="col-lg-2 col-md-2">
+					Price Details
+				</div>
+				<div class="col-lg-2 col-md-2 subprice">
+					<p>Base item</p>
+					&#8377;<p id="mainprs">1000</p>
+					<p style="padding-left:20px">+</p>
+				</div>
+				
+				<div class="col-lg-2 col-md-2 subprice">
+					<p>Add-ons</p>
+					&#8377;<p id="subprs">500</p>
+					<p style="padding-left:20px">+</p>
+				</div>
+				
+				<div class="col-lg-2 col-md-2 subprice">
+					<p>Shipping</p>
+					&#8377;<p id="shippingrs">19</p>
+					<p style="padding-left:20px">=</p>
+				</div>
+				
+				<div class="col-lg-2 col-md-2 subprice">
+					<p>Total</p>
+					<p id="totalrs">&#8377;1318</p>
+				</div>
+				<div class="col-lg-2 col-md-2">
+					<button type="submit" id="continue_btn">Continue without ads</button>
+				</div>
+			</div>
+			</form>	
+		</div>
+</div>
 
+</div>
+</div>
+
+@section('script')
+
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> -->
 <script src='https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.11/flatpickr.min.js"></script>
 <script>
+var totalsub = 0;
 $(document).ready(function(){
+	const flatpickr_time = $('#flatpickr_time').flatpickr({
+    //static: position the calendar inside the wrapper and next to the input element*.
+    static: true,
+	inline: true,
+	minDate: "today"
+  });
 
+  $("#cartBtn").click(function(){
+	alert("hello");
+	var pincode = $(".pincode").val();
+	alert(pincode);
+	var confirmslot = $(".confirmslot").val();
+	alert(confirmslot);
+	if(pincode == '')
+	{
+		$(".pincodeResponse").html("<font color='red' style='font-size: 13px; font-weight: bold'><i class='fa fa-ban'></i> Please Check pincode first for delivery.</font>");
+	}
+	
+	else{
+		if(confirmslot == '')
+		{
+			$(".confirmslottext").html("<font color='red' style='font-size: 13px; font-weight: bold'><i class='fa fa-ban'></i> Please Select Slot First.</font>");
+
+		}
+		else{
+			var form= $("#addtocartForm");
+			$.ajax({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				},
+				url: "{{url('/add-cart')}}",
+				type: 'POST',
+				data: form.serialize(),
+				success: function (response) {
+					console.log(response);
+					console.log("hello");
+					var mainprice = $(".getPrice").html();
+					var shippingrs = $("#confirm_price").val();
+					$("#mainprs").text(mainprice);
+					$("#shippingrs").text(shippingrs);
+					$("#subproductModal").modal('show');
+					
+					
+				}
+			});
+		}
+	}
+  });
+  $(".subproduct").click(function(){
+	if(this.checked)
+	{
+		var price = $(this).val();
+		totalsub = parseInt(totalsub) + parseInt(price);
+		const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+		const checkedOne = Array.from(checkboxes).some(x => x.checked);
+		if(checkedOne == true)
+		{
+			$("#continue_btn").text("Continue With Add Ones");
+		}
+	}
+	else{
+		var price = $(this).val();
+		totalsub = parseInt(totalsub) - parseInt(price);
+
+		const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+		const checkedOne = Array.from(checkboxes).some(x => x.checked);
+		if(checkedOne == false)
+		{
+			$("#continue_btn").text("Continue Without Add Ones");
+		}
+	}
+	var mainprs = $("#mainprs").text();
+	$("#subprs").text(totalsub);
+	var subprs = totalsub;
+	var shippingrs = $("#shippingrs").text();
+	var total = parseInt(mainprs) + totalsub + parseInt(shippingrs);
+	$("#totalrs").text(total);
+
+
+  });
 //change price and stock with size
 $(".selSize").change(function(){
 	// $(document).on('click',".selSize", function(){
@@ -464,8 +579,10 @@ $(".selSize").change(function(){
 	$(document).on('click',".shipping_radio", function(){
 		// $('input[type=radio][name=shipping_method]').change(function() {
 		var slottext = $('input[name="shipping_method"]:checked').val();
+		var slotprice = $(this).attr("data-attr-price");
 		$("#myModal").modal('hide');
 		$("#confirm_slot").val(slottext);
+		$("#confirm_price").val(slotprice);
 		$.ajax({
 				type:'post',
 				data:{slottext:slottext},
@@ -495,7 +612,8 @@ $(".selSize").change(function(){
             var slot = $("#confirm_slot").val();
             var time = $("#confirm_time").val();
             var confirm = `Order will be delivered between - ${date}, Slot - ${slot}, Time - ${time}`;
-           alert(confirm);
+			$(".confirmslot").val(confirm);
+			$(".confirmslottext").text(confirm);
 	});
 		$(".checkpin").click(function() {
 		var pincode = $(this).prev().val();
@@ -511,6 +629,7 @@ $(".selSize").change(function(){
 				success:function(resp){		
 					if(resp>0){
 						$(".pincodeResponse").html("<font color='green' style='font-size: 13px; font-weight: bold'><i class='fa fa-check'></i> This pincode is available for delivery.</font>");
+						// $("#calendarModal").modal('show');
 						$("#datePopup" + dataid).css({"display":"inline-block"});
 					}else{
 						$(".pincodeResponse").html("<font color='red' style='font-size: 13px; font-weight: bold'><i class='fa fa-ban'></i> This pincode is not available for delivery.</font>");
@@ -523,6 +642,7 @@ $(".selSize").change(function(){
 
 				$(".selectedDate").change(function() {
 					$(".pincodeResponse").hide();
+					$(".confirmslottext").hide();
 					var shipping_date= $(this).val();
 					var data_id = $(this).attr("data-id");
 				if(shipping_date.length > 0)
@@ -536,11 +656,12 @@ $(".selSize").change(function(){
 							console.log(resp);
 							var shippingslot = '';
 							for (i = 0; i < resp.length; ++i) {
-								shippingslot += '<div style="border: 1px solid black;height: 72px;width:600px"><input class="shipping_radio" type="radio" value="' + resp[i]['slot'] + '" name="shipping_method" style="margin-bottom: -78px;margin-left: 10px;"/><h4 style="margin-left:40px;display: inline-block;">' + resp[i]['slot'] + '</h4><h5 style="margin-left:40px;display: block;">Choose from any 5 hour slot during the day</h5><div class="add-cart" style="margin-top: -70px;margin-left: 420px;"><a href="#" class="btn-add-cart" style="background:#7d8035;width: 140px;">Rs.' + resp[i]['price'] + '</a></div></div><br/>	'
+								shippingslot += '<div style="border: 1px solid black;height: 72px;width:600px"><input data-attr-price="'+resp[i]['price']+'" class="shipping_radio" type="radio" value="' + resp[i]['slot'] + '" name="shipping_method" style="margin-bottom: -78px;margin-left: 10px;"/><h4 style="margin-left:40px;display: inline-block;">' + resp[i]['slot'] + '</h4><h5 style="margin-left:40px;display: block;">Choose from any 5 hour slot during the day</h5><div class="add-cart" style="margin-top: -70px;margin-left: 420px;"><a href="#" class="btn-add-cart" style="background:#7d8035;width: 140px;">Rs.' + resp[i]['price'] + '</a></div></div><br/>	'
 									console.log(resp[i]['slot']);
 								}
 								$("#shippingslot").html(shippingslot);
 								$("#confirm_date").val(shipping_date);
+								
 								$("#myModal").modal('show');
 								
 						}	
@@ -568,5 +689,6 @@ $(".selSize").change(function(){
         // }
 		
 </script>
-</body>
-</html>
+@endsection('script')
+
+@endsection

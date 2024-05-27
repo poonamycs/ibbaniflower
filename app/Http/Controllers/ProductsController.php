@@ -1743,4 +1743,7 @@ class ProductsController extends Controller
             return view('admin.charts')->with(compact('datefrom','dateto','users','total_users_count','users_count','orders','total_orders_count','orders_count','sale','total_sale'));
         }
     }
+    public function addsubproductcart(Request $request){
+        // DB::table('cart')->insert(['cart_id'=>,'subproduct_id'=>])
+    }
 }
