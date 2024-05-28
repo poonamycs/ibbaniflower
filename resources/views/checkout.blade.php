@@ -1,27 +1,18 @@
 @extends('layouts.frontLayout.design')
 @section('content')
+@section('style')
+<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-about.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-res-about.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-checkout.css') }}">
+@endsection('style')
 <main>
-	<div class="content-search">
-
-                            <div class="container container-100">
-                            	<i class="far fa-times-circle" id="close-search"></i>
-                                <h3 class="text-center">what are your looking for ?</h3>
-                                <form method="get" action="/search" role="search" style="position: relative;">
-                                  <input type="text" class="form-control control-search" value="" autocomplete="off" placeholder="Enter Search ..." aria-label="SEARCH" name="q">
-
-                                  <button class="button_search" type="submit">search</button>
-                                </form>
-                            </div>
-                            
-</div>
 	<div class="banner">
 		<div class="container">
-			<figure id="banner-about"><a href="#"><img src="img/1350x500.png" class="img-responsive" alt="img-holiwood"></a></figure>
-		<div class="title-banner">
-			<h1>Checkout</h1>
-			<p><a href="#" title="Home">Home</a><i class="fa fa-caret-right"></i>Checkout</p>
-		</div>
-		
+			<figure id="banner-about"><a href="#"><img src="{{ asset('images/frontend_images/checkoutbanner.png') }}" class="img-responsive" alt="img-holiwood"></a></figure>
+            <div class="title-banner">
+                <h1>Checkout</h1>
+                <p><a href="#" title="Home">Home</a><i class="fa fa-caret-right"></i>Checkout</p>
+            </div>
 		</div>
 		
 	</div>
@@ -53,62 +44,64 @@
                 <!-- End container -->
             <div class="cart-box-container check-out">
                 <div class="container container-ver2">
+                <form method="post" action="{{ url('/checkout') }}">
+                    {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-6">
                             <h3 class="title-brand">BILLING ADDRESS</h3>
                             <form class="form-horizontal">
                                 <div class="form-group col-md-6">
-                                    <label for="inputfname" class=" control-label">First Name <span class="color">*</span></label>                            
-                                    <input type="text" placeholder="Enter your first name..." id="inputfname" class="form-control">  
+                                    <label for="inputfname" class=" control-label">Full Name <span class="color">*</span></label>                            
+                                    <input type="text" placeholder="Enter your first name..." id="inputfname" name="name" class="form-control" value="{{Auth::user()->name}}">  
                                 </div>
-                                <div class="form-group col-md-6">
+                                <!-- <div class="form-group col-md-6">
                                     <label for="inputlname" class=" control-label">Last Name <span class="color">*</span></label>                            
                                     <input type="text" placeholder="Enter your last name..." id="inputlname" class="form-control">  
-                                </div>
-                                <div class="form-group col-md-12">
+                                </div> -->
+                                <!-- <div class="form-group col-md-12">
                                     <label for="inputcompany" class=" control-label">Company Name<span class="color">*</span></label>                            
                                     <input type="text" placeholder="Enter your company name..." id="inputcompany" class="form-control">  
-                                </div>
+                                </div> -->
                                 <div>
                                     <div class="form-group col-md-6">
                                         <label for="inputemail" class=" control-label">Email<span class="color">*</span></label>                            
-                                        <input type="text" placeholder="Enter your email..." id="inputemail" class="form-control">  
+                                        <input type="text" placeholder="Enter your email..." id="inputemail" name="email" class="form-control" value="{{Auth::user()->email}}">  
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="inputphone" class=" control-label">Phone<span class="color">*</span></label>                            
-                                        <input type="text" placeholder="Enter your phone..." id="inputphone" class="form-control">  
+                                        <input type="text" placeholder="Enter your phone..." id="inputphone" name="phone" class="form-control">  
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputcountry1" class=" control-label">COUNTRY<span class="color">*</span></label>
-                                    <select id="inputcountry1" name="inputcountry1" class="country form-control">
-                                        <option>COUNTRY 2</option>
-                                        <option selected="selected">COUNTRY 1</option>
-                                        <option>COUNTRY 3</option>
-                                        <option>COUNTRY 4</option>
+                                    <label for="inputcountry1" class="control-label">COUNTRY<span class="color">*</span></label>
+                                    <select  class="select2 form-control border-form-control" name="country" required>
+                                        <option value="">-- Select option from below --</option>
+                                        @foreach($countries as $country)
+                                        <option value="{{ $country->id }}"> {{ $country->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div> 
                                 <div class="form-group">
                                     <label for="inputstreet" class=" control-label">Adress<span class="color">*</span></label>                            
-                                    <input type="text" placeholder="Enter your street address..." id="inputstreet" class="form-control space-20">  
-                                    <input type="text" placeholder="Enter the apartment, floor, suite, etc..." id="inputapartment" class="form-control"> 
+                                    <input type="text" placeholder="Enter your address..." id="inputstreet" name="address" class="form-control space-20">  
+                                    <!-- <input type="text" placeholder="Enter the apartment, floor, suite, etc..." id="inputapartment" class="form-control">  -->
                                 </div>                        
-                                <div class="form-group">
+                                <div class="form-group col-md-6">
                                     <label for="inputcountry" class=" control-label">Town/City<span class="color">*</span></label>                            
-                                    <input type="text" placeholder="Enter your Town..." id="inputcountry" class="form-control space-20">
+                                    <input type="text" placeholder="Enter your Town..." id="inputcountry" name="city" class="form-control space-20">
                                 </div>
                                 <div>
-                                    <div class="form-group col-md-6">
+                                    <!-- <div class="form-group col-md-6">
                                         <label for="inputfState" class=" control-label">COUNTY <span class="color">*</span></label>                            
                                         <input type="text" placeholder="Select your county..." id="inputfState" class="form-control">  
-                                    </div>
+                                    </div> -->
                                     <div class="form-group col-md-6">
                                         <label for="inputpostcode" class=" control-label">POSTCODE <span class="color">*</span></label>                            
-                                        <input type="text" placeholder="Enter your postcode..." id="inputpostcode" class="form-control">  
+                                        <input type="text" placeholder="Enter your postcode..." name="pincode" id="inputpostcode" class="form-control" value="{{ $cart->pincode }}" readonly>  
                                     </div>    
                                 </div> 
-                                <label for="check-1" class="form-check space-50"><input type="checkbox" name="check1" id="check-1"><span class="checkmark"></span> Create an account?</label>
-                                <label for="check-2" class="form-check space-20"><input type="checkbox" name="check2" id="check-2"><span class="checkmark"></span> Ship to a different address?</label>
+                                <!-- <label for="check-1" class="form-check space-50"><input type="checkbox" name="check1" id="check-1"><span class="checkmark"></span> Create an account?</label>
+                                <label for="check-2" class="form-check space-20"><input type="checkbox" name="check2" id="check-2"><span class="checkmark"></span> Ship to a different address?</label> -->
                             </form>
                             
                             
@@ -125,12 +118,35 @@
                                                 <span class="qty"><b>QTY</b></span>
                                                 <span class="total"><b>SUB TOTAL</b></span>
                                             </li>
-                                            <li>
-                                                <span class="name">Modern Chair</span>
-                                                <span class="qty">01</span>
-                                                <span class="total">$520.00</span>
-                                            </li>
-                                            <li>
+                                            <?php $total_amount=0; $sub_total_price=0; ?>
+                                            @foreach($usercart as $cart)
+                                                <li>
+                                                    <span class="name">{{ $cart->product_name }}</span>
+                                                    <span class="qty">{{ $cart->quantity }}</span>
+                                                    <span class="total"> {{ $cart->quantity* $cart->price }} </span>
+                                                </li>
+                                                <?php $maincart = DB::table('maincart')->where(['cart_id'=>$cart->id])->get();?>
+                                                @if(count($maincart)>0)
+                                                @foreach($maincart as $mcart)
+                                                <?php $subproduct = App\Models\Subproduct::where(['id'=>$mcart->subproduct_id])->first();?>
+                                                    <li>
+                                                        <span class="name">{{ $subproduct->product_name }}</span>
+                                                        <span class="qty"> 1 </span>
+                                                        <span class="total"> {{ $subproduct->price }} </span>
+                                                    </li>
+                                                    <?php $sub_total_price = $sub_total_price + $subproduct->price;
+                                                    
+                                                    ?>
+                                                @endforeach
+                                                @endif
+                                                @if(count($maincart)>0)
+                                                    <?php $total_amount = $total_amount + ($cart->price*$cart->quantity) + $sub_total_price; ?>
+                                                @else
+                                                    <?php $total_amount = $total_amount + ($cart->price*$cart->quantity); ?>
+                                                @endif
+                                                <?php $slot = DB::table('shipping_methods')->where('id',$cart->slot_id)->first(); ?>
+                                            @endforeach
+                                            <!-- <li>
                                                 <span class="name">Toldbod Lamp</span>
                                                 <span class="qty">02</span>
                                                 <span class="total">$190.00</span>
@@ -139,22 +155,22 @@
                                                 <span class="name">Getama Sofa</span>
                                                 <span class="qty">03</span>
                                                 <span class="total">$270.00</span>
-                                            </li>
+                                            </li> -->
                                         </ul>
                                     </div>
                                     <!-- End product-name -->
                                     <ul class="product-order">
                                         <li>
                                             <span class="left">CART SUBTOTAL</span>
-                                            <span class="right">$980.00</span>
+                                            <span class="right">₹ {{ $total_amount }}</span>
                                         </li>
                                         <li>
                                             <span class="left">SHIPPING & HANDLING</span>
-                                            <span class="right">Free Shipping</span>
+                                            <span class="right">₹ {{$slot->price}}</span>
                                         </li>
                                         <li>
                                             <span class="left">ORDER TOTAL</span>
-                                            <span class="right brand">$980.00</span>
+                                            <span class="right brand">₹ {{ ($slot->price) + $total_amount}}</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -187,9 +203,13 @@
                             </div>
                         </div>
                     </div>
+                    </form>
                     <!-- End row -->
                 </div>
                 <!-- End container -->
             </div>
             <!-- End cat-box-container -->
+@section('script')
+    
+@endsection('script')
 @endsection

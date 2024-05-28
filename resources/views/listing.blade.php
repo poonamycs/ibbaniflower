@@ -37,7 +37,7 @@
 				@foreach($products as $product)
 					<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 product-flower">
 						<div class="product-image-flower">
-						<figure class="sale"><a href="{{ url('/product/'.base64_encode($product->id).'/'.($product->slug)) }}"><img src="{{ url('/images/backend_images/products/medium/'.$product->image) }}" class="img-responsive" alt="img-holiwood"></a></figure>
+						<a href="{{ url('/product/'.base64_encode($product->id).'/'.($product->slug)) }}"><img src="{{ url('/images/backend_images/products/medium/'.$product->image) }}" class="img-responsive" alt="img-holiwood"></a>
 						<div class="product-icon-flower">
 							<a href="#"><i class="far fa-eye"></i></a>
 							<a href="#"><i class="fas fa-shopping-basket"></i></a>

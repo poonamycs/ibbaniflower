@@ -227,7 +227,7 @@
 													<li><a href="{{ url('/category/'.base64_encode($category->id) ) }}">{{ $category->name }}</a> </li>
 													@if($subcategories)
 														@foreach($subcategories as $subcategory)
-														<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/category/'.base64_encode($category->id)) }}" style="color: black;">{{ $subcategory->name }}</a></li>
+														<li class="li-home"><i class="fas fa-long-arrow-alt-right hidden-sm hidden-md hidden-xs"></i><a href="{{ url('/category/'.base64_encode($subcategory->id)) }}" style="color: black;">{{ $subcategory->name }}</a></li>
 														@endforeach
 													@endif
 												</ul>

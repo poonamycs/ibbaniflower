@@ -3,7 +3,7 @@
 @section('style')
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-product-detail.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/frontend_css/style-res-product-detail.css') }}">
-	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.11/flatpickr.min.css" rel="stylesheet" />
 	<style>
 	.select{
@@ -13,36 +13,13 @@
 		width:200px;
 		height:36px;
 	}
-	.popup {
-            display: none; /* Hide the popup by default */
-            position: fixed; /* Position the popup */
-            left: 50%; /* Center the popup horizontally */
-            top: 50%; /* Center the popup vertically */
-            transform: translate(-50%, -50%); /* Center the popup */
-            background-color: #ffffff; /* Background color */
-            border: 1px solid #000000; /* Border */
-            padding: 20px; /* Padding */
-            z-index: 1000; /* Ensure the popup is on top */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow */
-            max-width: 400px; /* Maximum width of the popup */
-            width: 80%; /* Set the width */
-        }
+	
 
-        /* Close button style */
-        .close {
-            position: absolute; /* Position the close button */
-            top: 10px; /* Position the close button 10px from the top */
-            right: 10px; /* Position the close button 10px from the right */
-            cursor: pointer; /* Set cursor to pointer */
-        }
+       
 		.slider-nav{
 			height:max-content;
 		}
-		/* .modal-content .detail .add-cart .btn-add-cart {
-			display:block;
-			background:none;
-			color:none;
-		} */
+		
 		div#timeslot {
 			display: flex;
 			align-items: center;
@@ -54,9 +31,9 @@
 		.alert {
     		margin-bottom: 45px !important;
 		}
-		.subprice {
+		/* .subprice {
 			display:flex;
-		}
+		} */
 </style>
 @endsection('style')
 
@@ -96,7 +73,7 @@
 				<div class="slider-for">
 					<div class="product-content">
 						<div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 img-content">
-      							<img src="{{ url('/images/backend_images/products/medium/'.$product->image) }}" class="img-responsive dta" alt="img-holiwood">
+      							<img src="{{ url('/images/backend_images/products/large/'.$product->image) }}" class="img-responsive dta" alt="img-holiwood">
       					</div>
 						  <form name="addtocartForm" id="addtocartForm" action="{{ url('add-cart') }}" method="post">
 							{{ csrf_field() }}
@@ -112,7 +89,7 @@
 								
 									<div class="Quality">
 										
-										<div class="input-group input-number-group">
+										<div class="input-group input-number-group d-flex">
 											<span class="text-qua">Quantity:</span>
 											  <div class="input-group-button">
 											    <span class="input-number-decrement">-</span>
@@ -136,7 +113,7 @@
 
 											<div class="select-custom rose">
 												<select class="selSize" name="size">
-													<option value="0">-- Select option --</option>
+													<!-- <option value="0">-- Select option --</option> -->
 													@foreach($product->attributes as $sizes)
 													<option value="{{ $product->id }}-{{ $sizes->size }}">
 														{{ $sizes->size }}
@@ -166,6 +143,7 @@
 							
 										<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 									<div class="add-cart">
+									<input type="hidden" id="confirm_slot_id" name="slot_id">
 									<button type="button" class="btn-add-cart" id="cartBtn" name="cartButton" value="Shopping Cart" title="Add this Product to cart"><i class="mdi mdi-cart-outline"></i> Add To Cart</button>
 								</div>
 								
@@ -183,14 +161,14 @@
 							<input type="hidden" name="email" value="{{ $product->email }}">
 							<input type="hidden" name="image" value="{{ $product->image }}">
 						<div class="col-lg-5 col-md-6 col-sm-12 col-xs-12 img-content">
-      							<img src="{{ url('/images/backend_images/products/medium/'.$product_img->image) }}" class="img-responsive" alt="img-holiwood">
+      							<img src="{{ url('/images/backend_images/products/large/'.$product_img->image) }}" class="img-responsive dta" alt="img-holiwood">
       						</div>
       						<div class="col-lg-7 col-md-6 col-sm-12 col-xs-12 detail">
       							<h1>{{ $product->product_name }}</h1>
 								<div class="prince">&#8377;&nbsp;<span class="getPrice">{{ $product->price }}</span><s class="strike">&#8377;{{$product->discount}}</s></div>
 									<div class="Quality">
 										
-										<div class="input-group input-number-group">
+										<div class="input-group input-number-group d-flex">
 											<span class="text-qua">Quantity:</span>
 											  <div class="input-group-button">
 											    <span class="input-number-decrement">-</span>
@@ -204,20 +182,27 @@
 										
 									</div>
 									<div class="row">
-										<div class="size col-lg-4 col-md-6 col-sm-6 col-xs-12">
-											<span class="lb-size">Size <span class="sta-red">*</span></span>
-												<div class="select-custom">
-													<select class="selSize" name="size"  required>
-														<option value="">-- Select option below --</option>
-														@foreach($product->attributes as $sizes)
-														<option value="{{ $product->id }}-{{ $sizes->size }}"> {{ $sizes->size }}</option>
-														@endforeach
-													</select>
-												</div>
+										<div class="size col-lg-8 col-md-6 col-sm-6 col-xs-12">
+											<div class="d-flex  align-items-center">
+											<span class="lb-size">Size:
+												<!-- <span class="sta-red">* </span> -->
+											</span>
+
+											<div class="select-custom rose">
+												<select class="selSize" name="size">
+													<option value="0">-- Select option --</option>
+													@foreach($product->attributes as $sizes)
+													<option value="{{ $product->id }}-{{ $sizes->size }}">
+														{{ $sizes->size }}
+													</option>
+													@endforeach
+												</select>
+											</div>
+										</div>
 										</div>
 									<br/>
 									<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-									<div class="size col-lg-4 col-md-6 col-sm-6 col-xs-12">
+									<div class="size col-lg-6 col-md-6 col-sm-6 col-xs-12">
 									<h6><i class="fa fa-shopping-bag"></i> Check product availability in your area</h6>
 										<div class="form-inline pincode-search" style="display:flex">
 											<input type="number" name="pincode"  class="form-control chkPincode{{$product->id}}" name="product" placeholder="Enter your pincode">
@@ -230,7 +215,7 @@
 										</div>	
 									</div>
 										<span class="pincodeResponse"></span>
-										
+										<div class="brd"></div>
 	
 									<div class="add-cart">
 									@if($total_stock>0)
@@ -247,9 +232,9 @@
 				</div>
 				@if(count($product_imgs) > 1)
 				<div class="slider-nav col-lg-5 col-md-6 col-sm-12 col-xs-12">
-					<div><img src="{{ url('/images/backend_images/products/medium/'.$product->image) }}" class="img-responsive" alt="img-holiwood"></div>
+					<div><img src="{{ url('/images/backend_images/products/large/'.$product->image) }}" class="img-responsive" alt="img-holiwood"></div>
 					@foreach($product_imgs as $product_img)
-						<div><img src="{{ url('/images/backend_images/products/medium/'.$product_img->image) }}" class="img-responsive" alt="img-holiwood"></div>
+						<div><img src="{{ url('/images/backend_images/products/large/'.$product_img->image) }}" class="img-responsive" alt="img-holiwood"></div>
 					@endforeach
 				</div>
   				@endif
@@ -319,18 +304,18 @@
 </div>
 
 <div id="myModal" class="modal fade" role="dialog">
-	<div class="modal-dialog mdw">
+	<div class="modal-dialog">
 
 	<!-- Modal content-->
 	<div class="modal-content mcd">
 		<div class="modal-header">
-			<div class="d-flex align-items-center justify-content-space-around">
+			<div class="d-flex align-items-center justify-content-space-between">
 				<span><i class="fas fa-long-arrow-alt-left fa-2x"></i></span>
 				<span>
-				<h1 class="fa-2x shipping">Select Shipping Method</h1>
+				<h1 class="fa-2x method">Select Shipping Method</h1>
 				</span>
 				<span>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<i class="fa fa-times-circle fa-2x" data-dismiss="modal"></i>
 				</span>
 			</div>
                 <hr />
@@ -341,7 +326,7 @@
 			
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 detail">
 					
-					<div id="shippingslot"></div>
+					<div id="shippingslot" style="overflow:auto"></div>
 							
 				</div>
 			</div>
@@ -356,9 +341,17 @@
 
 <div id="myModal1" class="modal fade" role="dialog">
 	<div class="modal-dialog">
-		<div class="modal-content" style="width:700px">
+		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<div class="d-flex align-items-center justify-content-space-between ">
+                    <span><i class="fas fa-long-arrow-alt-left fa-2x"></i></span>
+                    <span>
+                        <h1 class="fa-2x method">Select Time Slot</h1>
+                    </span>
+                    <span>
+                        <i class="fa fa-times-circle fa-2x" data-dismiss="modal"></i>
+                    </span>
+                </div>
 			</div>
 			<div class="modal-body" style="width:100%">
 				<div class="tab-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -371,7 +364,7 @@
 	</div>
 </div>
 <div id="calendarModal" class="modal" role="dialog">
-<div class="modal-dialog"  style="width:360px">
+<div class="modal-dialog" style="width:360px">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -396,7 +389,7 @@
 		<!-- </div> -->
 		<div>
 		<form id="subproductform" action="{{ url('add-subproduct-cart') }}" method="post">
-			<input type="hidden" value="" name="cart_id">
+			<input type="hidden" value="" name="cart_id" id="cart_id">
 			<div class="row container-fluid">
 				@foreach($subproduct as $product)
 					<div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 product-category">
@@ -416,34 +409,56 @@
 			{{ csrf_field() }}
 			
 			<div class="row">
-				<div class="col-lg-2 col-md-2">
-					Price Details
-				</div>
-				<div class="col-lg-2 col-md-2 subprice">
-					<p>Base item</p>
-					&#8377;<p id="mainprs">1000</p>
-					<p style="padding-left:20px">+</p>
-				</div>
-				
-				<div class="col-lg-2 col-md-2 subprice">
-					<p>Add-ons</p>
-					&#8377;<p id="subprs">500</p>
-					<p style="padding-left:20px">+</p>
-				</div>
-				
-				<div class="col-lg-2 col-md-2 subprice">
-					<p>Shipping</p>
-					&#8377;<p id="shippingrs">19</p>
-					<p style="padding-left:20px">=</p>
-				</div>
-				
-				<div class="col-lg-2 col-md-2 subprice">
-					<p>Total</p>
-					<p id="totalrs">&#8377;1318</p>
-				</div>
-				<div class="col-lg-2 col-md-2">
-					<button type="submit" id="continue_btn">Continue without ads</button>
-				</div>
+                        <div class="col-lg-3 col-md-3 ">
+                            <div class="d-flex">
+                                <div class="">
+                                    <p>Base item </p>
+                                    <div class="d-flex">
+                                    &#8377;<p id="mainprs">1000</p>
+                                    </div>
+                                </div>
+                                <p style="padding-left:20px">+</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 subprice">
+                            <div class="d-flex">
+                                <div class="">
+                                    <p>Add-ons</p>
+                                    <div>
+                                        <p id="subprs">&#8377;500</p>
+                                    </div>
+                                </div>
+                                <p style="padding-left:20px">+</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 subprice">
+
+                            <div class="d-flex">
+                                <div class="">
+                                    <p>Shipping</p>
+                                    <div class="d-flex">
+                                    &#8377;<p id="shippingrs">190099</p>
+                                    </div>
+                                </div>
+                                <p style="padding-left:20px">=</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 subprice">
+                            <div class="">
+                                <div class="">
+                                    <p>Total</p>
+                                    <div class="">
+                                        <p id="totalrs">&#8377;1318</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2">
+                            <button type="submit" id="continue_btn" class="btn-default">Continue Without Add On</button>
+                        </div>
 			</div>
 			</form>	
 		</div>
@@ -470,7 +485,6 @@ $(document).ready(function(){
   $("#cartBtn").click(function(){
 	alert("hello");
 	var pincode = $(".pincode").val();
-	alert(pincode);
 	var confirmslot = $(".confirmslot").val();
 	alert(confirmslot);
 	if(pincode == '')
@@ -496,10 +510,13 @@ $(document).ready(function(){
 				success: function (response) {
 					console.log(response);
 					console.log("hello");
+					$("#cart_id").val(response);
 					var mainprice = $(".getPrice").html();
 					var shippingrs = $("#confirm_price").val();
 					$("#mainprs").text(mainprice);
 					$("#shippingrs").text(shippingrs);
+					var balance = parseInt(mainprice) + parseInt(shippingrs);
+					$("#totalrs").text(balance);
 					$("#subproductModal").modal('show');
 					$("#mainproductprice").val(mainprice);
 					$("#shippingprice").val(shippingrs);
@@ -579,7 +596,10 @@ $(".selSize").change(function(){
 		// $('input[type=radio][name=shipping_method]').change(function() {
 		var slottext = $('input[name="shipping_method"]:checked').val();
 		var slotprice = $(this).attr("data-attr-price");
+		var slotid = $(this).attr("data-attr-id");
+		alert(slotid);
 		$("#myModal").modal('hide');
+		$("#confirm_slot_id").val(slotid);
 		$("#confirm_slot").val(slottext);
 		$("#confirm_price").val(slotprice);
 		$.ajax({
@@ -589,7 +609,7 @@ $(".selSize").change(function(){
 				url:'/check-time-slot',
 				success:function(resp){	
 					console.log(resp);
-					var timeslot = '<h1>Select Time Slot</h1><hr/><h2>Express Delivery</h2>';
+					var timeslot = '<h3>Express Delivery</h3>';
 					for (i = 0; i < resp.length; ++i) {
 						timeslot += '<div style="border: 1px solid black;height: 28px;width: 220px;"><input style="margin-left:45px" class="btn-add-time" type="radio" value="'+ resp[i]['time_slot'] +'" name="time_slot"> &nbsp;<span>'+ resp[i]['time_slot'] +'&nbsp;hrs</span></div><br/>'
 							console.log(resp[i]['time_slot']);
@@ -656,7 +676,7 @@ $(".selSize").change(function(){
 							console.log(resp);
 							var shippingslot = '';
 							for (i = 0; i < resp.length; ++i) {
-								shippingslot += '<div style="border: 1px solid black;height: 72px;width:600px"><input data-attr-price="'+resp[i]['price']+'" class="shipping_radio" type="radio" value="' + resp[i]['slot'] + '" name="shipping_method" style="margin-bottom: -78px;margin-left: 10px;"/><h4 style="margin-left:40px;display: inline-block;">' + resp[i]['slot'] + '</h4><h5 style="margin-left:40px;display: block;">Choose from any 5 hour slot during the day</h5><div class="add-cart" style="margin-top: -70px;margin-left: 420px;"><a href="#" class="btn-add-cart" style="background:#7d8035;width: 140px;">Rs.' + resp[i]['price'] + '</a></div></div><br/>	'
+								shippingslot += '<div style="border: 1px solid black;height: 72px;width:600px"><input data-attr-id="'+resp[i]['id']+'" data-attr-price="'+resp[i]['price']+'" class="shipping_radio" type="radio" value="' + resp[i]['slot'] + '" name="shipping_method" style="margin-bottom: -78px;margin-left: 10px;"/><h4 style="margin-left:40px;display: inline-block;">' + resp[i]['slot'] + '</h4><h5 style="margin-left:40px;display: block;">Choose from any 5 hour slot during the day</h5><div class="add-cart" style="margin-top: -70px;margin-left: 420px;"><a href="#" class="btn-add-cart" style="background:#7d8035;width: 140px;">Rs.' + resp[i]['price'] + '</a></div></div><br/>	'
 									console.log(resp[i]['slot']);
 								}
 								$("#shippingslot").html(shippingslot);

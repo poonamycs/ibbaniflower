@@ -10,6 +10,7 @@ use Auth;
 use Session;
 use Image;
 use App\Models\Category;
+use App\Models\Cart;
 use App\Models\Admin;
 use App\Models\Product;
 use App\Models\Subproduct;
@@ -120,8 +121,23 @@ class ProductsController extends Controller
             // }
 
     		$product->status = $status;
-            $product->featured = $featured;
+            // $product->featured = $featured;
             $product->save();
+
+            $id = $product->id;
+            $productDetails = Product::where(['id'=>$id])->first();
+            $data = $request->all();
+            $sku = $productDetails->product_name.$id;
+            $attribute = new ProductsAttribute;
+            $attribute->sku = $sku;
+            $attribute->product_id = $id;
+            $attribute->size = 1;
+            $attribute->price = $productDetails->price;
+            $attribute->stock = 10;
+            $attribute->unit = $productDetails->unit;
+            $attribute->save();
+           
+            // return redirect('admin/add-attributes/'.$product->id);
     		return redirect('/admin/view-all-products')->with('flash_message_success','Product has been Added Successfully');  		
     	}
 
@@ -757,11 +773,11 @@ class ProductsController extends Controller
                 $sku = $getSKU->sku;
 
             }
-            else
-            {
-                $product_size = 0;
-                $sku = "null";
-            }
+            // else
+            // {
+            //     $product_size = 0;
+            //     $sku = "null";
+            // }
             
             
 
@@ -783,18 +799,37 @@ class ProductsController extends Controller
                
                 $countProducts = DB::table('cart')->where(['product_id' => $data['product_id'],'size' => $product_size,'session_id' => $session_id])->count();
                 if($countProducts>0){
-                    return redirect()->back()->with('flash_message_error','Product already added in cart. <a href="/cart"> View Shopping Cart</a>');
+                    $cart_id = DB::table('cart')->where(['product_id' => $data['product_id'],'size' => $product_size,'session_id' => $session_id])->first();
+                    return $cart_id->id;
+                    // return redirect()->back()->with('flash_message_error','Product already added in cart. <a href="/cart"> View Shopping Cart</a>');
                 }
             }else{
                 
                 $countProducts = DB::table('cart')->where(['product_id' => $data['product_id'],'size' => $product_size,'user_email' => $data['user_email']])->count();
                 if($countProducts>0){
-                    return redirect()->back()->with('flash_message_error','Product already added in cart.<a href="/cart"> View Shopping Cart</a>');
+                    $cart_id = DB::table('cart')->where(['product_id' => $data['product_id'],'size' => $product_size,'user_email' => $data['user_email']])->first();
+                    return $cart_id->id;
+                    // return redirect()->back()->with('flash_message_error','Product already added in cart.<a href="/cart"> View Shopping Cart</a>');
                 }
             }
+            $cart_id = new Cart;
+            $cart_id->product_id = $data['product_id'];
+            $cart_id->product_name = $data['product_name'];
+            $cart_id->product_code = $sku;
+            $cart_id->price = $data['price'];
+            $cart_id->size = $product_size;
+            $cart_id->quantity = $data['quantity'];
+            $cart_id->user_email = $data['user_email'];
+            $cart_id->session_id = $session_id;
+            $cart_id->email = $data['email'];
+            $cart_id->image =  $data['image'];
+            $cart_id->slot_id = $data['slot_id'];
+            $cart_id->pincode = $data['pincode'];
+            $cart_id->save();
+            // DB::table('cart')->insert(['product_id' => $data['product_id'],'product_name' => $data['product_name'],'product_code' => $sku,'price' => $data['price'],'size' => $product_size,'quantity' => $data['quantity'],'user_email' => $data['user_email'],'session_id' => $session_id,'email' => $data['email'],'image' => $data['image']]);
+            return $cart_id->id;
 
-            DB::table('cart')->insert(['product_id' => $data['product_id'],'product_name' => $data['product_name'],'product_code' => $sku,'price' => $data['price'],'size' => $product_size,'quantity' => $data['quantity'],'user_email' => $data['user_email'],'session_id' => $session_id,'email' => $data['email'],'image' => $data['image']]);
-            return redirect()->back()->with('flash_message_success','Product added in Cart! <a href="/cart"> View Shopping Cart</a>');
+            // return redirect()->back()->with('flash_message_success','Product added in Cart! <a href="/cart"> View Shopping Cart</a>');
         }
     }
 
@@ -854,6 +889,10 @@ class ProductsController extends Controller
         DB::table('cart')->where('id',$id)->delete();
         return redirect()->back()->with('flash_message_success','Product removed from Cart!');
     }
+    public function deletesubCartProduct($id = null){
+        DB::table('maincart')->where('id',$id)->delete();
+        return redirect()->back()->with('flash_message_success','Product removed from Cart!');
+    }
 
     public function deleteWishlistProduct($id = null){
         DB::table('wish_list')->where('id',$id)->delete();
@@ -861,11 +900,12 @@ class ProductsController extends Controller
     }
 
     public function checkout(Request $request){
+        session()->forget('login');
         $user_id = Auth::user()->id;
         $user_email = Auth::user()->email;
         $userDetails = User::find($user_id);
         $countries = Country::get();
-
+        
         //Check if Shipping Address exists
         $shippingCount = DeliveryAddress::where('user_id',$user_id)->count();
         $shippingDetails = array();
@@ -876,15 +916,17 @@ class ProductsController extends Controller
         // Update cart table with user email
         $session_id = Session::get('session_id');
         DB::table('cart')->where(['session_id'=>$session_id])->update(['user_email'=>$user_email]);
+        $cart = DB::table('cart')->where(['user_email'=>$user_email])->first();
+        $usercart = DB::table('cart')->where(['user_email'=>$user_email])->get();
 
         if($request->isMethod('post')){
             $data = $request->all();
             // echo "<pre>"; print_r($data); die;
             //return to checkout page if any field is empty
-            if(empty($data['billing_name']) || empty($data['billing_address']) || empty($data['billing_city']) || empty($data['billing_state']) || empty($data['billing_country']) || empty($data['billing_pincode']) || empty($data['billing_mobile']) || empty($data['shipping_name']) || empty($data['shipping_address']) || empty($data['shipping_city']) || empty($data['shipping_state']) || empty($data['shipping_country']) || empty($data['shipping_pincode']) || empty($data['shipping_mobile'])){
-                return redirect()->back()->with('flash_message_error','Please fill all fields to continue.');
-            }
-            User::where('id',$user_id)->update(['name'=>$data['billing_name'],'address'=>$data['billing_address'],'city'=>$data['billing_city'],'state'=>$data['billing_state'],'pincode'=>$data['billing_pincode'],'country'=>$data['billing_country'],'mobile'=>$data['billing_mobile']]);
+            // if(empty($data['billing_name']) || empty($data['billing_address']) || empty($data['billing_city']) || empty($data['billing_state']) || empty($data['billing_country']) || empty($data['billing_pincode']) || empty($data['billing_mobile']) || empty($data['shipping_name']) || empty($data['shipping_address']) || empty($data['shipping_city']) || empty($data['shipping_state']) || empty($data['shipping_country']) || empty($data['shipping_pincode']) || empty($data['shipping_mobile'])){
+            //     return redirect()->back()->with('flash_message_error','Please fill all fields to continue.');
+            // }
+            // User::where('id',$user_id)->update(['name'=>$data['billing_name'],'address'=>$data['billing_address'],'city'=>$data['billing_city'],'state'=>$data['billing_state'],'pincode'=>$data['billing_pincode'],'country'=>$data['billing_country'],'mobile'=>$data['billing_mobile']]);
 
             if($shippingCount>0){
                 // Update Shipping Address
@@ -903,17 +945,18 @@ class ProductsController extends Controller
                 $shipping->mobile = $data['shipping_mobile'];
                 $shipping->save();
             }
+            return redirect()->action('ProductsController@thanksRazorpay');
 
-            $pincodeCount = DB::table('shipping_charges')->where('pincode',$data['shipping_pincode'])->count();
-            if($pincodeCount==0){
-                return redirect()->back()->with('flash_message_error','Your location/pinocde is not available for delivery. Please enter another shipping location/pincode.');
-            }
+            // $pincodeCount = DB::table('shipping_charges')->where('pincode',$data['shipping_pincode'])->count();
+            // if($pincodeCount==0){
+            //     return redirect()->back()->with('flash_message_error','Your location/pinocde is not available for delivery. Please enter another shipping location/pincode.');
+            // }
 
             // echo "Redirect to order review page";
-            return redirect()->action('ProductsController@orderReview');
+            // return redirect()->action('ProductsController@orderReview');
         }
         $categories = Category::with('categories')->where(['parent_id'=>0])->get();
-        return view('products.checkout')->with(compact('userDetails','countries','shippingDetails','categories'));
+        return view('checkout')->with(compact('userDetails','countries','shippingDetails','categories','cart','usercart'));
     }
 
     public function orderReview(){
@@ -1633,7 +1676,7 @@ class ProductsController extends Controller
     public function checkshippingmethod(Request $request){
         if($request->isMethod('post')){
             $data = $request->all();
-            $shipping = DB::table('shipping_methods')->select('slot','price')->groupBy('slot','price')->get();
+            $shipping = DB::table('shipping_methods')->select('id','slot','price')->groupBy('id','slot','price')->get();
           
             return $shipping;
         }
@@ -1748,8 +1791,9 @@ class ProductsController extends Controller
         foreach($request->subproduct as $product)
         {
             // dd($product);
-            DB::table('maincart')->insert(['subproduct_id'=>$product]);
+            DB::table('maincart')->insert(['cart_id'=>$request->cart_id,'subproduct_id'=>$product]);
         }
+        return redirect('/cart');
         // DB::table('cart')->insert(['cart_id'=>,'subproduct_id'=>])
     }
 }

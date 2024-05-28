@@ -84,9 +84,9 @@ class HomeController extends Controller
     public function pagenotfound(){
         return view('page404');
     }
-    public function checkout(){
-        return view('checkout');
-    }
+    // public function checkout(){
+    //     return view('checkout');
+    // }
     public function contact(){
         return view('contact');
     }
@@ -121,7 +121,7 @@ class HomeController extends Controller
         $id = base64_decode($id);
         $categories = Category::where('parent_id',0)->get();
         $category = Category::where('id',$id)->first();
-        $products = Product::where('category_id','98')->where('status',1)->get();
+        $products = Product::where('category_id',$category->id)->where('status',1)->get();
         return view('listing')->with(compact('products','category','categories'));
     }
     public function order(){

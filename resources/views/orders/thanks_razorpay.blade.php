@@ -1,4 +1,4 @@
-@extends('layouts.frontLayout.front_design')
+@extends('layouts.frontLayout.design')
 @section('content')
 
 <section class="pt-3 pb-3 page-info section-padding border-bottom bg-white">

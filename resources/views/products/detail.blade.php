@@ -125,7 +125,7 @@
 
 					<h6><i class="fa fa-shopping-bag"></i> Check product availability in your area</h6>
 					<div class="form-inline pincode-search">
-						<input type="number" name="pincode" id="chkPincode" class="form-control" name="product" placeholder="Enter your pincode">
+						<input type="number" name="pincode" id="chkPincode" class="form-control" placeholder="Enter your pincode">
 						<button type="button" onclick="return checkPincode();" class="pl-2 pr-2 btn btn-secondary btn-lg" style="padding: 7px; margin: 15px 5px"><i class="fa fa-search"></i>
 						</button>
 						<span id="pincodeResponse"></span>

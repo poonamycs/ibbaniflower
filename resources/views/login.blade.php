@@ -6,7 +6,7 @@
 
 	<div class="banner">
 		<div class="container">
-			<figure id="banner-about"><a href="#"><img src="{{ asset('/images/frontend_images/1350x500.png') }}" class="img-responsive" alt="img-holiwood"></a></figure>
+			<figure id="banner-about"><a href="#"><img src="{{ asset('images/frontend_images/loginbanner.png') }}" class="img-responsive" alt="img-holiwood"></a></figure>
 		<div class="title-banner">
 			<h1>Login/Register</h1>
 			<p><a href="#" title="Home">Home</a><i class="fa fa-caret-right"></i>Login/Register</p>
@@ -62,7 +62,7 @@
                             </div>
                             <div class="group box">
                                 <label class="control-label" for="inputemail">PASSWORD *</label>
-                                <input class="form-control" type="text" name="password" placeholder="Password" id="inputpass"> 
+                                <input class="form-control" type="password" name="password" placeholder="Password" id="inputpass"> 
                             </div>
                             <div class="remember">
                                 <input id="remeber" type="checkbox" name="check" value="remeber">

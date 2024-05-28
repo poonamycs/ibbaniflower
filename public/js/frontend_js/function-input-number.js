@@ -8,6 +8,7 @@ $(document).ready(function(){
   var incy = parseFloat($(".productprice").val()); 
   $(".total-prince").text(parseFloat(y += incy).toFixed(1));
   $input.val(val + 1);
+  // $("span.input-number-increment").css("pointer-events", "none");
 });
 
 $('.input-number-decrement').on("click",function() {

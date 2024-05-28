@@ -30,6 +30,10 @@ class UsersController extends Controller
                 if(!empty(Session::get('session_id'))){
                     $session_id = Session::get('session_id');
                     DB::table('cart')->where('session_id',$session_id)->update(['user_email'=>$data['email']]);
+                    if(!empty(Session::get('login')))
+                    {
+                        return redirect('checkout');
+                    }
                 }                 
                 return redirect('/account');
             }else{

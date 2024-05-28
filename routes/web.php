@@ -58,11 +58,7 @@ Route::get('/product/{id}','ProductsController@product');
 //Admin forgot password
 Route::match(['get','post'],'admin/forgot-password/','AdminController@forgotPassword');
 
-// Delete Cart Product
-Route::get('/cart/delete-product/{id}','ProductsController@deleteCartProduct');
 
-// Update Cart quantity of Product
-Route::get('/cart/update-quantity/{id}/{quantity}/','ProductsController@updateCartQuantity');
 
 //products filter page
 Route::match(['get','post'],'/products-filter','ProductsController@filter');
@@ -80,7 +76,7 @@ Route::group(['middleware'=>['frontlogin']],function(){
 	//update user pwd
 	Route::post('/update-user-pwd','UsersController@updatePassword');
 	//update user pwd
-	Route::match(['get','post'],'/checkout','ProductsController@checkout');
+	// Route::match(['get','post'],'/checkout','ProductsController@checkout');
 	// Order review page
 	Route::match(['get','post'],'/order-review','ProductsController@orderReview');
 	// Place Order
@@ -158,7 +154,7 @@ Route::match(['get','post'],'/page/{url}','CmsController@cmsPage');
 Route::get('/cart', [ProductsController::class, 'cart']);
 // Route::get('/corporate', [HomeController::class, 'corporate']);
 Route::get('/page404', [HomeController::class, 'pagenotfound']);
-Route::get('/checkout', [HomeController::class, 'checkout']);
+Route::get('/checkout', [ProductsController::class, 'checkout']);
 Route::get('/faq', [HomeController::class, 'faq']);
 Route::get('/order', [HomeController::class, 'order']);
 Route::get('/home1', [HomeController::class, 'home1']);
@@ -189,7 +185,12 @@ Route::post('/check-shipping-method/',[ProductsController::class, 'checkShipping
 
 //get product attribute price
 Route::get('/get-product-price',[ProductsController::class, 'getProductPrice']);
+// Delete Cart Product
+Route::get('/cart/delete-product/{id}',[ProductsController::class, 'deleteCartProduct']);
+Route::get('/subcart/delete-product/{id}',[ProductsController::class, 'deletesubCartProduct']);
 
+// Update Cart quantity of Product
+Route::get('/cart/update-quantity/{id}/{quantity}/',[ProductsController::class, 'updateCartQuantity']);
 
 // Auth::routes(['verify'=>true]);
 Auth::routes();
