@@ -1744,6 +1744,12 @@ class ProductsController extends Controller
         }
     }
     public function addsubproductcart(Request $request){
+        // dd($request->all());
+        foreach($request->subproduct as $product)
+        {
+            // dd($product);
+            DB::table('maincart')->insert(['subproduct_id'=>$product]);
+        }
         // DB::table('cart')->insert(['cart_id'=>,'subproduct_id'=>])
     }
 }
